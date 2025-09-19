@@ -4,8 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ejercicio 2 - Calculadora de Área</title>
+    <style>
+        body {
+           background-color: rgb(104, 154, 247);
+           text-align: center;
+        }
+    </style>
 </head>
 <body>
+    <h1>VAMOS A CALCULAR UN ÁREA</h1>
     <label for="ancho">Ancho (cm):</label>
     <input id="ancho" type="number" min="0" step="any" placeholder="Introduce el ancho">
 
@@ -13,5 +20,13 @@
 
     <label for="alto">Alto (cm):</label>
     <input id="alto" type="number" min="0" step="any" placeholder="Introduce el alto">
+
+    <br><br>
+
+    <button id="btnCalcular">Calcular Área</button>
+
+    <p id="resultado"></p>
+
+    <script src="ejercicio2.js"></script>
 </body>
 </html>
