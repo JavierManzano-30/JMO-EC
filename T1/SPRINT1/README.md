@@ -93,5 +93,5 @@ El GIF muestra cómo al hacer clic sobre diferentes botones aparece una alerta c
 
 ---
 
-✍️ *Autor: [Tu Nombre]*  
+✍️ *Autor: [Javier Manzano]*  
 📅 *Sprint de Entorno Cliente*
