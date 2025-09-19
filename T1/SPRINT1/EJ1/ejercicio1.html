@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ejercicio 1 - Cambio de color</title>
+  <style>
+    /* Estilos mínimos para que se vea bien en el GIF */
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 0;
+      padding: 40px;
+      transition: background-color 300ms ease;
+      color: #111;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    button {
+      padding: 12px 20px;
+      font-size: 1.1rem;
+      border-radius: 8px;
+      border: 1px solid #444;
+      cursor: pointer;
+      background: #f0f0f0;
+    }
+    button:active { transform: translateY(1px); }
+    .info {
+      margin-top: 18px;
+      font-size: 0.95rem;
+    }
+    .color-box {
+      margin-top: 18px;
+      display: inline-block;
+      padding: 8px 12px;
+      border-radius: 6px;
+      background: rgba(255,255,255,0.7);
+      border: 1px solid rgba(0,0,0,0.08);
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Ejercicio 1 — Cambio de Color</h1>
+    <p>Pulsa el botón para cambiar el color de fondo a un color aleatorio.</p>
+
+    <button id="btnCambiarColor">Cambiar color</button>
+
+    <div class="info">
+      Color actual: <span id="colorActual" class="color-box">rgb(255,255,255)</span>
+    </div>
+  </div>
+
+  <script src="ejercicio1.js"></script>
+</body>
+</html>
