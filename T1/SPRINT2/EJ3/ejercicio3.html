@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Encuesta - Ejercicio 3</title>
+  <style>
+    .bar-container {
+      width: 300px;
+      background-color: #f0f0f0;
+      margin: 5px 0;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .bar {
+      height: 25px;
+      background-color: steelblue;
+      text-align: right;
+      padding-right: 5px;
+      color: white;
+      line-height: 25px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Encuesta</h1>
+  <p>¿Cuál es tu color favorito?</p>
+
+  <form id="encuestaForm">
+    <label><input type="radio" name="color" value="Rojo"> Rojo</label><br>
+    <label><input type="radio" name="color" value="Verde"> Verde</label><br>
+    <label><input type="radio" name="color" value="Azul"> Azul</label><br>
+    <label><input type="radio" name="color" value="Amarillo"> Amarillo</label><br><br>
+
+    <button type="button" id="btnEnviar">Enviar</button>
+  </form>
+
+  <h2>Resultados</h2>
+  <div id="resultados"></div>
+
+  <script src="ejercicio3.js"></script>
+</body>
+</html>
