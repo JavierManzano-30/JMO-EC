@@ -84,13 +84,13 @@ Calculadora que permite realizar operaciones básicas (suma, resta, multiplicaci
 `ejercicio2.html` | `ejercicio2.js`
 
 **Pruebas realizadas (GIF):**
-- `Sumar 10 + 12 = 22`  
+- Sumar 10 + 12 = 22  
 ![Ejercicio 2](gifs/ejercicio2.gif)
-- `Resta 10 - 12 = -2`  
+- Resta 10 - 12 = -2  
 ![Ejercicio 2.2](gifs/ejercicio2.2.gif)
-- `Multiplicar 5 X 4 = 20 y 5 X 0 = 0`  
+- Multiplicar 5 X 4 = 20 y 5 X 0 = 0  
 ![Ejercicio 2.3](gifs/ejercicio2.3.gif)
-- `Dividir 5 / 4 = 1.25 y 5 / 0 = "INDEFINIDO"`  
+- Dividir 5 / 4 = 1.25 y 5 / 0 = "INDEFINIDO"  
 ![Ejercicio 2.4](gifs/ejercicio2.4.gif)
 
 ---
@@ -110,13 +110,13 @@ Cada voto actualiza dinámicamente un gráfico de barras que muestra el total de
 `ejercicio3.html` | `ejercicio3.js`
 
 **Pruebas realizadas (GIF):**
-- `Verificar que al seleccionar una opción y hacer clic en "Enviar", se actualicen correctamente los votos en el gráfico.`  
+- Verificar que al seleccionar una opción y hacer clic en "Enviar", se actualicen correctamente los votos en el gráfico.  
 ![Ejercicio 3](gifs/ejercicio3.gif)
-- `Comprobar que el gráfico de barras se actualiza dinámicamente después de cada nueva votación.`  
+- Comprobar que el gráfico de barras se actualiza dinámicamente después de cada nueva votación.  
 ![Ejercicio 3.2](gifs/ejercicio3.2.gif)
-- `Probar que el sistema gestiona correctamente intentos de envío sin seleccionar ninguna opción.`  
+- Probar que el sistema gestiona correctamente intentos de envío sin seleccionar ninguna opción.  
 ![Ejercicio 3.3](gifs/ejercicio3.3.gif)
-- `Verificar que las votaciones previas se mantienen después de varias interacciones.`  
+- Verificar que las votaciones previas se mantienen después de varias interacciones.  
 ![Ejercicio 3.4](gifs/ejercicio3.4.gif)
 
 ---
