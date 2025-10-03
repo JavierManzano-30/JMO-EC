@@ -38,6 +38,7 @@ La estructura del repositorio es la siguiente:
                     ├── sol.png
             └── gifs/
                 ├── ejercicio1.gif
+                ├── ejercicio1.2.gif
                 ├── ejercicio2.gif
                 ├── ejercicio3.gif
                 ├── ejercicio4.gif
