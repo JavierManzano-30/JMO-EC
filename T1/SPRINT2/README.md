@@ -69,7 +69,7 @@ Al llegar a cero, muestra el mensaje “¡Tiempo finalizado!”.
 ![Ejercicio 1.2](gifs/ejercicio1.2.gif)
 
 **Diagrama de flujo:**  
-![Ejercicio 1](img/ejercicio1)
+![Ejercicio 1](img/ejercicio1.png)
 ---
 
 ## ➕ Ejercicio 2: Calculadora Básica
