@@ -110,12 +110,14 @@ Cada voto actualiza dinámicamente un gráfico de barras que muestra el total de
 `ejercicio3.html` | `ejercicio3.js`
 
 **Pruebas realizadas (GIF):**
-- Registro correcto de votos  
-- Actualización dinámica del gráfico  
-- Prevención de envío sin seleccionar opción  
-- Persistencia visual de votos anteriores  
-
-![Ejercicio 3](./ejercicio3.gif)
+- `Verificar que al seleccionar una opción y hacer clic en "Enviar", se actualicen correctamente los votos en el gráfico.`  
+![Ejercicio 3](gifs/ejercicio3.gif)
+- `Comprobar que el gráfico de barras se actualiza dinámicamente después de cada nueva votación.`  
+![Ejercicio 3.2](gifs/ejercicio3.2.gif)
+- `Probar que el sistema gestiona correctamente intentos de envío sin seleccionar ninguna opción.`  
+![Ejercicio 3.3](gifs/ejercicio3.3.gif)
+- `Verificar que las votaciones previas se mantienen después de varias interacciones.`  
+![Ejercicio 3.4](gifs/ejercicio3.4.gif)
 
 ---
 
