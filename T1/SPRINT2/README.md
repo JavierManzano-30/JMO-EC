@@ -173,11 +173,6 @@ Incluye botón de **Reiniciar** que baraja las cartas y reinicia el juego.
 - Reinicio del juego correctamente barajado  
 ![Ejercicio 5.4](gifs/ejercicio5.4.gif)
 
----
-
-## 📸 Capturas estáticas (si aplica)
-
-Incluye capturas de pantalla de los ejercicios que no requieran interacción (por ejemplo, estructuras o maquetas simples).
 
 ---
 
@@ -190,6 +185,6 @@ Incluye capturas de pantalla de los ejercicios que no requieran interacción (po
 
 ---
 
-✍️ **Autor:** *[Tu Nombre Aquí]*  
+✍️ **Autor:** *[Javier Manzano Oliveros]*  
 📆 **Fecha:** *Octubre 2025*  
 🏫 **Módulo:** *Entorno Cliente – 2º DAW*
