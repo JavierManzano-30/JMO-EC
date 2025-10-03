@@ -68,6 +68,8 @@ Al llegar a cero, muestra el mensaje “¡Tiempo finalizado!”.
 - Cuenta regresiva desde 4 segundos  
 ![Ejercicio 1.2](gifs/ejercicio1.2.gif)
 
+**Diagrama de flujo:**  
+![Ejercicio 1](img/ejercicio1)
 ---
 
 ## ➕ Ejercicio 2: Calculadora Básica
