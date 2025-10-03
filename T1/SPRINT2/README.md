@@ -164,13 +164,13 @@ Incluye botón de **Reiniciar** que baraja las cartas y reinicia el juego.
 `ejercicio5.html` | `ejercicio5.js`
 
 **Pruebas realizadas (GIF):**
-- Dos cartas no coincidentes se tapan tras 0.8s
+- Dos cartas iguales permanecen visibles  
 ![Ejercicio 5](gifs/ejercicio5.gif)
-- Dos cartas iguales permanecen visibles
+- Dos cartas no coincidentes se tapan tras 0.8s  
 ![Ejercicio 5.2](gifs/ejercicio5.2.gif)
-- Mensaje de victoria al encontrar todas las parejas
+- Mensaje de victoria al encontrar todas las parejas  
 ![Ejercicio 5.3](gifs/ejercicio5.3.gif)
-- Reinicio del juego correctamente barajado
+- Reinicio del juego correctamente barajado  
 ![Ejercicio 5.4](gifs/ejercicio5.4.gif)
 
 ---
