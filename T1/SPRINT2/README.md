@@ -84,16 +84,12 @@ Calculadora que permite realizar operaciones básicas (suma, resta, multiplicaci
 `ejercicio2.html` | `ejercicio2.js`
 
 **Pruebas realizadas (GIF):**
-SUMA
 ![Ejercicio 2](gifs/ejercicio2.gif)
 
-RESTA
 ![Ejercicio 2.2](gifs/ejercicio2.2.gif)
 
-MULTIPLICACIÓN
 ![Ejercicio 2.3](gifs/ejercicio2.3.gif)
 
-DIVISIÓN
 ![Ejercicio 2.4](gifs/ejercicio2.4.gif)
 
 ---
