@@ -63,10 +63,9 @@ Al llegar a cero, muestra el mensaje “¡Tiempo finalizado!”.
 `ejercicio1.html` | `ejercicio1.js`
 
 **Pruebas realizadas (GIF):**
-- Cuenta regresiva desde 2 segundos  
+- Cuenta regresiva desde 2 segundos
+  ![Ejercicio 1](gifs/ejercicio1.gif)
 - Cuenta regresiva desde 4 segundos  
-
-![Ejercicio 1](gifs/ejercicio1.gif)
 ![Ejercicio 1.2](gifs/ejercicio1.2.gif)
 
 ---
