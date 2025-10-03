@@ -136,13 +136,13 @@ Muestra el tiempo transcurrido en minutos y segundos.
 `ejercicio4.html` | `ejercicio4.js`
 
 **Pruebas realizadas (GIF):**
-- Inicio y conteo correcto del tiempo
+- Inicio y conteo correcto del tiempo  
 ![Ejercicio 4](gifs/ejercicio4.gif)
-- Pausa del cronómetro
+- Pausa del cronómetro  
 ![Ejercicio 4.2](gifs/ejercicio4.2.gif)
-- Reinicio a `00:00`
+- Reinicio a `00:00`  
 ![Ejercicio 4.3](gifs/ejercicio4.3.gif)
-- Reanudación correcta tras pausa
+- Reanudación correcta tras pausa  
 ![Ejercicio 4.4](gifs/ejercicio4.4.gif)
 
 ---
