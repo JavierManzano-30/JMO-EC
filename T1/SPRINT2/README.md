@@ -84,7 +84,7 @@ Calculadora que permite realizar operaciones básicas (suma, resta, multiplicaci
 `ejercicio2.html` | `ejercicio2.js`
 
 **Pruebas realizadas (GIF):**
-- Sumar 10 + 12 = 22
+- `Sumar 10 + 12 = 22`
 ![Ejercicio 2](gifs/ejercicio2.gif)
 - Resta 10 - 12 = -2
 ![Ejercicio 2.2](gifs/ejercicio2.2.gif)
