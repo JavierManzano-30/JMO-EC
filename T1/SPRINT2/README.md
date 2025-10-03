@@ -1,97 +1,188 @@
-# Entorno Cliente - SPRINT 📚
+# 💻 SPRINT 2 – Entorno Cliente (2º DAW)
 
-Este repositorio contiene los ejercicios del primer sprint de Entorno Cliente.  
-Cada ejercicio incluye su respectivo archivo HTML, archivo JS y un GIF de prueba mostrando el funcionamiento.
+Este sprint contiene los ejercicios prácticos de HTML + JavaScript correspondientes al segundo boletín.  
+Cada ejercicio se encuentra dividido en dos archivos:  
+- Un archivo **.html** (estructura visual)  
+- Un archivo **.js** (lógica funcional)  
+
+La estructura del repositorio es la siguiente:
+
+```
+└── EC/
+    └── T1/
+        └── SPRINT2/
+            └── EJ1/
+                ├── ejercicio1.html
+                ├── ejercicio1.js
+            └── EJ2/
+                ├── ejercicio2.html
+                ├── ejercicio2.js
+            └── EJ3/
+                ├── ejercicio3.html
+                ├── ejercicio3.js
+            └── EJ4/
+                ├── ejercicio4.html
+                ├── ejercicio4.js
+            └── EJ5/
+                ├── ejercicio5.html
+                ├── ejercicio5.js
+                └── img/
+                    ├── coche.png
+                    ├── corazon.png
+                    ├── estrella.png
+                    ├── flor.png
+                    ├── gato.png
+                    ├── luna.png
+                    ├── perro.png
+                    ├── reverso.png
+                    ├── sol.png
+            └── gifs/
+                ├── ejercicio1.gif
+                ├── ejercicio2.gif
+                ├── ejercicio3.gif
+                ├── ejercicio4.gif
+                ├── ejercicio5.gif
+            ├── README.md
+```
 
 ---
 
-## 🟢 Ejercicio 1: Cambio de Color con Botón
+## 🕐 Ejercicio 1: Contrarreloj
 
 **Descripción:**  
-Se ha creado una página web con un botón **"Cambiar color"**.  
-Al hacer clic en él, el fondo de la página cambia a un color aleatorio utilizando `Math.random()` para generar valores RGB.
+Temporizador simple que cuenta hacia atrás desde los segundos introducidos por el usuario.  
+Al llegar a cero, muestra el mensaje “¡Tiempo finalizado!”.
 
-**Archivos entregados:**  
-- `ejercicio1.html`  
-- `ejercicio1.js`
+**Objetivos:**
+- Manejo de eventos `click`
+- Uso de `setInterval` y `clearInterval`
+- Manipulación del DOM
 
-**Prueba:**  
-El GIF muestra cómo al pulsar varias veces el botón el fondo cambia a diferentes colores.  
+**Archivos:**  
+`ejercicio1.html` | `ejercicio1.js`
 
-![Ejercicio 1](./gifs/ejercicio1.gif)
+**Pruebas realizadas (GIF):**
+- Cuenta regresiva desde 2 segundos  
+- Cuenta regresiva desde 4 segundos  
+
+![Ejercicio 1](./ejercicio1.gif)
 
 ---
 
-## 🟠 Ejercicio 2: Calculadora de Área
+## ➕ Ejercicio 2: Calculadora Básica
 
 **Descripción:**  
-Página con dos campos de entrada (`input`) para introducir el ancho y alto de un rectángulo.  
-Al hacer clic en el botón **"Calcular Área"**, se multiplica ancho x alto y se muestra el resultado en un `<p>`.
+Calculadora que permite realizar operaciones básicas (suma, resta, multiplicación y división) entre dos números seleccionados.
 
-**Archivos entregados:**  
-- `ejercicio2.html`  
-- `ejercicio2.js`
+**Objetivos:**
+- Manejo de eventos `click`
+- Validación de entradas
+- Uso de operadores aritméticos
 
-**Prueba:**  
-El GIF muestra el cálculo correcto:  
-- Con valores `2` y `2` devuelve `4`.  
-- Con valores `2` y `9` devuelve `18`.  
+**Archivos:**  
+`ejercicio2.html` | `ejercicio2.js`
 
-![Ejercicio 2](./gifs/ejercicio2.gif)
+**Pruebas realizadas (GIF):**
+- `10 + 12 = 22`  
+- `10 - 12 = -2`  
+- `5 × 4 = 20`  
+- `5 × 0 = 0`  
+- `5 ÷ 4 = 1.25`  
+- `5 ÷ 0 = INDEFINIDO`
+
+![Ejercicio 2](./ejercicio2.gif)
 
 ---
 
-## 🔵 Ejercicio 3: Listado Dinámico
+## 🧠 Ejercicio 3: Encuesta con Gráfico de Resultados
 
 **Descripción:**  
-Página con un campo de entrada y un botón **"Añadir a la lista"**.  
-Al escribir en el campo y pulsar el botón, se añade el texto como un nuevo elemento `<li>` a una lista (`<ul>` o `<ol>`).  
+Página con una encuesta de selección única.  
+Cada voto actualiza dinámicamente un gráfico de barras que muestra el total de respuestas por opción.
 
-**Archivos entregados:**  
-- `ejercicio3.html`  
-- `ejercicio3.js`
+**Objetivos:**
+- Manejo de eventos `click`
+- Manipulación del DOM
+- Actualización dinámica de un gráfico con HTML y CSS
 
-**Prueba:**  
-El GIF muestra cómo se añaden 3 elementos a la lista.  
+**Archivos:**  
+`ejercicio3.html` | `ejercicio3.js`
 
-![Ejercicio 3](./gifs/ejercicio3.gif)
+**Pruebas realizadas (GIF):**
+- Registro correcto de votos  
+- Actualización dinámica del gráfico  
+- Prevención de envío sin seleccionar opción  
+- Persistencia visual de votos anteriores  
+
+![Ejercicio 3](./ejercicio3.gif)
 
 ---
 
-## 🟡 Ejercicio 4: Hover y Estilo Dinámico
+## ⏱ Ejercicio 4: Cronómetro con Controles
 
 **Descripción:**  
-Página con varios `div` con textos diferentes.  
-Al pasar el ratón sobre un `div`, su fondo cambia a azul y el texto a blanco.  
-Al salir, se restauran los estilos originales.  
+Cronómetro con botones para **Iniciar**, **Pausar** y **Reiniciar**.  
+Muestra el tiempo transcurrido en minutos y segundos.
 
-**Archivos entregados:**  
-- `ejercicio4.html`  
-- `ejercicio4.js`
+**Objetivos:**
+- Manejo de múltiples eventos `click`
+- Uso de `setInterval` y `clearInterval`
+- Actualización continua del DOM
 
-**Prueba:**  
-El GIF muestra cómo los `div` cambian de color al pasar el ratón y vuelven a su estado inicial al salir.  
+**Archivos:**  
+`ejercicio4.html` | `ejercicio4.js`
 
-![Ejercicio 4](./gifs/ejercicio4.gif)
+**Pruebas realizadas (GIF):**
+- Inicio y conteo correcto del tiempo  
+- Pausa del cronómetro  
+- Reinicio a `00:00`  
+- Reanudación correcta tras pausa  
+
+![Ejercicio 4](./ejercicio4.gif)
 
 ---
 
-## 🔴 Ejercicio 5: Detección de Clics y Generación de XPath
+## 🃏 Ejercicio 5: Juego de Memoria con Imágenes
 
 **Descripción:**  
-Se ha desarrollado una página que detecta los clics sobre cualquier elemento y genera el **XPath relativo** de dicho elemento.  
-El XPath se muestra en una alerta.  
+Juego de memoria en el que el jugador debe emparejar imágenes iguales.  
+Si las cartas coinciden, permanecen descubiertas; si no, se vuelven a tapar tras un breve intervalo.  
+Incluye botón de **Reiniciar** que baraja las cartas y reinicia el juego.
 
-**Archivos entregados:**  
-- `Ejercicio5.html` (HTML proporcionado, no modificable)  
-- `ejercicio5.js`
+**Objetivos:**
+- Uso de `setTimeout` para lógica temporal
+- Comparación de elementos dinámicos
+- Manipulación avanzada del DOM
+- Barajado de arrays y reinicio del juego
 
-**Prueba:**  
-El GIF muestra cómo al hacer clic sobre diferentes botones aparece una alerta con su XPath relativo.  
+**Archivos:**  
+`ejercicio5.html` | `ejercicio5.js`
 
-![Ejercicio 5](./gifs/ejercicio5.gif)
+**Pruebas realizadas (GIF):**
+- Dos cartas no coincidentes se tapan tras 0.8s  
+- Dos cartas iguales permanecen visibles  
+- Mensaje de victoria al encontrar todas las parejas  
+- Reinicio del juego correctamente barajado  
+
+![Ejercicio 5](./ejercicio5.gif)
 
 ---
 
-✍️ *Autor: [Javier Manzano]*  
-📅 *Sprint de Entorno Cliente*
+## 📸 Capturas estáticas (si aplica)
+
+Incluye capturas de pantalla de los ejercicios que no requieran interacción (por ejemplo, estructuras o maquetas simples).
+
+---
+
+## 🗂 Formato de entrega
+
+- Todos los ejercicios se encuentran en la carpeta `SPRINT2`.  
+- Los GIFs están incrustados en este `README.md`.  
+- La estructura del repositorio respeta el formato:  
+  `EC → T1 → SPRINT2`
+
+---
+
+✍️ **Autor:** *[Tu Nombre Aquí]*  
+📆 **Fecha:** *Octubre 2025*  
+🏫 **Módulo:** *Entorno Cliente – 2º DAW*
