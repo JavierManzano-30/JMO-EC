@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ejercicio 1 - Entorno Cliente (Sprint)</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f4f6f8;
+      color: #333;
+      padding: 20px;
+    }
+    h1 {
+      color: #0077cc;
+    }
+    button {
+      display: inline-block;
+      margin: 6px;
+      padding: 10px 15px;
+      background: #0077cc;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #005fa3;
+    }
+    pre {
+      background: #fff;
+      padding: 10px;
+      border-radius: 6px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+      overflow-x: auto;
+      max-height: 400px;
+    }
+    input, select {
+      padding: 8px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      margin-right: 10px;
+    }
+    .filtros {
+      margin: 15px 0;
+      background: #eef3f7;
+      padding: 10px;
+      border-radius: 6px;
+    }
+    .info {
+      margin-top: 20px;
+      padding: 10px;
+      background: #eaf3ff;
+      border-left: 4px solid #0077cc;
+      border-radius: 6px;
+      display: none; /* 👈 Oculto por defecto */
+    }
+  </style>
+</head>
+<body>
+  <h1>Ejercicio 1 - Análisis y Transformación de Datos</h1>
+
+  <div class="filtros">
+    <label>Ciudad:</label>
+    <select id="ciudadInput">
+      <option value="Madrid">Madrid</option>
+      <option value="Barcelona">Barcelona</option>
+      <option value="Sevilla">Sevilla</option>
+      <option value="Valencia">Valencia</option>
+      <option value="Bilbao">Bilbao</option>
+    </select>
+
+    <label>Asignatura:</label>
+    <select id="asignaturaInput">
+      <option value="matematicas">Matemáticas</option>
+      <option value="fisica">Física</option>
+      <option value="historia">Historia</option>
+    </select>
+  </div>
+
+  <div>
+    <button onclick="mostrarResultado(1)">Parte 1 - Estudiantes Destacados</button>
+    <button onclick="mostrarResultado(2)">Parte 2 - Asignatura con Menor Rendimiento</button>
+    <button onclick="mostrarResultado(3)">Parte 3 - Mejora Notas Beca</button>
+    <button onclick="mostrarResultado(4)">Parte 4 - Filtrado por Ciudad</button>
+    <button onclick="mostrarResultado(5)">Parte 5 - Estudiantes Sin Beca</button>
+    <button onclick="mostrarResultado(6)">Parte 6 - Promedio Edad Beca</button>
+    <button onclick="mostrarResultado(7)">Parte 7 - Mejores Estudiantes</button>
+    <button onclick="mostrarResultado(8)">Parte 8 - Aprobados en Todo</button>
+  </div>
+
+  <h2>Resultado:</h2>
+  <pre id="resultado"></pre>
+
+  <div id="infoCiudad" class="info"></div>
+
+  <script src="ejercicio1.js"></script>
+</body>
+</html>
