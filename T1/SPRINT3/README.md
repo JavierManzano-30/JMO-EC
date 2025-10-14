@@ -10,7 +10,7 @@ La estructura del repositorio es la siguiente:
 ```
 └── EC/
     └── T1/
-        └── SPRINT2/
+        └── SPRINT3/
             └── EJ1/
                 ├── ejercicio1.html
                 ├── ejercicio1.js
