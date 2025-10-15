@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Ejercicio 1 — Quiz cronometrado</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/modern-css-reset/dist/reset.min.css">
+  <style>
+    :root {
+      --accent:#0066cc;
+      --correct:#1a9a6b;
+      --wrong:#d64545;
+    }
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+      line-height: 1.4;
+      padding: 20px;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    h1 { font-size: 1.3rem; }
+    .card { border: 1px solid #ddd; padding: 16px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,.05); }
+    .options { margin-top: 12px; display: flex; flex-direction: column; gap: 8px; }
+    label.option { display: flex; align-items: center; padding: 8px; border-radius: 6px; border: 1px solid transparent; cursor: pointer; }
+    label.option input { margin-right: 10px; }
+    label.option.correct { background: rgba(26,154,107,0.12); border-color: rgba(26,154,107,0.22); }
+    label.option.wrong { background: rgba(214,69,69,0.08); border-color: rgba(214,69,69,0.2); }
+    .progress-wrap { height: 10px; background: #eee; border-radius: 99px; overflow: hidden; margin-top: 12px; }
+    .progress { height: 100%; width: 100%; background: linear-gradient(90deg, var(--accent), #2a9bd6); transition: width 0.2s linear; }
+    .timer { font-weight: 700; margin-left: 8px; }
+    .feedback { margin-top: 12px; min-height: 1.2em; }
+    .summary { font-size: 1.1rem; text-align: center; }
+    .controls { display: flex; gap: 8px; justify-content: flex-end; margin-top: 12px; }
+    button { background: var(--accent); color: #fff; border: none; padding: 8px 12px; border-radius: 6px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h1>Ejercicio 1 — Quiz cronometrado</h1>
+
+  <div class="card" id="quiz">
+    <div id="questionArea">
+      <p id="questionText">Cargando...</p>
+      <div class="options" id="options"></div>
+
+      <div class="progress-wrap">
+        <div id="progress" class="progress"></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;margin-top:8px;">
+        <div>Tiempo restante: <span id="time" class="timer">10</span>s</div>
+        <div>Pregunta <span id="qindex">0</span>/<span id="qtotal">0</span></div>
+      </div>
+
+      <div id="feedback" class="feedback" aria-live="polite"></div>
+    </div>
+
+    <div class="controls">
+      <button id="restart">Reiniciar</button>
+    </div>
+
+    <div id="summary" style="display:none;margin-top:12px" aria-live="polite"></div>
+  </div>
+
+  <script src="ejercicio1_quiz.js"></script>
+</body>
+</html>
