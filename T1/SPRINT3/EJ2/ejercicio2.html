@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Ejercicio 2 - Uso de PokeAPI</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; background-color: #f3f4f6; }
+    h1 { color: #2b2b2b; }
+    button { margin: 5px; padding: 8px 12px; border-radius: 6px; cursor: pointer; }
+    input { margin: 5px; padding: 6px; }
+    #resultado { background: white; border-radius: 10px; padding: 15px; margin-top: 20px; white-space: pre-wrap; }
+    img { width: 150px; height: 150px; }
+    table { border-collapse: collapse; width: 100%; margin-top: 10px; background: white; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+    th { background: #efefef; }
+  </style>
+</head>
+<body>
+  <h1>Ejercicio 2 - Uso de PokeAPI</h1>
+
+  <section>
+    <h2>Parte 1: Información Básica del Pokémon</h2>
+    <input type="text" id="nombrePokemon" placeholder="Ej: pikachu" />
+    <button onclick="probarInfoBasica()">Buscar Pokémon</button>
+  </section>
+
+  <section>
+    <h2>Parte 2: Comparativa de Pokémon</h2>
+    <input type="text" id="pokemon1" placeholder="Ej: bulbasaur" />
+    <input type="text" id="pokemon2" placeholder="Ej: squirtle" />
+    <button onclick="probarComparacion()">Comparar Pokémon</button>
+  </section>
+
+  <section>
+    <h2>Parte 3: Cadena Evolutiva y Habilidades</h2>
+    <input type="text" id="pokemonEvo" placeholder="Ej: charmander" />
+    <button onclick="probarEvoluciones()">Ver Evoluciones</button>
+  </section>
+
+  <div id="resultado"></div>
+
+  <script src="ejercicio2.js"></script>
+</body>
+</html>
