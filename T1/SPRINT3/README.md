@@ -35,6 +35,15 @@ La estructura del repositorio es la siguiente:
                 ├── guild-management-api.yml
                 └── guild_management/
             └── gifs/
+                ├── ejercicio1.1.gif
+                ├── ejercicio1.2.gif
+                ├── ejercicio2.1.gif
+                ├── ejercicio2.2.gif
+                ├── ejercicio2.3.gif
+                ├── ejercicio2.4.gif
+                ├── ejercicio2.5.gif
+                ├── ejercicio2.6.gif
+                ├── ejercicio2.7.gif
                 ├── ejercicio3.1.gif
                 ├── ejercicio3.2.gif
                 ├── ejercicio3.3.gif
@@ -77,6 +86,12 @@ Permite consultar información detallada sobre estudiantes, sus calificaciones y
 - Mejores estudiantes por promedio general
 - Lista de estudiantes aprobados en todas las asignaturas
 
+**Pruebas realizadas (GIF):**
+- Primeras 4 funcionalidades (Parte 1)  
+![Ejercicio 1.1](gifs/ejercicio1.1.gif)
+- Últimas 4 funcionalidades (Parte 2)  
+![Ejercicio 1.2](gifs/ejercicio1.2.gif)
+
 ---
 
 ## 🎮 Ejercicio 2: Integración con PokeAPI
@@ -102,12 +117,20 @@ Integración completa con servicios REST externos.
 - Manejo de errores y validaciones
 
 **Pruebas realizadas (GIF):**
-- Búsqueda de información básica de Pikachu  
-![Ejercicio 2](gifs/ejercicio2.gif)
-- Comparativa entre Bulbasaur y Squirtle  
+- **Parte 1 - Información Básica:** Búsqueda de Pikachu  
+![Ejercicio 2.1](gifs/ejercicio2.1.gif)
+- **Parte 1:** Búsqueda de Charizard  
 ![Ejercicio 2.2](gifs/ejercicio2.2.gif)
-- Cadena evolutiva de Charmander  
+- **Parte 1:** Manejo de error con Pokémon inexistente  
 ![Ejercicio 2.3](gifs/ejercicio2.3.gif)
+- **Parte 2 - Comparativa:** Bulbasaur vs Squirtle  
+![Ejercicio 2.4](gifs/ejercicio2.4.gif)
+- **Parte 2:** Gengar vs Alakazam  
+![Ejercicio 2.5](gifs/ejercicio2.5.gif)
+- **Parte 3 - Evoluciones:** Cadena evolutiva de Charmander  
+![Ejercicio 2.6](gifs/ejercicio2.6.gif)
+- **Parte 3:** Manejo de Pokémon sin evolución (Tauros)  
+![Ejercicio 2.7](gifs/ejercicio2.7.gif)
 
 ---
 
@@ -212,6 +235,8 @@ Incluye funcionalidades adicionales y mejor gestión de errores.
 - API REST completa
 - Manejo de errores HTTP
 - Validación de datos del lado del servidor
+
+**Nota:** Este ejercicio no incluye GIFs de demostración ya que presenta problemas de funcionamiento.
 
 ---
 
