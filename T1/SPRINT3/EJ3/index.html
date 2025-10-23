@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guild Management System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="api-status connected">
+        <div class="status-dot"></div>
+        <span>API Ready (localhost:3000)</span>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1>⚔️ Guild Management System</h1>
+            <p>Gestiona los miembros de tu guild de manera eficiente</p>
+        </div>
+
+        <div class="controls">
+            <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="searchInput" placeholder="Buscar por nombre o ID...">
+            </div>
+            <button class="btn btn-primary" id="addMemberBtn">
+                <span>➕</span> Add New Member
+            </button>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>User ID</th>
+                        <th>Username</th>
+                        <th>Level</th>
+                        <th>Item Level</th>
+                        <th>Character Role</th>
+                        <th>Guild Role</th>
+                        <th>Main Archetype</th>
+                        <th>Secondary Archetype</th>
+                        <th>Profession 1</th>
+                        <th>Profession 2</th>
+                        <th>Email</th>
+                        <th>Email Notifications</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="membersTable">
+                    <!-- Los miembros se cargarán dinámicamente -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="memberModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Add New Member</h2>
+                <button class="close-btn" id="closeModalBtn">×</button>
+            </div>
+            <div class="modal-body">
+                <form id="memberForm">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="user_id">User ID *</label>
+                            <input type="text" id="user_id" name="user_id" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="username">Username *</label>
+                            <input type="text" id="username" name="username" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="level">Level *</label>
+                            <input type="number" id="level" name="level" min="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="ilvl">Item Level *</label>
+                            <input type="number" id="ilvl" name="ilvl" min="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="character_role">Character Role *</label>
+                            <select id="character_role" name="character_role" required>
+                                <option value="">Select role...</option>
+                                <option value="TANK">TANK</option>
+                                <option value="HEALER">HEALER</option>
+                                <option value="DAMAGE">DAMAGE</option>
+                                <option value="SUPPORT">SUPPORT</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="guild_role">Guild Role *</label>
+                            <select id="guild_role" name="guild_role" required>
+                                <option value="">Select role...</option>
+                                <option value="LIDER">LIDER</option>
+                                <option value="GERENTE SENIOR">GERENTE SENIOR</option>
+                                <option value="GERENTE">GERENTE</option>
+                                <option value="GERENTE A2">GERENTE A2</option>
+                                <option value="ALPHA 2">ALPHA 2</option>
+                                <option value="MEMBER">MEMBER</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="main_archetype">Main Archetype *</label>
+                            <select id="main_archetype" name="main_archetype" required>
+                                <option value="">Select archetype...</option>
+                                <option value="BARD">BARD</option>
+                                <option value="CLERIC">CLERIC</option>
+                                <option value="FIGHTER">FIGHTER</option>
+                                <option value="MAGE">MAGE</option>
+                                <option value="RANGER">RANGER</option>
+                                <option value="ROGUE">ROGUE</option>
+                                <option value="SUMMONER">SUMMONER</option>
+                                <option value="TANK">TANK</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="secondary_archetype">Secondary Archetype *</label>
+                            <select id="secondary_archetype" name="secondary_archetype" required>
+                                <option value="">Select archetype...</option>
+                                <option value="BARD">BARD</option>
+                                <option value="CLERIC">CLERIC</option>
+                                <option value="FIGHTER">FIGHTER</option>
+                                <option value="MAGE">MAGE</option>
+                                <option value="RANGER">RANGER</option>
+                                <option value="ROGUE">ROGUE</option>
+                                <option value="SUMMONER">SUMMONER</option>
+                                <option value="TANK">TANK</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="grandmaster_profession_one">Grandmaster Profession 1 *</label>
+                            <select id="grandmaster_profession_one" name="grandmaster_profession_one" required>
+                                <option value="">Select profession...</option>
+                                <option value="FISHING">FISHING</option>
+                                <option value="HERBALISM">HERBALISM</option>
+                                <option value="HUNTING">HUNTING</option>
+                                <option value="LUMBERJACKING">LUMBERJACKING</option>
+                                <option value="MINING">MINING</option>
+                                <option value="ALCHEMY">ALCHEMY</option>
+                                <option value="ANIMALHUSBANDRY">ANIMAL HUSBANDRY</option>
+                                <option value="COOKING">COOKING</option>
+                                <option value="FARMING">FARMING</option>
+                                <option value="LUMBERMILLING">LUMBERMILLING</option>
+                                <option value="METALWORKING">METALWORKING</option>
+                                <option value="STONECUTTING">STONECUTTING</option>
+                                <option value="TANNING">TANNING</option>
+                                <option value="WEAVING">WEAVING</option>
+                                <option value="ARCANEENGINEERING">ARCANE ENGINEERING</option>
+                                <option value="ARMORSMITHING">ARMORSMITHING</option>
+                                <option value="CARPENTRY">CARPENTRY</option>
+                                <option value="JEWELCUTTING">JEWELCUTTING</option>
+                                <option value="LEATHERWORKING">LEATHERWORKING</option>
+                                <option value="SCRIBE">SCRIBE</option>
+                                <option value="TAILORING">TAILORING</option>
+                                <option value="WEAPONSMITHING">WEAPONSMITHING</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="grandmaster_profession_two">Grandmaster Profession 2 *</label>
+                            <select id="grandmaster_profession_two" name="grandmaster_profession_two" required>
+                                <option value="">Select profession...</option>
+                                <option value="FISHING">FISHING</option>
+                                <option value="HERBALISM">HERBALISM</option>
+                                <option value="HUNTING">HUNTING</option>
+                                <option value="LUMBERJACKING">LUMBERJACKING</option>
+                                <option value="MINING">MINING</option>
+                                <option value="ALCHEMY">ALCHEMY</option>
+                                <option value="ANIMALHUSBANDRY">ANIMAL HUSBANDRY</option>
+                                <option value="COOKING">COOKING</option>
+                                <option value="FARMING">FARMING</option>
+                                <option value="LUMBERMILLING">LUMBERMILLING</option>
+                                <option value="METALWORKING">METALWORKING</option>
+                                <option value="STONECUTTING">STONECUTTING</option>
+                                <option value="TANNING">TANNING</option>
+                                <option value="WEAVING">WEAVING</option>
+                                <option value="ARCANEENGINEERING">ARCANE ENGINEERING</option>
+                                <option value="ARMORSMITHING">ARMORSMITHING</option>
+                                <option value="CARPENTRY">CARPENTRY</option>
+                                <option value="JEWELCUTTING">JEWELCUTTING</option>
+                                <option value="LEATHERWORKING">LEATHERWORKING</option>
+                                <option value="SCRIBE">SCRIBE</option>
+                                <option value="TAILORING">TAILORING</option>
+                                <option value="WEAPONSMITHING">WEAPONSMITHING</option>
+                            </select>
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group full-width">
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="notify_email" name="notify_email" checked>
+                                <label for="notify_email">Enable email notifications</label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="cancelBtn">Cancel</button>
+                <button class="btn btn-primary" id="submitBtn">
+                    <span id="submitBtnText">Add Member</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

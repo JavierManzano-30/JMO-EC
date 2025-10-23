@@ -1,192 +1,158 @@
-# 💻 SPRINT 2 – Entorno Cliente (2º DAW)
+# 💻 SPRINT 3 – Desarrollo Full-Stack (2º DAW)
 
-Este sprint contiene los ejercicios prácticos de HTML + JavaScript correspondientes al segundo boletín.  
-Cada ejercicio se encuentra dividido en dos archivos:  
-- Un archivo **.html** (estructura visual)  
-- Un archivo **.js** (lógica funcional)  
+Este sprint contiene los ejercicios prácticos de desarrollo full-stack con integración de frontend y backend, incluyendo gestión de base de datos MySQL.
 
-La estructura del repositorio es la siguiente:
+## 📁 Estructura del Proyecto
 
 ```
-└── EC/
-    └── T1/
-        └── SPRINT3/
-            └── EJ1/
-                ├── ejercicio1.html
-                ├── ejercicio1.js
-            └── EJ2/
-                ├── ejercicio2.html
-                ├── ejercicio2.js
-            └── EJ3/
-                ├── ejercicio3.html
-                ├── ejercicio3.js
-            └── EJ4/
-                ├── ejercicio4.html
-                ├── ejercicio4.js
-            └── EJ5/
-                ├── ejercicio5.html
-                ├── ejercicio5.js
-                └── img/
-                    ├── coche.png
-                    ├── corazon.png
-                    ├── estrella.png
-                    ├── flor.png
-                    ├── gato.png
-                    ├── luna.png
-                    ├── perro.png
-                    ├── reverso.png
-                    ├── sol.png
-            └── gifs/
-                ├── ejercicio1.gif
-                ├── ejercicio1.2.gif
-                ├── ejercicio2.gif
-                ├── ejercicio3.gif
-                ├── ejercicio4.gif
-                ├── ejercicio5.gif
-            ├── README.md
+SPRINT3/
+├── EJ1/                    # Ejercicio 1: Contrarreloj
+│   ├── ejercicio1.html
+│   └── ejercicio1.js
+├── EJ2/                    # Ejercicio 2: Calculadora Básica
+│   ├── ejercicio2.html
+│   └── ejercicio2.js
+├── EJ3/                    # Ejercicio 3: Gestión de Guild Members
+│   ├── index.html
+│   ├── script.js
+│   ├── styles.css
+│   └── PROBLEMA_ESQUEMA_BD.md
+├── EJ4/                    # Ejercicio 4: Party Finder Básico
+│   ├── index.html
+│   ├── script.js
+│   ├── styles.css
+│   ├── PROBLEMA_SOLUCIONADO.md
+│   └── SOLUCION_BACKEND_PROFESOR.md
+├── EJ5/                    # Ejercicio 5: Party Finder Avanzado
+│   ├── index.html
+│   ├── script.js
+│   ├── styles.css
+│   ├── README.md
+│   └── backend/
+│       ├── server.js
+│       ├── package.json
+│       └── node_modules/
+├── Cosas/                  # Backend del Profesor (Problemático)
+│   ├── guild-management-BackEnd.exe
+│   ├── guild-management-api.yml
+│   └── EJ3/backend/
+└── gifs/                   # Demostraciones visuales
+    ├── ejercicio3.1.gif
+    ├── ejercicio3.2.gif
+    ├── ejercicio3.3.gif
+    ├── ejercicio3.4.gif
+    ├── ejercicio3.5.gif
+    ├── ejercicio3.6.gif
+    ├── ejercicio4.1.gif
+    ├── ejercicio4.2.gif
+    ├── ejercicio4.3.gif
+    ├── ejercicio4.4.gif
+    └── ejercicio4.5.gif
 ```
 
----
+## 🎯 Ejercicios Implementados
 
-## 🕐 Ejercicio 1: Contrarreloj
-
-**Descripción:**  
-Temporizador simple que cuenta hacia atrás desde los segundos introducidos por el usuario.  
-Al llegar a cero, muestra el mensaje “¡Tiempo finalizado!”.
-
-**Objetivos:**
-- Manejo de eventos `click`
+### **EJ1: Contrarreloj**
+- Temporizador que cuenta hacia atrás
+- Manejo de eventos y manipulación del DOM
 - Uso de `setInterval` y `clearInterval`
-- Manipulación del DOM
 
-**Archivos:**  
-`ejercicio1.html` | `ejercicio1.js`
-
-**Pruebas realizadas (GIF):**
-- Cuenta regresiva desde 2 segundos
-  ![Ejercicio 1](gifs/ejercicio1.gif)
-- Cuenta regresiva desde 4 segundos  
-![Ejercicio 1.2](gifs/ejercicio1.2.gif)
-
-**Diagrama de flujo:**  
-![Ejercicio 1](img/ejercicio1.png)
----
-
-## ➕ Ejercicio 2: Calculadora Básica
-
-**Descripción:**  
-Calculadora que permite realizar operaciones básicas (suma, resta, multiplicación y división) entre dos números seleccionados.
-
-**Objetivos:**
-- Manejo de eventos `click`
+### **EJ2: Calculadora Básica**
+- Operaciones aritméticas básicas
 - Validación de entradas
-- Uso de operadores aritméticos
+- Manejo de errores (división por cero)
 
-**Archivos:**  
-`ejercicio2.html` | `ejercicio2.js`
+### **EJ3: Gestión de Guild Members**
+- **Frontend:** Interfaz completa para gestión de miembros
+- **Backend:** Integración con MySQL del profesor
+- **Funcionalidades:** CRUD completo de usuarios
+- **Base de datos:** Tabla `guildmembers`
 
-**Pruebas realizadas (GIF):**
-- Sumar 10 + 12 = 22  
-![Ejercicio 2](gifs/ejercicio2.gif)
-- Resta 10 - 12 = -2  
-![Ejercicio 2.2](gifs/ejercicio2.2.gif)
-- Multiplicar 5 X 4 = 20 y 5 X 0 = 0  
-![Ejercicio 2.3](gifs/ejercicio2.3.gif)
-- Dividir 5 / 4 = 1.25 y 5 / 0 = "INDEFINIDO"  
-![Ejercicio 2.4](gifs/ejercicio2.4.gif)
+### **EJ4: Party Finder Básico**
+- **Frontend:** Creación y gestión de parties
+- **Backend:** Integración con MySQL del profesor
+- **Funcionalidades:** Crear parties de tamaño 3, 5, 8
+- **Base de datos:** Tablas `partyfinderthree`, `partyfinderfive`, `partyfindereight`
 
----
+### **EJ5: Party Finder Avanzado**
+- **Frontend:** Gestión avanzada de parties con interfaz mejorada
+- **Backend:** Servidor Node.js propio con MySQL
+- **Funcionalidades:** 
+  - Crear usuarios y parties
+  - Añadir/remover miembros
+  - Eliminar parties
+  - Validaciones avanzadas
+- **Base de datos:** Mismas tablas que EJ3/EJ4 (unificada)
 
-## 🧠 Ejercicio 3: Encuesta con Gráfico de Resultados
+## 🗄️ Base de Datos MySQL
 
-**Descripción:**  
-Página con una encuesta de selección única.  
-Cada voto actualiza dinámicamente un gráfico de barras que muestra el total de respuestas por opción.
+### **Configuración:**
+- **Host:** localhost:3306
+- **Usuario:** root (sin contraseña)
+- **Base de datos:** guildmanagement
 
-**Objetivos:**
-- Manejo de eventos `click`
-- Manipulación del DOM
-- Actualización dinámica de un gráfico con HTML y CSS
+### **Tablas:**
+- `guildmembers` - Usuarios del sistema
+- `partyfinderthree` - Parties de tamaño 3
+- `partyfinderfive` - Parties de tamaño 5
+- `partyfindereight` - Parties de tamaño 8
 
-**Archivos:**  
-`ejercicio3.html` | `ejercicio3.js`
+## 🚀 Cómo Ejecutar
 
-**Pruebas realizadas (GIF):**
-- Verificar que al seleccionar una opción y hacer clic en "Enviar", se actualicen correctamente los votos en el gráfico.  
-![Ejercicio 3](gifs/ejercicio3.gif)
-- Comprobar que el gráfico de barras se actualiza dinámicamente después de cada nueva votación.  
-![Ejercicio 3.2](gifs/ejercicio3.2.gif)
-- Probar que el sistema gestiona correctamente intentos de envío sin seleccionar ninguna opción.  
-![Ejercicio 3.3](gifs/ejercicio3.3.gif)
-- Verificar que las votaciones previas se mantienen después de varias interacciones.  
-![Ejercicio 3.4](gifs/ejercicio3.4.gif)
+### **EJ1 y EJ2:**
+```bash
+# Abrir directamente en el navegador
+open EJ1/ejercicio1.html
+open EJ2/ejercicio2.html
+```
 
----
+### **EJ3 y EJ4:**
+```bash
+# Requiere backend del profesor (problemático)
+cd Cosas
+./guild-management-BackEnd.exe  # Puede fallar con ETIMEDOUT
+# Luego abrir EJ3/index.html o EJ4/index.html
+```
 
-## ⏱ Ejercicio 4: Cronómetro con Controles
+### **EJ5 (Recomendado):**
+```bash
+# Usar el backend funcional propio
+cd EJ5/backend
+npm install
+npm start
+# Luego abrir EJ5/index.html
+```
 
-**Descripción:**  
-Cronómetro con botones para **Iniciar**, **Pausar** y **Reiniciar**.  
-Muestra el tiempo transcurrido en minutos y segundos.
+## ⚠️ Problemas Conocidos
 
-**Objetivos:**
-- Manejo de múltiples eventos `click`
-- Uso de `setInterval` y `clearInterval`
-- Actualización continua del DOM
+### **Backend del Profesor:**
+- Error `ETIMEDOUT` al conectar a MySQL
+- Requiere configuración específica no documentada
+- **Solución:** Usar el backend propio de EJ5
 
-**Archivos:**  
-`ejercicio4.html` | `ejercicio4.js`
+### **Integración:**
+- EJ3/EJ4 dependen del backend del profesor
+- EJ5 tiene backend propio funcional
+- Los datos se pueden compartir usando la misma base de datos MySQL
 
-**Pruebas realizadas (GIF):**
-- Inicio y conteo correcto del tiempo  
-![Ejercicio 4](gifs/ejercicio4.gif)
-- Pausa del cronómetro  
-![Ejercicio 4.2](gifs/ejercicio4.2.gif)
-- Reinicio a `00:00`  
-![Ejercicio 4.3](gifs/ejercicio4.3.gif)
-- Reanudación correcta tras pausa  
-![Ejercicio 4.4](gifs/ejercicio4.4.gif)
+## 🎉 Funcionalidades Destacadas
 
----
+✅ **Sistema completo** de gestión de guilds  
+✅ **Base de datos MySQL** integrada  
+✅ **Frontend responsivo** con validaciones  
+✅ **Backend robusto** con manejo de errores  
+✅ **Integración** entre ejercicios  
+✅ **Documentación completa** de problemas y soluciones  
 
-## 🃏 Ejercicio 5: Juego de Memoria con Imágenes
+## 📊 Demostraciones
 
-**Descripción:**  
-Juego de memoria en el que el jugador debe emparejar imágenes iguales.  
-Si las cartas coinciden, permanecen descubiertas; si no, se vuelven a tapar tras un breve intervalo.  
-Incluye botón de **Reiniciar** que baraja las cartas y reinicia el juego.
-
-**Objetivos:**
-- Uso de `setTimeout` para lógica temporal
-- Comparación de elementos dinámicos
-- Manipulación avanzada del DOM
-- Barajado de arrays y reinicio del juego
-
-**Archivos:**  
-`ejercicio5.html` | `ejercicio5.js`
-
-**Pruebas realizadas (GIF):**
-- Dos cartas iguales permanecen visibles  
-![Ejercicio 5](gifs/ejercicio5.gif)
-- Dos cartas no coincidentes se tapan tras 0.8s  
-![Ejercicio 5.2](gifs/ejercicio5.2.gif)
-- Mensaje de victoria al encontrar todas las parejas  
-![Ejercicio 5.3](gifs/ejercicio5.3.gif)
-- Reinicio del juego correctamente barajado  
-![Ejercicio 5.4](gifs/ejercicio5.4.gif)
-
+Los GIFs en la carpeta `gifs/` muestran el funcionamiento de cada ejercicio:
+- `ejercicio3.1.gif` a `ejercicio3.6.gif` - Funcionalidades de EJ3
+- `ejercicio4.1.gif` a `ejercicio4.5.gif` - Funcionalidades de EJ4
 
 ---
 
-## 🗂 Formato de entrega
-
-- Todos los ejercicios se encuentran en la carpeta `SPRINT2`.  
-- Los GIFs están incrustados en este `README.md`.  
-- La estructura del repositorio respeta el formato:  
-  `EC → T1 → SPRINT2`
-
----
-
-✍️ **Autor:** *[Javier Manzano Oliveros]*  
-📆 **Fecha:** *Octubre 2025*  
-🏫 **Módulo:** *Entorno Cliente – 2º DAW*
+✍️ **Autor:** Javier Manzano Oliveros  
+📆 **Fecha:** Octubre 2025  
+🏫 **Módulo:** Entorno Cliente – 2º DAW  
+🎯 **Sprint:** SPRINT 3 - Desarrollo Full-Stack
