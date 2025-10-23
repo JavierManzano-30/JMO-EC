@@ -1,0 +1,118 @@
+CREATE DATABASE guildmanagement;
+USE guildmanagement;
+
+-- Crear la tabla guildmembers
+CREATE TABLE guildmembers (
+    user_id VARCHAR(50) NOT NULL UNIQUE,
+    username VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    level INT DEFAULT NULL,
+    ilvl INT DEFAULT NULL,
+    character_role ENUM('TANK', 'HEALER', 'DAMAGE', 'SUPPORT') DEFAULT NULL,
+    guild_role ENUM('LIDER', 'GERENTE SENIOR', 'GERENTE', 'GERENTE A2', 'ALPHA 2', 'MEMBER') DEFAULT 'MEMBER',
+    joined_guild_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    last_active TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    main_archetype ENUM('BARD', 'CLERIC', 'FIGHTER', 'MAGE', 'RANGER', 'ROGUE', 'SUMMONER', 'TANK') DEFAULT NULL,
+    secondary_archetype ENUM('BARD', 'CLERIC', 'FIGHTER', 'MAGE', 'RANGER', 'ROGUE', 'SUMMONER', 'TANK') DEFAULT NULL,
+    grandmaster_profession_one ENUM('FISHING', 'HERBALISM', 'HUNTING', 'LUMBERJACKING', 'MINING', 'ALCHEMY', 'ANIMALHUSBANDRY',
+        'COOKING', 'FARMING', 'LUMBERMILLING', 'METALWORKING', 'STONECUTTING', 'TANNING', 'WEAVING',
+        'ARCANEENGINEERING', 'ARMORSMITHING', 'CARPENTRY', 'JEWELCUTTING', 'LEATHERWORKING', 'SCRIBE', 'TAILORING',
+        'WEAPONSMITHING') DEFAULT NULL,
+    grandmaster_profession_two ENUM('FISHING', 'HERBALISM', 'HUNTING', 'LUMBERJACKING', 'MINING', 'ALCHEMY', 'ANIMALHUSBANDRY',
+        'COOKING', 'FARMING', 'LUMBERMILLING', 'METALWORKING', 'STONECUTTING', 'TANNING', 'WEAVING',
+        'ARCANEENGINEERING', 'ARMORSMITHING', 'CARPENTRY', 'JEWELCUTTING', 'LEATHERWORKING', 'SCRIBE', 'TAILORING',
+        'WEAPONSMITHING') DEFAULT NULL,
+    DKP_1 INT DEFAULT 0,
+    DKP_2 INT DEFAULT 0,
+    notify_partyfinder BOOLEAN DEFAULT TRUE,
+    notify_dkp BOOLEAN DEFAULT TRUE,
+    notify_email BOOLEAN DEFAULT TRUE,
+    PRIMARY KEY (user_id)
+);
+
+-- Crear la tabla partyfinderthree
+CREATE TABLE partyfinderthree (
+    party_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    creator_id VARCHAR(50) NOT NULL,
+    level_cap INT NOT NULL,
+    ilvl_cap INT NOT NULL,
+    party_role_member_one ENUM('TANK', 'HEALER', 'DAMAGE', 'SUPPORT') DEFAULT NULL,
+    party_member_one VARCHAR(50) DEFAULT NULL,
+    party_role_member_two ENUM('TANK', 'HEALER', 'DAMAGE', 'SUPPORT') DEFAULT NULL,
+    party_member_two VARCHAR(50) DEFAULT NULL,
+    party_role_member_three ENUM('TANK', 'HEALER', 'DAMAGE', 'SUPPORT') DEFAULT NULL,
+    party_member_three VARCHAR(50) DEFAULT NULL,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    forum_thread_id VARCHAR(255) DEFAULT NULL,
+    planned_start DATETIME DEFAULT NULL
+);
+
+-- Crear la tabla partyfinderfive
+CREATE TABLE partyfinderfive (
+    party_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    creator_id VARCHAR(50) NOT NULL,
+    level_cap INT NOT NULL,
+    ilvl_cap INT NOT NULL,
+    party_role_member_one ENUM('TANK', 'HEALER', 'DAMAGE', 'SUPPORT') DEFAULT NULL,
+    party_member_one VARCHAR(50) DEFAULT NULL,
+    party_role_member_two ENUM('TANK', 'HEALER', 'DAMAGE', 'SUPPORT') DEFAULT NULL,
+    party_member_two VARCHAR(50) DEFAULT NULL,
+    party_role_member_three ENUM('TANK', 'HEALER', 'DAMAGE', 'SUPPORT') DEFAULT NULL,
+    party_member_three VARCHAR(50) DEFAULT NULL,
+    party_role_member_four ENUM('TANK', 'HEALER', 'DAMAGE', 'SUPPORT') DEFAULT NULL,
+    party_member_four VARCHAR(50) DEFAULT NULL,
+    party_role_member_five ENUM('TANK', 'HEALER', 'DAMAGE', 'SUPPORT') DEFAULT NULL,
+    party_member_five VARCHAR(50) DEFAULT NULL,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    forum_thread_id VARCHAR(255) DEFAULT NULL,
+    planned_start DATETIME DEFAULT NULL
+);
+
+-- Crear la tabla partyfindereight
+CREATE TABLE partyfindereight (
+    party_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    creator_id VARCHAR(50) NOT NULL,
+    level_cap INT NOT NULL,
+    ilvl_cap INT NOT NULL,
+    party_role_member_one ENUM('TANK', 'HEALER', 'DAMAGE', 'SUPPORT') DEFAULT NULL,
+    party_member_one VARCHAR(50) DEFAULT NULL,
+    party_role_member_two ENUM('TANK', 'HEALER', 'DAMAGE', 'SUPPORT') DEFAULT NULL,
+    party_member_two VARCHAR(50) DEFAULT NULL,
+    party_role_member_three ENUM('TANK', 'HEALER', 'DAMAGE', 'SUPPORT') DEFAULT NULL,
+    party_member_three VARCHAR(50) DEFAULT NULL,
+    party_role_member_four ENUM('TANK', 'HEALER', 'DAMAGE', 'SUPPORT') DEFAULT NULL,
+    party_member_four VARCHAR(50) DEFAULT NULL,
+    party_role_member_five ENUM('TANK', 'HEALER', 'DAMAGE', 'SUPPORT') DEFAULT NULL,
+    party_member_five VARCHAR(50) DEFAULT NULL,
+    party_role_member_six ENUM('TANK', 'HEALER', 'DAMAGE', 'SUPPORT') DEFAULT NULL,
+    party_member_six VARCHAR(50) DEFAULT NULL,
+    party_role_member_seven ENUM('TANK', 'HEALER', 'DAMAGE', 'SUPPORT') DEFAULT NULL,
+    party_member_seven VARCHAR(50) DEFAULT NULL,
+    party_role_member_eight ENUM('TANK', 'HEALER', 'DAMAGE', 'SUPPORT') DEFAULT NULL,
+    party_member_eight VARCHAR(50) DEFAULT NULL,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    forum_thread_id VARCHAR(255) DEFAULT NULL,
+    planned_start DATETIME DEFAULT NULL
+);
+
+-- Crear la tabla guildeventsystem
+CREATE TABLE guildeventsystem (
+    event_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    creator_id VARCHAR(50) NOT NULL,
+    level INT DEFAULT NULL,
+    ilvl INT DEFAULT NULL,
+    num_members INT NOT NULL,
+    creator_role ENUM('TANK', 'HEALER', 'DAMAGE', 'SUPPORT') NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (creator_id) REFERENCES guildmembers(user_id) ON DELETE CASCADE
+);
+
+-- Crear la tabla DKP_Items
+CREATE TABLE DKP_Items (
+    item_id INT AUTO_INCREMENT PRIMARY KEY,
+    item_name VARCHAR(100) DEFAULT NULL,
+    wiki_url VARCHAR(255) DEFAULT NULL,
+    dkp_type ENUM('DKP_1', 'DKP_2') NOT NULL,
+    dkp_cost INT DEFAULT 0,
+    description TEXT DEFAULT NULL
+);

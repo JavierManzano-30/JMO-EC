@@ -1,0 +1,1544 @@
+openapi: 3.0.3
+info:
+  title: Guild Management API
+  version: 1.0.0
+  description: |
+    API para gestionar los miembros de la guild y el Party Finder en el sistema de gestión de guilds. Permite realizar operaciones CRUD en las tablas `guildmembers` y `partyfinder`.
+
+servers:
+  - url: http://localhost:3000
+    description: Servidor local
+
+paths:
+  /guildmembers:
+    get:
+      summary: Obtener todos los miembros
+      description: Devuelve una lista de todos los miembros registrados en la guild.
+      responses:
+        '200':
+          description: Lista de miembros obtenida exitosamente.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GuildMember'
+      tags:
+        - GuildMembers
+
+    post:
+      summary: Crear un nuevo miembro
+      description: Crea un nuevo miembro en la guild con los datos proporcionados, incluyendo email y las opciones de notificación por email.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: string
+                  description: ID del usuario.
+                  example: "1234567890"
+                username:
+                  type: string
+                  description: Nombre de usuario.
+                  example: "JohnDoe"
+                level:
+                  type: integer
+                  description: Nivel del usuario.
+                  example: 50
+                ilvl:
+                  type: integer
+                  description: Nivel de ítem del usuario.
+                  example: 150
+                character_role:
+                  type: string
+                  description: Rol del personaje.
+                  enum: [TANK, HEALER, DAMAGE, SUPPORT]
+                  example: "TANK"
+                guild_role:
+                  type: string
+                  description: Rol del usuario en la guild.
+                  enum: [LIDER, GERENTE SENIOR, GERENTE, GERENTE A2, ALPHA 2, MEMBER]
+                  example: "MEMBER"
+                main_archetype:
+                  type: string
+                  description: Arquetipo principal.
+                  example: "RANGER"
+                secondary_archetype:
+                  type: string
+                  description: Arquetipo secundario.
+                  example: "ROGUE"
+                grandmaster_profession_one:
+                  type: string
+                  description: Primera profesión de gran maestro.
+                  example: "MINING"
+                grandmaster_profession_two:
+                  type: string
+                  description: Segunda profesión de gran maestro.
+                  example: "WEAPONSMITHING"
+                email:
+                  type: string
+                  description: Correo electrónico del miembro.
+                  example: "miembro@example.com"
+                notify_email:
+                  type: boolean
+                  description: Activar o desactivar notificaciones por email.
+                  example: true
+      responses:
+        '201':
+          description: Miembro creado exitosamente.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  user_id:
+                    type: string
+                example:
+                  message: "Miembro creado exitosamente."
+                  user_id: "1234567890"
+        '400':
+          description: Error de validación en los datos proporcionados.
+        '500':
+          description: Error interno del servidor.
+
+  /guildmembers/{user_id}:
+    get:
+      summary: Obtener detalles de una party
+      description: Obtiene la información de una party específica utilizando su `party_id`.
+      parameters:
+        - in: path
+          name: partySize
+          required: true
+          schema:
+            type: integer
+            enum: [3, 5, 8]
+          description: Tamaño de la party (3, 5 o 8).
+        - in: path
+          name: party_id
+          required: true
+          schema:
+            type: integer
+          description: ID de la party.
+      responses:
+        '200':
+          description: Detalles de la party obtenidos exitosamente.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  party_id:
+                    type: integer
+                    description: ID de la party.
+                  creator_id:
+                    type: string
+                    description: ID del creador de la party.
+                  level_cap:
+                    type: integer
+                    description: Nivel máximo requerido para unirse a la party.
+                  ilvl_cap:
+                    type: integer
+                    description: Nivel de item máximo requerido para unirse a la party.
+                  party_members:
+                    type: array
+                    description: Lista de miembros de la party con sus roles e información.
+                    items:
+                      type: object
+                      properties:
+                        role:
+                          type: string
+                          description: Rol del miembro en la party (por ejemplo, TANK, HEALER, DAMAGE).
+                        user_id:
+                          type: string
+                          description: ID del miembro en la party.
+                        username:
+                          type: string
+                          description: Nombre de usuario del miembro en la party.
+                  updated_at:
+                    type: string
+                    format: date-time
+                    description: Fecha de la última actualización de la party.
+                  tableName:
+                    type: string
+                    description: Nombre de la tabla en la base de datos donde se almacena la party.
+        '404':
+          description: Party no encontrada.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                message: "Party no encontrada."
+        '500':
+          description: Error interno del servidor.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      tags:
+        - PartyFinder
+
+    put:
+      summary: Actualizar un miembro
+      description: Actualiza la información de un miembro existente.
+      parameters:
+        - in: path
+          name: user_id
+          required: true
+          schema:
+            type: string
+          description: Identificador único del miembro.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GuildMemberUpdate'
+            example:
+              ilvl: 160
+              guild_role: "GERENTE"
+              grandmaster_profession_two: "ALCHEMY"
+      responses:
+        '200':
+          description: Miembro actualizado exitosamente.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+              example:
+                message: "Miembro actualizado exitosamente."
+        '400':
+          description: Error de validación en los datos proporcionados.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                message: "Rol de guild inválido."
+        '404':
+          description: Miembro no encontrado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                message: "Miembro no encontrado."
+        '500':
+          description: Error interno del servidor.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      tags:
+        - GuildMembers
+
+    delete:
+      summary: Eliminar un miembro
+      description: Elimina un miembro existente de la guild.
+      parameters:
+        - in: path
+          name: user_id
+          required: true
+          schema:
+            type: string
+          description: Identificador único del miembro.
+      responses:
+        '200':
+          description: Miembro eliminado exitosamente.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+              example:
+                message: "Miembro eliminado exitosamente."
+        '404':
+          description: Miembro no encontrado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                message: "Miembro no encontrado."
+        '500':
+          description: Error interno del servidor.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      tags:
+        - GuildMembers
+  /guildmembers/{user_id}/updateDKP1:
+    put:
+      summary: Actualizar DKP_1 de un miembro
+      description: Permite sumar o restar un valor al DKP_1 de un miembro específico.
+      parameters:
+        - in: path
+          name: user_id
+          required: true
+          schema:
+            type: string
+          description: Identificador único del miembro.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                value:
+                  type: integer
+                  description: Valor a sumar o restar del DKP_1 del miembro.
+              example:
+                value: 10
+      responses:
+        '200':
+          description: DKP_1 actualizado exitosamente.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "DKP_1 actualizado exitosamente."
+        '400':
+          description: Error de validación en los datos proporcionados.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                message: "El valor proporcionado no es un número válido."
+        '404':
+          description: Miembro no encontrado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                message: "Miembro no encontrado."
+        '500':
+          description: Error interno del servidor.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                message: "Error interno del servidor."
+      tags:
+        - GuildMembers
+
+  /guildmembers/{user_id}/updateDKP2:
+    put:
+      summary: Actualizar DKP_2 de un miembro
+      description: Permite sumar o restar un valor al DKP_2 de un miembro específico.
+      parameters:
+        - in: path
+          name: user_id
+          required: true
+          schema:
+            type: string
+          description: Identificador único del miembro.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                value:
+                  type: integer
+                  description: Valor a sumar o restar del DKP_2 del miembro.
+              example:
+                value: -5
+      responses:
+        '200':
+          description: DKP_2 actualizado exitosamente.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "DKP_2 actualizado exitosamente."
+        '400':
+          description: Error de validación en los datos proporcionados.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                message: "El valor proporcionado no es un número válido."
+        '404':
+          description: Miembro no encontrado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                message: "Miembro no encontrado."
+        '500':
+          description: Error interno del servidor.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                message: "Error interno del servidor."
+      tags:
+        - GuildMembers
+
+  /guildmembers/level/greaterthan/{level}:
+      get:
+        summary: Obtener miembros con nivel mayor que X
+        description: Obtiene una lista de miembros cuyo nivel es mayor que el valor especificado.
+        parameters:
+          - in: path
+            name: level
+            required: true
+            schema:
+              type: integer
+            description: Nivel mínimo (no incluido) para filtrar los miembros.
+        responses:
+          '200':
+            description: Lista de miembros obtenida exitosamente.
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/GuildMember'
+          '400':
+            description: Nivel proporcionado no válido.
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/ErrorResponse'
+                example:
+                  message: "El nivel proporcionado no es válido."
+          '500':
+            description: Error interno del servidor.
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/ErrorResponse'
+        tags:
+          - GuildMembers
+
+  /guildmembers/ilvl/greaterthan/{ilvl}:
+    get:
+      summary: Obtener miembros con ilvl mayor que X
+      description: Obtiene una lista de miembros cuyo ilvl es mayor que el valor especificado.
+      parameters:
+        - in: path
+          name: ilvl
+          required: true
+          schema:
+            type: integer
+          description: ilvl mínimo (no incluido) para filtrar los miembros.
+      responses:
+        '200':
+          description: Lista de miembros obtenida exitosamente.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GuildMember'
+        '400':
+          description: ilvl proporcionado no válido.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                message: "El ilvl proporcionado no es válido."
+        '500':
+          description: Error interno del servidor.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      tags:
+        - GuildMembers
+
+  /guildmembers/character_role/{character_role}:
+    get:
+      summary: Obtener miembros por character_role
+      description: Obtiene una lista de miembros que tienen el character_role especificado.
+      parameters:
+        - in: path
+          name: character_role
+          required: true
+          schema:
+            type: string
+            enum:
+              - TANK
+              - HEALER
+              - DAMAGE
+              - SUPPORT
+          description: El character_role para filtrar los miembros.
+      responses:
+        '200':
+          description: Lista de miembros obtenida exitosamente.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GuildMember'
+        '400':
+          description: character_role proporcionado no válido.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                message: "El character_role proporcionado no es válido."
+        '500':
+          description: Error interno del servidor.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      tags:
+        - GuildMembers
+  /guildmembers/{user_id}/notifications:
+    get:
+      summary: Obtener los flags de notificación de un miembro
+      description: Devuelve el estado actual de las notificaciones para Party Finder, DKP y email de un miembro específico.
+      parameters:
+        - in: path
+          name: user_id
+          required: true
+          schema:
+            type: string
+          description: ID del miembro.
+          example: "1234567890"
+      responses:
+        '200':
+          description: Flags de notificaciones obtenidos exitosamente.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  notify_partyfinder:
+                    type: boolean
+                    description: Flag para notificaciones del Party Finder.
+                    example: true
+                  notify_dkp:
+                    type: boolean
+                    description: Flag para notificaciones de DKP.
+                    example: true
+                  notify_email:
+                    type: boolean
+                    description: Flag para notificaciones por correo electrónico.
+                    example: true
+        '404':
+          description: Miembro no encontrado.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                example:
+                  message: "Miembro no encontrado."
+        '500':
+          description: Error interno del servidor.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                example:
+                  message: "Error interno del servidor."
+      tags:
+        - GuildMembers
+    put:
+      summary: Actualizar los flags de notificación de un miembro
+      description: Permite actualizar los flags de notificación para Party Finder, DKP y email de un miembro. Solo se actualizarán los valores proporcionados, los no enviados se mantendrán.
+      parameters:
+        - in: path
+          name: user_id
+          required: true
+          schema:
+            type: string
+          description: ID del miembro.
+          example: "1234567890"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                notify_partyfinder:
+                  type: boolean
+                  description: Actualizar flag de notificaciones del Party Finder.
+                  example: true
+                notify_dkp:
+                  type: boolean
+                  description: Actualizar flag de notificaciones de DKP.
+                  example: false
+                notify_email:
+                  type: boolean
+                  description: Actualizar flag de notificaciones por correo electrónico.
+                  example: true
+      responses:
+        '200':
+          description: Flags de notificaciones actualizados exitosamente.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                example:
+                  message: "Notificaciones actualizadas exitosamente."
+        '404':
+          description: Miembro no encontrado.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                example:
+                  message: "Miembro no encontrado."
+        '500':
+          description: Error interno del servidor.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                example:
+                  message: "Error interno del servidor."
+      tags:
+        - GuildMembers
+
+  # Nuevas APIs de Party Finder
+  /partyfinder/{partySize}:
+    post:
+      summary: Crear una nueva party
+      description: Crea una nueva party con el tamaño especificado y agrega al creador como primer miembro. El campo `planned_start` debe ser enviado en formato `DD/MM/YYYY_HH:mm` y será almacenado en horario CEST.
+      parameters:
+        - in: path
+          name: partySize
+          required: true
+          schema:
+            type: integer
+            enum: [3, 5, 8]
+          description: Tamaño de la party (3, 5 o 8).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                creator_id:
+                  type: string
+                  description: ID del usuario creador de la party.
+                  example: "1283784732404088892"
+                level_cap:
+                  type: integer
+                  description: Nivel máximo permitido en la party.
+                  example: 24
+                ilvl_cap:
+                  type: integer
+                  description: Nivel de ítem máximo permitido en la party.
+                  example: 125
+                party_role_creator:
+                  type: string
+                  description: Rol del creador en la party.
+                  enum: [TANK, HEALER, DAMAGE, SUPPORT]
+                  example: "TANK"
+                planned_start:
+                  type: string
+                  description: Fecha y hora planeadas de inicio de la party, en formato `DD/MM/YYYY_HH:mm`.
+                  example: "15/10/2024_19:00"
+                forum_thread_id:
+                  type: string
+                  description: ID del hilo del foro asociado a la party, si existe.
+                  example: null
+      responses:
+        '201':
+          description: Party creada exitosamente.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  party_id:
+                    type: integer
+                example:
+                  message: "Party creada exitosamente."
+                  party_id: 3
+        '400':
+          description: Error de validación en los datos proporcionados.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                example:
+                  message: "creator_id, party_role_creator y planned_start son obligatorios."
+        '500':
+          description: Error interno del servidor.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                example:
+                  message: "Error interno del servidor."
+
+  /partyfinder/{partySize}/{party_id}/addMember:
+    post:
+      summary: Añadir un nuevo miembro a una party
+      description: Añade un nuevo miembro a la party en un slot disponible, utilizando su `user_id` y asignándole un `role`.
+      parameters:
+        - in: path
+          name: partySize
+          required: true
+          schema:
+            type: integer
+            enum: [3, 5, 8]
+          description: Tamaño de la party (3, 5 o 8).
+        - in: path
+          name: party_id
+          required: true
+          schema:
+            type: integer
+          description: ID de la party.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: string
+                  description: Identificador único del miembro a añadir.
+                role:
+                  type: string
+                  enum: [TANK, HEALER, DAMAGE, SUPPORT]
+                  description: Rol asignado al miembro en la party.
+      responses:
+        '200':
+          description: Miembro añadido a la party exitosamente.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Miembro añadido a la party exitosamente."
+        '400':
+          description: Error de validación o party llena.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "La party está llena o no hay posiciones disponibles."
+        '404':
+          description: Party o miembro no encontrado.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Miembro no encontrado."
+        '500':
+          description: Error interno del servidor.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Error interno del servidor."
+      tags:
+        - PartyFinder
+
+
+  /partyfinder/{partySize}/{party_id}/removeMember:
+    post:
+      summary: Remover miembro de una party
+      description: Remueve a un miembro de la party especificada.
+      parameters:
+        - in: path
+          name: partySize
+          required: true
+          schema:
+            type: integer
+            enum: [3, 5, 8]
+          description: Tamaño de la party (3, 5 o 8).
+        - in: path
+          name: party_id
+          required: true
+          schema:
+            type: integer
+          description: ID de la party.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RemoveMember'
+            example:
+              user_id: "0987654321"
+      responses:
+        '200':
+          description: Miembro eliminado de la party exitosamente.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+              example:
+                message: "Miembro eliminado de la party exitosamente."
+        '400':
+          description: Error de validación.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                message: "user_id es obligatorio."
+        '404':
+          description: Party o miembro no encontrado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                partyNotFound:
+                  value:
+                    message: "Party no encontrada."
+                memberNotFound:
+                  value:
+                    message: "Miembro no encontrado en la party."
+        '500':
+          description: Error interno del servidor.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      tags:
+        - PartyFinder
+
+  /partyfinder/{partySize}/{party_id}:
+    get:
+      summary: Obtener detalles de una party
+      description: Obtiene la información de una party específica utilizando su `party_id`. Las fechas `planned_start` y `updated_at` se devuelven en formato **CEST**.
+      parameters:
+        - in: path
+          name: partySize
+          required: true
+          schema:
+            type: integer
+            enum: [3, 5, 8]
+          description: Tamaño de la party (3, 5 o 8).
+        - in: path
+          name: party_id
+          required: true
+          schema:
+            type: integer
+          description: ID de la party.
+      responses:
+        '200':
+          description: Detalles de la party obtenidos exitosamente.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  party_id:
+                    type: integer
+                    description: ID de la party.
+                  creator_id:
+                    type: string
+                    description: ID del creador de la party.
+                  level_cap:
+                    type: integer
+                    description: Nivel máximo requerido para unirse a la party.
+                  ilvl_cap:
+                    type: integer
+                    description: Nivel de ítem máximo requerido para unirse a la party.
+                  planned_start:
+                    type: string
+                    description: Fecha y hora planificada para el inicio de la party, en formato **CEST**.
+                    example: "2024-10-15 19:00:00"
+                  updated_at:
+                    type: string
+                    description: Fecha y hora de la última actualización de la party, en formato **CEST**.
+                    example: "2024-10-14 15:49:08"
+                  forum_thread_id:
+                    type: string
+                    description: ID del hilo del foro asociado a la party, si existe.
+                    example: null
+                  party_members:
+                    type: array
+                    description: Lista de miembros de la party con sus roles e información.
+                    items:
+                      type: object
+                      properties:
+                        role:
+                          type: string
+                          description: Rol del miembro en la party (por ejemplo, TANK, HEALER, DAMAGE).
+                        user_id:
+                          type: string
+                          description: ID del miembro en la party.
+                        username:
+                          type: string
+                          description: Nombre de usuario del miembro en la party.
+                  tableName:
+                    type: string
+                    description: Nombre de la tabla en la base de datos donde se almacena la party.
+        '404':
+          description: Party no encontrada.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                example:
+                  message: "Party no encontrada."
+        '500':
+          description: Error interno del servidor.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                example:
+                  message: "Error interno del servidor."
+
+    delete:
+      summary: Eliminar una party
+      description: Elimina una party existente si el usuario es el creador.
+      parameters:
+        - in: path
+          name: partySize
+          required: true
+          schema:
+            type: integer
+            enum: [3, 5, 8]
+          description: Tamaño de la party (3, 5 o 8).
+        - in: path
+          name: party_id
+          required: true
+          schema:
+            type: integer
+          description: ID de la party.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteParty'
+            example:
+              user_id: "1234567890"
+      responses:
+        '200':
+          description: Party eliminada exitosamente.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+              example:
+                message: "Party eliminada exitosamente."
+        '400':
+          description: Error de validación o permiso denegado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                validationError:
+                  value:
+                    message: "user_id es obligatorio."
+                permissionDenied:
+                  value:
+                    message: "No tienes permiso para eliminar esta party."
+        '404':
+          description: Party no encontrada.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                message: "Party no encontrada."
+        '500':
+          description: Error interno del servidor.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      tags:
+        - PartyFinder
+  /partyfinder/update-role/{partySize}/{party_id}:
+    put:
+      tags:
+        - PartyFinder
+      summary: Actualizar el rol de un miembro en la party
+      description: Permite actualizar el rol de un miembro en la party, basado en su número y asignación de rol.
+      parameters:
+        - name: partySize
+          in: path
+          required: true
+          description: Tamaño de la party (3, 5 o 8)
+          schema:
+            type: integer
+            example: 8
+        - name: party_id
+          in: path
+          required: true
+          description: ID de la party
+          schema:
+            type: integer
+            example: 3
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                member_number:
+                  type: integer
+                  description: Número del miembro en la party (1, 2, etc.)
+                  example: 1
+                new_role:
+                  type: string
+                  description: Nuevo rol para el miembro (TANK, HEALER, DAMAGE, SUPPORT)
+                  enum: ['TANK', 'HEALER', 'DAMAGE', 'SUPPORT']
+                  example: 'HEALER'
+      responses:
+        '200':
+          description: El rol del miembro fue actualizado exitosamente.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Rol del miembro actualizado con éxito.
+        '400':
+          description: Error de validación o datos faltantes.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Faltan datos para actualizar el rol del miembro.
+        '500':
+          description: Error interno del servidor.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Error al actualizar el rol del miembro.
+                  error:
+                    type: object
+                    example: {}
+
+components:
+  schemas:
+    GuildMember:
+      type: object
+      properties:
+        user_id:
+          type: string
+          description: ID del usuario.
+        username:
+          type: string
+          description: Nombre de usuario.
+        level:
+          type: integer
+          description: Nivel del usuario.
+        ilvl:
+          type: integer
+          description: Nivel de ítem del usuario.
+        character_role:
+          type: string
+          description: Rol del personaje.
+          enum:
+            - TANK
+            - HEALER
+            - DAMAGE
+            - SUPPORT
+        guild_role:
+          type: string
+          description: Rol del usuario en la guild.
+          enum:
+            - LIDER
+            - GERENTE SENIOR
+            - GERENTE
+            - GERENTE A2
+            - ALPHA 2
+            - MEMBER
+        main_archetype:
+          type: string
+          description: Arquetipo principal del usuario.
+          enum:
+            - BARD
+            - CLERIC
+            - FIGHTER
+            - MAGE
+            - RANGER
+            - ROGUE
+            - SUMMONER
+            - TANK
+        secondary_archetype:
+          type: string
+          description: Arquetipo secundario del usuario.
+          enum:
+            - BARD
+            - CLERIC
+            - FIGHTER
+            - MAGE
+            - RANGER
+            - ROGUE
+            - SUMMONER
+            - TANK
+        grandmaster_profession_one:
+          type: string
+          description: Primera profesión de gran maestro del usuario.
+          enum:
+            - FISHING
+            - HERBALISM
+            - HUNTING
+            - LUMBERJACKING
+            - MINING
+            - ALCHEMY
+            - ANIMALHUSBANDRY
+            - COOKING
+            - FARMING
+            - LUMBERMILLING
+            - METALWORKING
+            - STONECUTTING
+            - TANNING
+            - WEAVING
+            - ARCANEENGINEERING
+            - ARMORSMITHING
+            - CARPENTRY
+            - JEWELCUTTING
+            - LEATHERWORKING
+            - SCRIBE
+            - TAILORING
+            - WEAPONSMITHING
+        grandmaster_profession_two:
+          type: string
+          description: Segunda profesión de gran maestro del usuario.
+          enum:
+            - FISHING
+            - HERBALISM
+            - HUNTING
+            - LUMBERJACKING
+            - MINING
+            - ALCHEMY
+            - ANIMALHUSBANDRY
+            - COOKING
+            - FARMING
+            - LUMBERMILLING
+            - METALWORKING
+            - STONECUTTING
+            - TANNING
+            - WEAVING
+            - ARCANEENGINEERING
+            - ARMORSMITHING
+            - CARPENTRY
+            - JEWELCUTTING
+            - LEATHERWORKING
+            - SCRIBE
+            - TAILORING
+            - WEAPONSMITHING
+
+    GuildMemberCreate:
+      type: object
+      required:
+        - user_id
+        - username
+        - level
+        - ilvl
+        - character_role
+        - guild_role
+        - main_archetype
+        - secondary_archetype
+        - grandmaster_profession_one
+        - grandmaster_profession_two
+      properties:
+        user_id:
+          type: string
+          description: ID del usuario.
+        username:
+          type: string
+          description: Nombre de usuario.
+        level:
+          type: integer
+          description: Nivel del usuario.
+        ilvl:
+          type: integer
+          description: Nivel de ítem del usuario.
+        character_role:
+          type: string
+          description: Rol del personaje.
+          enum:
+            - TANK
+            - HEALER
+            - DAMAGE
+            - SUPPORT
+        guild_role:
+          type: string
+          description: Rol del usuario en la guild.
+          enum:
+            - LIDER
+            - GERENTE SENIOR
+            - GERENTE
+            - GERENTE A2
+            - ALPHA 2
+            - MEMBER
+        main_archetype:
+          type: string
+          description: Arquetipo principal del usuario.
+          enum:
+            - BARD
+            - CLERIC
+            - FIGHTER
+            - MAGE
+            - RANGER
+            - ROGUE
+            - SUMMONER
+            - TANK
+        secondary_archetype:
+          type: string
+          description: Arquetipo secundario del usuario.
+          enum:
+            - BARD
+            - CLERIC
+            - FIGHTER
+            - MAGE
+            - RANGER
+            - ROGUE
+            - SUMMONER
+            - TANK
+        grandmaster_profession_one:
+          type: string
+          description: Primera profesión de gran maestro del usuario.
+          enum:
+            - FISHING
+            - HERBALISM
+            - HUNTING
+            - LUMBERJACKING
+            - MINING
+            - ALCHEMY
+            - ANIMALHUSBANDRY
+            - COOKING
+            - FARMING
+            - LUMBERMILLING
+            - METALWORKING
+            - STONECUTTING
+            - TANNING
+            - WEAVING
+            - ARCANEENGINEERING
+            - ARMORSMITHING
+            - CARPENTRY
+            - JEWELCUTTING
+            - LEATHERWORKING
+            - SCRIBE
+            - TAILORING
+            - WEAPONSMITHING
+        grandmaster_profession_two:
+          type: string
+          description: Segunda profesión de gran maestro del usuario.
+          enum:
+            - FISHING
+            - HERBALISM
+            - HUNTING
+            - LUMBERJACKING
+            - MINING
+            - ALCHEMY
+            - ANIMALHUSBANDRY
+            - COOKING
+            - FARMING
+            - LUMBERMILLING
+            - METALWORKING
+            - STONECUTTING
+            - TANNING
+            - WEAVING
+            - ARCANEENGINEERING
+            - ARMORSMITHING
+            - CARPENTRY
+            - JEWELCUTTING
+            - LEATHERWORKING
+            - SCRIBE
+            - TAILORING
+            - WEAPONSMITHING
+
+    GuildMemberUpdate:
+      type: object
+      properties:
+        level:
+          type: integer
+          description: Nivel del usuario.
+        ilvl:
+          type: integer
+          description: Nivel de ítem del usuario.
+        character_role:
+          type: string
+          description: Rol del personaje.
+          enum:
+            - TANK
+            - HEALER
+            - DAMAGE
+            - SUPPORT
+        guild_role:
+          type: string
+          description: Rol del usuario en la guild.
+          enum:
+            - LIDER
+            - GERENTE SENIOR
+            - GERENTE
+            - GERENTE A2
+            - ALPHA 2
+            - MEMBER
+        main_archetype:
+          type: string
+          description: Arquetipo principal del usuario.
+          enum:
+            - BARD
+            - CLERIC
+            - FIGHTER
+            - MAGE
+            - RANGER
+            - ROGUE
+            - SUMMONER
+            - TANK
+        secondary_archetype:
+          type: string
+          description: Arquetipo secundario del usuario.
+          enum:
+            - BARD
+            - CLERIC
+            - FIGHTER
+            - MAGE
+            - RANGER
+            - ROGUE
+            - SUMMONER
+            - TANK
+        grandmaster_profession_one:
+          type: string
+          description: Primera profesión de gran maestro del usuario.
+          enum:
+            - FISHING
+            - HERBALISM
+            - HUNTING
+            - LUMBERJACKING
+            - MINING
+            - ALCHEMY
+            - ANIMALHUSBANDRY
+            - COOKING
+            - FARMING
+            - LUMBERMILLING
+            - METALWORKING
+            - STONECUTTING
+            - TANNING
+            - WEAVING
+            - ARCANEENGINEERING
+            - ARMORSMITHING
+            - CARPENTRY
+            - JEWELCUTTING
+            - LEATHERWORKING
+            - SCRIBE
+            - TAILORING
+            - WEAPONSMITHING
+        grandmaster_profession_two:
+          type: string
+          description: Segunda profesión de gran maestro del usuario.
+          enum:
+            - FISHING
+            - HERBALISM
+            - HUNTING
+            - LUMBERJACKING
+            - MINING
+            - ALCHEMY
+            - ANIMALHUSBANDRY
+            - COOKING
+            - FARMING
+            - LUMBERMILLING
+            - METALWORKING
+            - STONECUTTING
+            - TANNING
+            - WEAVING
+            - ARCANEENGINEERING
+            - ARMORSMITHING
+            - CARPENTRY
+            - JEWELCUTTING
+            - LEATHERWORKING
+            - SCRIBE
+            - TAILORING
+            - WEAPONSMITHING
+
+    PartyCreate:
+      type: object
+      required:
+        - creator_id
+        - party_role_creator
+      properties:
+        creator_id:
+          type: string
+          description: ID del usuario creador de la party.
+        level_cap:
+          type: integer
+          nullable: true
+          description: Nivel máximo permitido en la party.
+        ilvl_cap:
+          type: integer
+          nullable: true
+          description: Nivel de ítem máximo permitido en la party.
+        party_role_creator:
+          type: string
+          description: Rol del creador en la party.
+          enum:
+            - TANK
+            - HEALER
+            - DAMAGE
+            - SUPPORT
+
+    AddMember:
+      type: object
+      required:
+        - user_id
+        - party_role
+      properties:
+        user_id:
+          type: string
+          description: ID del usuario que se va a añadir a la party.
+        party_role:
+          type: string
+          description: Rol del usuario en la party.
+          enum:
+            - TANK
+            - HEALER
+            - DAMAGE
+            - SUPPORT
+
+    RemoveMember:
+      type: object
+      required:
+        - user_id
+      properties:
+        user_id:
+          type: string
+          description: ID del usuario que se va a remover de la party.
+
+    DeleteParty:
+      type: object
+      required:
+        - user_id
+      properties:
+        user_id:
+          type: string
+          description: ID del usuario que solicita eliminar la party (debe ser el creador).
+
+    PartyDetails:
+      type: object
+      properties:
+        party_id:
+          type: integer
+          description: ID de la party.
+        creator_id:
+          type: string
+          description: ID del creador de la party.
+        level_cap:
+          type: integer
+          nullable: true
+          description: Nivel mínimo permitido en la party.
+        ilvl_cap:
+          type: integer
+          nullable: true
+          description: Nivel de ítem mínimo permitido en la party.
+        # Aquí podrías añadir los miembros y sus roles según el tamaño de la party.
+        # Debido a la naturaleza variable de los miembros, podrías representarlos como una lista.
+        members:
+          type: array
+          items:
+            type: object
+            properties:
+              user_id:
+                type: string
+                description: ID del miembro.
+              party_role:
+                type: string
+                description: Rol del miembro en la party.
+                enum:
+                  - TANK
+                  - HEALER
+                  - DAMAGE
+                  - SUPPORT
+
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Mensaje descriptivo del error.
+
+tags:
+  - name: GuildMembers
+    description: Endpoints relacionados con la gestión de miembros de la guild.
+  - name: PartyFinder
+    description: Endpoints relacionados con la gestión del Party Finder.

@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Party Finder - Advanced Management</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Party Finder - Advanced Management</h1>
+            <p>Gestiona parties y miembros de la guild</p>
+            <div class="simulation-banner">
+                🎓 <strong>BACKEND DEL PROFESOR</strong> - Conectado a MySQL (XAMPP)
+            </div>
+        </header>
+
+        <div class="actions">
+            <button id="createPartyBtn" class="btn btn-primary">Create New Party</button>
+            <button id="createUserBtn" class="btn btn-warning">Create New User</button>
+            <button id="refreshPartiesBtn" class="btn btn-secondary">Refresh Parties</button>
+            <button id="clearDataBtn" class="btn btn-danger">Clear All Data</button>
+        </div>
+
+        <div class="parties-section">
+            <h2>Active Parties</h2>
+            <div id="partiesList" class="parties-list">
+                <!-- Las parties se cargarán aquí dinámicamente -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para crear party -->
+    <div id="partyModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Create New Party</h2>
+                <button id="closeModalBtn" class="close-btn">&times;</button>
+            </div>
+            
+            <form id="partyForm" class="modal-body">
+                <div class="form-group">
+                    <label for="partySize">Party Size *</label>
+                    <select id="partySize" name="partySize" required>
+                        <option value="">Select party size</option>
+                        <option value="3">3 Members</option>
+                        <option value="5">5 Members</option>
+                        <option value="8">8 Members</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="creatorId">Creator ID *</label>
+                    <input type="text" id="creatorId" name="creatorId" required placeholder="Enter creator user ID">
+                    <small class="help-text">Must be a valid guild member ID</small>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="levelCap">Level Cap</label>
+                        <input type="number" id="levelCap" name="levelCap" min="1" placeholder="Min level">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="ilvlCap">Item Level Cap</label>
+                        <input type="number" id="ilvlCap" name="ilvlCap" min="1" placeholder="Min item level">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="partyRole">Party Role *</label>
+                    <select id="partyRole" name="partyRole" required>
+                        <option value="">Select your role</option>
+                        <option value="TANK">TANK</option>
+                        <option value="HEALER">HEALER</option>
+                        <option value="DAMAGE">DAMAGE</option>
+                        <option value="SUPPORT">SUPPORT</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="plannedStart">Planned Start *</label>
+                    <input type="text" id="plannedStart" name="plannedStart" required 
+                           placeholder="DD/MM/YYYY_HH:mm" 
+                           pattern="\d{2}/\d{2}/\d{4}_\d{2}:\d{2}">
+                    <small class="help-text">Format: DD/MM/YYYY_HH:mm (e.g., 15/10/2024_19:00)</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="forumThreadId">Forum Thread ID (Optional)</label>
+                    <input type="text" id="forumThreadId" name="forumThreadId" placeholder="Forum thread ID">
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" id="cancelBtn" class="btn btn-secondary">Cancel</button>
+                    <button type="submit" id="submitBtn" class="btn btn-primary">Create Party</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal para añadir miembro -->
+    <div id="addMemberModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="addMemberModalTitle">Add Member to Party</h2>
+                <button id="closeAddMemberModalBtn" class="close-btn">&times;</button>
+            </div>
+            
+            <form id="addMemberForm" class="modal-body">
+                <!-- Campos ocultos para almacenar datos de la party -->
+                <input type="hidden" id="addMemberPartyId" name="addMemberPartyId">
+                <input type="hidden" id="addMemberPartySize" name="addMemberPartySize">
+                
+                <div class="form-group">
+                    <label for="memberUserId">User ID *</label>
+                    <input type="text" id="memberUserId" name="memberUserId" required placeholder="Enter user ID">
+                    <small class="help-text">Must be a valid guild member ID</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="memberRole">Party Role *</label>
+                    <select id="memberRole" name="memberRole" required>
+                        <option value="">Select role</option>
+                        <option value="TANK">TANK</option>
+                        <option value="HEALER">HEALER</option>
+                        <option value="DAMAGE">DAMAGE</option>
+                        <option value="SUPPORT">SUPPORT</option>
+                    </select>
+                    <small class="help-text" id="roleHelpText">Select an available role</small>
+                </div>
+
+                <div class="form-group">
+                    <label>Available Roles:</label>
+                    <div id="availableRoles" class="available-roles">
+                        <!-- Se llenará dinámicamente -->
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" id="cancelAddMemberBtn" class="btn btn-secondary">Cancel</button>
+                    <button type="submit" id="submitAddMemberBtn" class="btn btn-primary">Add Member</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal para crear usuario -->
+    <div id="userModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="userModalTitle">Create New Guild Member</h2>
+                <button id="closeUserModalBtn" class="close-btn">&times;</button>
+            </div>
+            
+            <form id="userForm" class="modal-body">
+                <div class="form-group">
+                    <label for="userId">User ID *</label>
+                    <input type="text" id="userId" name="userId" required placeholder="Enter user ID">
+                    <small class="help-text">Must be unique</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="username">Username *</label>
+                    <input type="text" id="username" name="username" required placeholder="Enter username">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="level">Level *</label>
+                        <input type="number" id="level" name="level" required min="1" placeholder="Level">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="ilvl">Item Level *</label>
+                        <input type="number" id="ilvl" name="ilvl" required min="1" placeholder="Item Level">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="characterRole">Character Role *</label>
+                    <select id="characterRole" name="characterRole" required>
+                        <option value="">Select character role</option>
+                        <option value="TANK">TANK</option>
+                        <option value="HEALER">HEALER</option>
+                        <option value="DAMAGE">DAMAGE</option>
+                        <option value="SUPPORT">SUPPORT</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="guildRole">Guild Role *</label>
+                    <select id="guildRole" name="guildRole" required>
+                        <option value="">Select guild role</option>
+                        <option value="LIDER">LIDER</option>
+                        <option value="GERENTE SENIOR">GERENTE SENIOR</option>
+                        <option value="GERENTE">GERENTE</option>
+                        <option value="GERENTE A2">GERENTE A2</option>
+                        <option value="ALPHA 2">ALPHA 2</option>
+                        <option value="MEMBER">MEMBER</option>
+                    </select>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="mainArchetype">Main Archetype *</label>
+                        <select id="mainArchetype" name="mainArchetype" required>
+                            <option value="">Select main archetype</option>
+                            <option value="BARD">BARD</option>
+                            <option value="CLERIC">CLERIC</option>
+                            <option value="FIGHTER">FIGHTER</option>
+                            <option value="MAGE">MAGE</option>
+                            <option value="RANGER">RANGER</option>
+                            <option value="ROGUE">ROGUE</option>
+                            <option value="SUMMONER">SUMMONER</option>
+                            <option value="TANK">TANK</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="secondaryArchetype">Secondary Archetype *</label>
+                        <select id="secondaryArchetype" name="secondaryArchetype" required>
+                            <option value="">Select secondary archetype</option>
+                            <option value="BARD">BARD</option>
+                            <option value="CLERIC">CLERIC</option>
+                            <option value="FIGHTER">FIGHTER</option>
+                            <option value="MAGE">MAGE</option>
+                            <option value="RANGER">RANGER</option>
+                            <option value="ROGUE">ROGUE</option>
+                            <option value="SUMMONER">SUMMONER</option>
+                            <option value="TANK">TANK</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="professionOne">Profession 1 *</label>
+                        <select id="professionOne" name="professionOne" required>
+                            <option value="">Select profession</option>
+                            <option value="FISHING">FISHING</option>
+                            <option value="HERBALISM">HERBALISM</option>
+                            <option value="HUNTING">HUNTING</option>
+                            <option value="LUMBERJACKING">LUMBERJACKING</option>
+                            <option value="MINING">MINING</option>
+                            <option value="ALCHEMY">ALCHEMY</option>
+                            <option value="ANIMALHUSBANDRY">ANIMALHUSBANDRY</option>
+                            <option value="COOKING">COOKING</option>
+                            <option value="FARMING">FARMING</option>
+                            <option value="LUMBERMILLING">LUMBERMILLING</option>
+                            <option value="METALWORKING">METALWORKING</option>
+                            <option value="STONECUTTING">STONECUTTING</option>
+                            <option value="TANNING">TANNING</option>
+                            <option value="WEAVING">WEAVING</option>
+                            <option value="ARCANEENGINEERING">ARCANEENGINEERING</option>
+                            <option value="ARMORSMITHING">ARMORSMITHING</option>
+                            <option value="CARPENTRY">CARPENTRY</option>
+                            <option value="JEWELCUTTING">JEWELCUTTING</option>
+                            <option value="LEATHERWORKING">LEATHERWORKING</option>
+                            <option value="SCRIBE">SCRIBE</option>
+                            <option value="TAILORING">TAILORING</option>
+                            <option value="WEAPONSMITHING">WEAPONSMITHING</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="professionTwo">Profession 2 *</label>
+                        <select id="professionTwo" name="professionTwo" required>
+                            <option value="">Select profession</option>
+                            <option value="FISHING">FISHING</option>
+                            <option value="HERBALISM">HERBALISM</option>
+                            <option value="HUNTING">HUNTING</option>
+                            <option value="LUMBERJACKING">LUMBERJACKING</option>
+                            <option value="MINING">MINING</option>
+                            <option value="ALCHEMY">ALCHEMY</option>
+                            <option value="ANIMALHUSBANDRY">ANIMALHUSBANDRY</option>
+                            <option value="COOKING">COOKING</option>
+                            <option value="FARMING">FARMING</option>
+                            <option value="LUMBERMILLING">LUMBERMILLING</option>
+                            <option value="METALWORKING">METALWORKING</option>
+                            <option value="STONECUTTING">STONECUTTING</option>
+                            <option value="TANNING">TANNING</option>
+                            <option value="WEAVING">WEAVING</option>
+                            <option value="ARCANEENGINEERING">ARCANEENGINEERING</option>
+                            <option value="ARMORSMITHING">ARMORSMITHING</option>
+                            <option value="CARPENTRY">CARPENTRY</option>
+                            <option value="JEWELCUTTING">JEWELCUTTING</option>
+                            <option value="LEATHERWORKING">LEATHERWORKING</option>
+                            <option value="SCRIBE">SCRIBE</option>
+                            <option value="TAILORING">TAILORING</option>
+                            <option value="WEAPONSMITHING">WEAPONSMITHING</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" required placeholder="Enter email">
+                </div>
+
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="notifyEmail" name="notifyEmail">
+                        <span class="checkmark"></span>
+                        Enable Email Notifications
+                    </label>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" id="cancelUserBtn" class="btn btn-secondary">Cancel</button>
+                    <button type="submit" id="submitUserBtn" class="btn btn-primary">Create User</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Party Details Modal -->
+    <div id="partyDetailsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="partyDetailsModalTitle">Party Details</h2>
+                <button id="closePartyDetailsModalBtn" class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="partyDetailsContent">
+                    <!-- Los detalles de la party se cargarán aquí -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="closeModal('partyDetailsModal')">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para confirmar eliminación de miembro -->
+    <div id="removeMemberModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Remove Member</h2>
+                <button id="closeRemoveMemberModalBtn" class="close-btn">&times;</button>
+            </div>
+            
+            <div class="modal-body">
+                <p id="removeMemberMessage">Are you sure you want to remove this member from the party?</p>
+                
+                <div class="member-info" id="memberToRemove">
+                    <!-- Se llenará dinámicamente -->
+                </div>
+            </div>
+            
+            <div class="modal-footer">
+                <button type="button" id="cancelRemoveMemberBtn" class="btn btn-secondary">Cancel</button>
+                <button type="button" id="confirmRemoveMemberBtn" class="btn btn-danger">Remove Member</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
