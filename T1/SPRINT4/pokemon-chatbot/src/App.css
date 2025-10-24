@@ -1,0 +1,30 @@
+/* Estilos específicos de App.jsx */
+
+.bubbly-logo {
+  margin-bottom: 0;
+  flex-shrink: 0;
+}
+
+.bubblybot-logo-img {
+  width: 60px;
+  height: 60px;
+  animation: bubble-float 3s ease-in-out infinite;
+  filter: drop-shadow(0 5px 15px rgba(79, 195, 247, 0.3));
+}
+
+@keyframes bubble-float {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+  }
+  25% {
+    transform: translateY(-8px) scale(1.05);
+  }
+  50% {
+    transform: translateY(-12px) scale(1.02);
+  }
+  75% {
+    transform: translateY(-6px) scale(1.03);
+  }
+}
+
+/* Estilos específicos de App.jsx - Solo para el logo */
