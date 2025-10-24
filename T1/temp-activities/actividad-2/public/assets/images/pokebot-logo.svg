@@ -1,0 +1,23 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Pokéball principal -->
+  <circle cx="100" cy="100" r="80" fill="#ff0000" stroke="#000" stroke-width="4"/>
+  
+  <!-- Mitad inferior blanca -->
+  <path d="M 20 100 A 80 80 0 0 1 180 100 L 180 180 A 80 80 0 0 1 20 180 Z" fill="#ffffff"/>
+  
+  <!-- Línea divisoria -->
+  <path d="M 20 100 L 180 100" stroke="#000" stroke-width="4"/>
+  
+  <!-- Botón central -->
+  <circle cx="100" cy="100" r="20" fill="#000"/>
+  <circle cx="100" cy="100" r="10" fill="#fff"/>
+  
+  <!-- Reflejo -->
+  <ellipse cx="70" cy="70" rx="15" ry="25" fill="#ffcccc" opacity="0.6"/>
+  
+  <!-- Detalles decorativos -->
+  <circle cx="50" cy="50" r="8" fill="#ff6666" opacity="0.7"/>
+  <circle cx="150" cy="60" r="6" fill="#ff9999" opacity="0.6"/>
+  <circle cx="60" cy="150" r="5" fill="#ffaaaa" opacity="0.5"/>
+  <circle cx="140" cy="140" r="7" fill="#ff7777" opacity="0.6"/>
+</svg>

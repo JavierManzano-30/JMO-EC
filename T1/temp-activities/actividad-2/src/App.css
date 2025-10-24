@@ -1,0 +1,23 @@
+/* Estilos específicos de App.jsx - Solo para el logo */
+
+.pokemon-logo {
+  margin-bottom: 1rem;
+}
+
+.pokebot-logo-img {
+  width: 120px;
+  height: 120px;
+  animation: float 3s ease-in-out infinite;
+  filter: drop-shadow(0 5px 15px rgba(255, 0, 0, 0.3));
+  border: 3px solid #fff;
+  border-radius: 50%;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}

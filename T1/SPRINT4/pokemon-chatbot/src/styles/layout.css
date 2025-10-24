@@ -1,0 +1,304 @@
+/* Estilos comunes de estructura */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 1rem;
+  padding-top: 1rem;
+  width: 100%;
+}
+
+.app-container {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-layout {
+  display: grid;
+  grid-template-columns: 350px 1fr;
+  gap: 1rem;
+  margin-top: 0.5rem;
+  width: 100%;
+  height: calc(100vh - 120px);
+  padding: 0 1rem;
+}
+
+.app-header {
+  text-align: center;
+  margin-bottom: 0.5rem;
+  color: white;
+  width: 100%;
+  padding: 0.5rem 1rem;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.header-text {
+  text-align: left;
+}
+
+.header-text h1 {
+  font-size: 1.8rem;
+  margin: 0 0 0.2rem 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.header-text p {
+  font-size: 0.9rem;
+  opacity: 0.9;
+  margin: 0;
+}
+
+.chat-section {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 1rem;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.section-title {
+  text-align: center;
+  color: white;
+  margin-bottom: 0.5rem;
+  flex-shrink: 0;
+}
+
+.section-title h2 {
+  font-size: 1.4rem;
+  margin: 0 0 0.3rem 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.section-title p {
+  font-size: 0.85rem;
+  opacity: 0.9;
+  margin: 0;
+}
+
+/* Panel informativo */
+.info-panel {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 0 20px 20px 0;
+  padding: 2rem;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  height: 100%;
+  position: sticky;
+  top: 0;
+  margin-left: -1rem;
+}
+
+.panel-section {
+  margin-bottom: 2rem;
+  color: white;
+}
+
+.panel-section:last-child {
+  margin-bottom: 0;
+}
+
+.panel-section h3 {
+  font-size: 1.2rem;
+  margin: 0 0 1rem 0;
+  color: white;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.panel-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.panel-section li {
+  padding: 0.5rem 0;
+  font-size: 0.95rem;
+  opacity: 0.9;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.panel-section li:last-child {
+  border-bottom: none;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.feature-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  font-size: 0.85rem;
+}
+
+.feature-item .feature-icon {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.tips p {
+  margin: 0.5rem 0;
+  font-size: 0.9rem;
+  opacity: 0.9;
+  padding-left: 0.5rem;
+}
+
+.status-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.status-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.9rem;
+}
+
+.status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+.status-dot.online {
+  background: #4CAF50;
+}
+
+.status-dot.ready {
+  background: #2196F3;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Responsive design */
+@media (min-width: 1600px) {
+  .main-layout {
+    grid-template-columns: 400px 1fr;
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1599px) {
+  .main-layout {
+    grid-template-columns: 350px 1fr;
+  }
+}
+
+@media (max-width: 1200px) {
+  .main-layout {
+    grid-template-columns: 300px 1fr;
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .main-layout {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+    height: auto;
+  }
+  
+  .info-panel {
+    position: static;
+    order: 2;
+    margin-left: 0;
+    border-radius: 20px;
+    height: auto;
+  }
+  
+  .chat-section {
+    order: 1;
+    height: 70vh;
+  }
+}
+
+@media (max-width: 768px) {
+  .app-header h1 {
+    font-size: 1.5rem;
+  }
+  
+  .header-content {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .header-text {
+    text-align: center;
+  }
+  
+  .section-title h2 {
+    font-size: 1.2rem;
+  }
+  
+  .chat-section {
+    padding: 0.5rem;
+  }
+  
+  .info-panel {
+    padding: 1rem;
+  }
+  
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  #root {
+    padding: 0.5rem;
+  }
+  
+  .app-header h1 {
+    font-size: 1.5rem;
+  }
+  
+  .main-layout {
+    gap: 0.5rem;
+    padding: 0 0.5rem;
+  }
+}
