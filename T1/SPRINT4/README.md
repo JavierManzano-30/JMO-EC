@@ -12,47 +12,53 @@ Cada actividad se encuentra documentada con archivos específicos:
 La estructura del repositorio es la siguiente:
 
 ```
-└── pokemon-chatbot/
-    ├── src/
-    │   ├── components/
-    │   │   ├── Chatbot/
-    │   │   │   ├── ChatInterface.jsx
-    │   │   │   ├── ChatWindow.jsx
-    │   │   │   ├── MessageInput.jsx
-    │   │   │   ├── MessageList.jsx
-    │   │   │   └── PokemonCard.jsx
-    │   │   └── chatbot.css
-    │   ├── services/
-    │   │   └── pokeapi.js
-    │   ├── styles/
-    │   │   └── layout.css
-    │   ├── App.jsx
-    │   ├── App.css
-    │   ├── main.jsx
-    │   └── index.css
-    ├── public/
-    │   └── assets/
-    │       ├── images/
-    │       │   ├── bubblybot-logo.svg
-    │       │   └── gifs1/
-    │       │       ├── ejercicio1.png
-    │       │       ├── ejercicio2.png
-    │       │       ├── ejercicio3.1.png
-    │       │       ├── ejercicio3.png
-    │       │       ├── ejercicio4.gif
-    │       │       ├── ejercicio5.1.gif
-    │       │       ├── ejercicio5.2.gif
-    │       │       └── ejercicio5.3.gif
-    │       └── icons/
-    │           └── bubblybot-icon.svg
-    ├── ACTIVIDAD-1-COMPLETADA.md
-    ├── ACTIVIDAD-2-COMPLETADA.md
-    ├── ACTIVIDAD-3-COMPLETADA.md
-    ├── ACTIVIDAD-4-COMPLETADA.md
-    ├── ACTIVIDAD-5-COMPLETADA.md
-    ├── package.json
-    ├── vite.config.js
-    └── README.md
+SPRINT4/
+├── src/
+│   ├── components/
+│   │   ├── Chatbot/
+│   │   │   ├── ChatInterface.jsx    # Componente principal de la interfaz de chat
+│   │   │   ├── ChatWindow.jsx       # Ventana contenedora del chat
+│   │   │   ├── MessageInput.jsx     # Componente de entrada de mensajes
+│   │   │   ├── MessageList.jsx      # Lista de mensajes del chat
+│   │   │   └── PokemonCard.jsx      # Tarjeta de visualización de Pokémon
+│   │   └── chatbot.css              # Estilos específicos del chatbot
+│   ├── services/
+│   │   └── pokeapi.js               # Servicio de integración con POKEAPI
+│   ├── styles/
+│   │   └── layout.css               # Estilos globales de layout
+│   ├── assets/
+│   │   ├── icons/
+│   │   │   ├── bubblybot-icon.svg
+│   │   │   └── pokebot-icon.svg
+│   │   └── images/
+│   │       ├── bubblybot-logo.svg
+│   │       ├── pokebot-logo.svg
+│   │       └── gifs1/
+│   │           ├── ejercicio1.png
+│   │           ├── ejercicio2.png
+│   │           ├── ejercicio3.1.png
+│   │           ├── ejercicio3.png
+│   │           ├── ejercicio4.gif
+│   │           ├── ejercicio5.1.gif
+│   │           ├── ejercicio5.2.gif
+│   │           └── ejercicio5.3.gif
+│   ├── public/
+│   │   ├── favicon.svg              # Favicon de la aplicación
+│   │   └── vite.svg                 # Logo de Vite
+│   ├── App.jsx                      # Componente raíz de la aplicación
+│   ├── App.css                      # Estilos del componente App
+│   ├── main.jsx                     # Punto de entrada de la aplicación
+│   └── index.css                    # Estilos globales base
+├── ACTIVIDAD-2-COMPLETADA.md        # Documentación de la actividad 2
+├── ACTIVIDAD-3-COMPLETADA.md        # Documentación de la actividad 3
+├── ACTIVIDAD-4-COMPLETADA.md        # Documentación de la actividad 4
+├── ACTIVIDAD-5-COMPLETADA.md        # Documentación de la actividad 5
+├── package.json                     # Configuración de dependencias y scripts
+├── package-lock.json                # Lock de versiones de dependencias
+├── vite.config.js                   # Configuración de Vite
+├── eslint.config.js                 # Configuración de ESLint
+├── index.html                       # Página HTML principal
+└── README.md                        # Este archivo
 ```
 
 ---
@@ -78,7 +84,7 @@ Creación del proyecto base en React con Vite, incluyendo la estructura inicial 
 - Servidor de desarrollo funcionando
 
 **Pruebas realizadas (Imagen):**
-![Actividad 1](public/assets/images/gifs1/ejercicio1.png)
+![Actividad 1](src/assets/images/gifs1/ejercicio1.png)
 
 ---
 
@@ -94,17 +100,17 @@ Personalización completa de la identidad visual del chatbot, incluyendo nombre,
 - Integración de la identidad en la interfaz
 
 **Archivos principales:**  
-`src/App.jsx` | `src/App.css` | `public/assets/images/bubblybot-logo.svg`
+`src/App.jsx` | `src/App.css` | `src/assets/images/bubblybot-logo.svg`
 
 **Funcionalidades implementadas:**
 - Identidad visual "BubblyBot" definida
 - Logo personalizado creado
 - Colores y tema visual establecidos
-- Recursos gráficos organizados en `public/assets/`
+- Recursos gráficos organizados en `src/assets/`
 - Integración completa de la identidad visual
 
 **Pruebas realizadas (Imagen):**
-![Actividad 2](public/assets/images/gifs1/ejercicio2.png)
+![Actividad 2](src/assets/images/gifs1/ejercicio2.png)
 
 ---
 
@@ -131,7 +137,7 @@ Organización del proyecto en una estructura modular con carpetas separadas para
 - Integración completa en App.jsx
 
 **Pruebas realizadas (Imagen):**
-![Actividad 3](public/assets/images/gifs1/ejercicio3.png)
+![Actividad 3](src/assets/images/gifs1/ejercicio3.png)
 
 ---
 
@@ -161,7 +167,7 @@ Implementación de una interfaz de chat completa similar a ChatGPT/Claude, inclu
 - Identidad visual BubblyBot integrada
 
 **Pruebas realizadas (GIF):**
-![Actividad 4](public/assets/images/gifs1/ejercicio4.gif)
+![Actividad 4](src/assets/images/gifs1/ejercicio4.gif)
 
 ---
 
@@ -192,11 +198,11 @@ Integración completa con la API pública de Pokémon para búsqueda de informac
 
 **Pruebas realizadas (GIF):**
 - **Búsqueda por nombre:** Pikachu  
-![Actividad 5.1](public/assets/images/gifs1/ejercicio5.1.gif)
+![Actividad 5.1](src/assets/images/gifs1/ejercicio5.1.gif)
 - **Búsqueda por número:** Gengar (#094)  
-![Actividad 5.2](public/assets/images/gifs1/ejercicio5.2.gif)
+![Actividad 5.2](src/assets/images/gifs1/ejercicio5.2.gif)
 - **Manejo de errores:** Pokémon inexistente  
-![Actividad 5.3](public/assets/images/gifs1/ejercicio5.3.gif)
+![Actividad 5.3](src/assets/images/gifs1/ejercicio5.3.gif)
 
 ---
 
@@ -212,7 +218,7 @@ Integración completa con la API pública de Pokémon para búsqueda de informac
 git clone [URL_DEL_REPOSITORIO]
 
 # Navegar al directorio del proyecto
-cd pokemon-chatbot
+cd SPRINT4
 
 # Instalar dependencias
 npm install
@@ -222,7 +228,7 @@ npm run dev
 ```
 
 ### Acceso:
-- Abrir el navegador en `http://localhost:5174`
+- Abrir el navegador en `http://localhost:5173` (o el puerto que indique Vite)
 - El chatbot estará disponible y funcionando
 
 ---
@@ -261,11 +267,16 @@ npm run dev
 
 ## 🗂 Formato de entrega
 
-- El proyecto completo se encuentra en la carpeta `pokemon-chatbot`.  
-- Los GIFs están incrustados en este `README.md`.  
-- La estructura del repositorio respeta el formato modular de React.  
-- Todas las actividades están documentadas en archivos `.md` separados.
-- El proyecto incluye integración completa con POKEAPI.
+- El proyecto completo se encuentra en la carpeta raíz `SPRINT4`.  
+- Los GIFs están incrustados en este `README.md` y se encuentran en `src/assets/images/gifs1/`.  
+- La estructura del repositorio respeta el formato modular de React con `src/` como carpeta principal.  
+- Todos los componentes están organizados en `src/components/`.  
+- Los servicios externos (APIs) están en `src/services/`.  
+- Los estilos globales están centralizados en `src/styles/`.  
+- Los assets (imágenes, iconos) están organizados en `src/assets/`.  
+- Los archivos públicos (favicon, etc.) están en `src/public/`.  
+- Todas las actividades están documentadas en archivos `.md` separados.  
+- El proyecto incluye integración completa con POKEAPI.  
 - La aplicación es completamente funcional y responsive.
 
 ---
