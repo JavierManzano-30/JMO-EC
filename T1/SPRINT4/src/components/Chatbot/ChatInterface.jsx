@@ -1,18 +1,23 @@
 import React, { useState, useEffect, useRef } from 'react';
 import MessageList from './MessageList';
 import MessageInput from './MessageInput';
+import { 
+  getPokemonData, 
+  isPokemonQuery, 
+  getErrorMessage 
+} from '../../services/pokeapi';
 
 const ChatInterface = () => {
   const [messages, setMessages] = useState([
     {
       id: 1,
-      text: "¡Hola! Soy BubblyBot, tu compañero de charla. ¡Qué alegría verte por aquí! 💙",
+      text: "¡Hola! Soy BubblyBot, tu asistente de Pokémon. ¡Qué alegría verte por aquí! 💙",
       sender: "bot",
       timestamp: new Date().toLocaleTimeString()
     },
     {
       id: 2,
-      text: "¡Hablemos de lo que sea! Estoy aquí para conversar contigo sobre cualquier tema. ¡Eres muy bienvenido! 😄",
+      text: "Puedo ayudarte a buscar información de cualquier Pokémon. Solo escribe el nombre o número del Pokémon que quieres conocer. ¡Prueba con 'pikachu' o '25'! 🔍",
       sender: "bot",
       timestamp: new Date().toLocaleTimeString()
     }
@@ -44,6 +49,37 @@ const ChatInterface = () => {
     return responses[Math.floor(Math.random() * responses.length)];
   };
 
+  const handlePokemonSearch = async (query) => {
+    try {
+      console.log('Iniciando búsqueda de Pokémon:', query);
+      const pokemonData = await getPokemonData(query);
+      
+      console.log('Pokémon encontrado:', pokemonData.name);
+      
+      const pokemonMessage = {
+        id: Date.now() + 1,
+        text: `¡Aquí tienes la información de ${pokemonData.name}! 🎉`,
+        sender: "bot",
+        timestamp: new Date().toLocaleTimeString(),
+        pokemon: pokemonData
+      };
+      
+      setMessages(prev => [...prev, pokemonMessage]);
+    } catch (error) {
+      console.log('Error en búsqueda de Pokémon:', error.message);
+      
+      const errorMessage = {
+        id: Date.now() + 1,
+        text: getErrorMessage(error, query),
+        sender: "bot",
+        timestamp: new Date().toLocaleTimeString()
+      };
+      
+      console.log('Mensaje de error creado:', errorMessage.text);
+      setMessages(prev => [...prev, errorMessage]);
+    }
+  };
+
   const handleSendMessage = async (messageText) => {
     // Agregar mensaje del usuario
     const userMessage = {
@@ -56,18 +92,11 @@ const ChatInterface = () => {
     setMessages(prev => [...prev, userMessage]);
     setIsThinking(true);
 
-    // Simular tiempo de respuesta del bot
+    // Siempre tratar como búsqueda de Pokémon
     setTimeout(() => {
-      const botResponse = {
-        id: Date.now() + 1,
-        text: generateBotResponse(messageText),
-        sender: "bot",
-        timestamp: new Date().toLocaleTimeString()
-      };
-      
-      setMessages(prev => [...prev, botResponse]);
+      handlePokemonSearch(messageText);
       setIsThinking(false);
-    }, 1500 + Math.random() * 1000); // Entre 1.5 y 2.5 segundos
+    }, 1000 + Math.random() * 1000); // Entre 1 y 2 segundos
   };
 
   return (

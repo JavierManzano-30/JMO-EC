@@ -1,6 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
+import PokemonCard from './PokemonCard';
 
 const MessageList = ({ messages, isThinking }) => {
+  const messagesEndRef = useRef(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages, isThinking]);
+
   return (
     <div className="message-list">
       {messages.map((message) => (
@@ -12,7 +23,10 @@ const MessageList = ({ messages, isThinking }) => {
               </span>
               <span className="timestamp">{message.timestamp}</span>
             </div>
-            <p className="message-text">{message.text}</p>
+            <div className="message-text">
+              {message.text}
+              {message.pokemon && <PokemonCard pokemon={message.pokemon} />}
+            </div>
           </div>
         </div>
       ))}
@@ -35,6 +49,7 @@ const MessageList = ({ messages, isThinking }) => {
           </div>
         </div>
       )}
+      <div ref={messagesEndRef} />
     </div>
   );
 };
