@@ -167,6 +167,7 @@ Implementación de una interfaz de chat completa similar a ChatGPT/Claude, inclu
 - Identidad visual BubblyBot integrada
 
 **Pruebas realizadas (GIF):**
+
 ![Actividad 4](src/assets/images/gifs1/ejercicio4.gif)
 
 ---
@@ -292,6 +293,6 @@ npm run dev
 ---
 
 ✍️ **Autor:** *[Javier Manzano Oliveros]*  
-📆 **Fecha:** *Diciembre 2024*  
+📆 **Fecha:** *Octubre 2025*  
 🏫 **Módulo:** *Entorno Cliente – 2º DAW*  
 🎯 **Proyecto:** *Chatbot de Pokémon con React*
