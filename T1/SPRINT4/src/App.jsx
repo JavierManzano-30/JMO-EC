@@ -1,7 +1,7 @@
 import React from 'react';
 import './styles/layout.css';
 import './App.css';
-import bubblybotLogo from '/assets/images/bubblybot-logo.svg';
+import bubblybotLogo from './assets/images/bubblybot-logo.svg';
 import ChatWindow from './components/Chatbot/ChatWindow';
 
 function App() {

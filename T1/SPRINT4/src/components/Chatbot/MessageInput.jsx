@@ -26,7 +26,7 @@ const MessageInput = ({ onSendMessage, disabled }) => {
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             onKeyPress={handleKeyPress}
-            placeholder="¡Escribe lo que quieras hablar conmigo!"
+            placeholder="Escribe el nombre o número del Pokémon que quieres buscar..."
             className="message-text-input"
             disabled={disabled}
             rows="1"
