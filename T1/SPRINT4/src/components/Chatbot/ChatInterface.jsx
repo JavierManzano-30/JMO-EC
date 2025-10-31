@@ -2,22 +2,21 @@ import React, { useState, useEffect, useRef } from 'react';
 import MessageList from './MessageList';
 import MessageInput from './MessageInput';
 import { 
-  getPokemonData, 
-  isPokemonQuery, 
+  getChatCompletion, 
   getErrorMessage 
-} from '../../services/pokeapi';
+} from '../../services/lmstudio';
 
 const ChatInterface = () => {
   const [messages, setMessages] = useState([
     {
       id: 1,
-      text: "¡Hola! Soy BubblyBot, tu asistente de Pokémon. ¡Qué alegría verte por aquí! 💙",
+      text: "¡Hola! Soy BubblyBot, tu asistente virtual. ¡Qué alegría verte por aquí! 💙",
       sender: "bot",
       timestamp: new Date().toLocaleTimeString()
     },
     {
       id: 2,
-      text: "Puedo ayudarte a buscar información de cualquier Pokémon. Solo escribe el nombre o número del Pokémon que quieres conocer. ¡Prueba con 'pikachu' o '25'! 🔍",
+      text: "Estoy aquí para ayudarte con cualquier pregunta o conversación. ¿En qué puedo ayudarte hoy? 🔍",
       sender: "bot",
       timestamp: new Date().toLocaleTimeString()
     }
@@ -34,52 +33,6 @@ const ChatInterface = () => {
     scrollToBottom();
   }, [messages, isThinking]);
 
-  const generateBotResponse = (userMessage) => {
-    const responses = [
-      "¡Qué interesante! Me encanta hablar de eso contigo. ¿Podrías contarme más detalles? 🤔",
-      "¡Excelente pregunta! Es un tema fascinante. Desde mi perspectiva, creo que... 💭",
-      "¡Wow! Nunca había pensado en eso de esa manera. Me parece muy inteligente tu punto de vista. ✨",
-      "¡Qué divertido! Me encanta cómo piensas. ¿Has considerado también...? 🎯",
-      "¡Increíble! Me fascina aprender cosas nuevas contigo. ¿Qué más sabes sobre esto? 📚",
-      "¡Genial! Me encanta conversar contigo. Siempre tienes ideas muy interesantes. 🌟",
-      "¡Qué bueno! Me parece un tema súper interesante. ¿Podrías explicarme más? 🔍",
-      "¡Fantástico! Me encanta cómo expresas tus ideas. ¿Qué opinas sobre...? 💡"
-    ];
-    
-    return responses[Math.floor(Math.random() * responses.length)];
-  };
-
-  const handlePokemonSearch = async (query) => {
-    try {
-      console.log('Iniciando búsqueda de Pokémon:', query);
-      const pokemonData = await getPokemonData(query);
-      
-      console.log('Pokémon encontrado:', pokemonData.name);
-      
-      const pokemonMessage = {
-        id: Date.now() + 1,
-        text: `¡Aquí tienes la información de ${pokemonData.name}! 🎉`,
-        sender: "bot",
-        timestamp: new Date().toLocaleTimeString(),
-        pokemon: pokemonData
-      };
-      
-      setMessages(prev => [...prev, pokemonMessage]);
-    } catch (error) {
-      console.log('Error en búsqueda de Pokémon:', error.message);
-      
-      const errorMessage = {
-        id: Date.now() + 1,
-        text: getErrorMessage(error, query),
-        sender: "bot",
-        timestamp: new Date().toLocaleTimeString()
-      };
-      
-      console.log('Mensaje de error creado:', errorMessage.text);
-      setMessages(prev => [...prev, errorMessage]);
-    }
-  };
-
   const handleSendMessage = async (messageText) => {
     // Agregar mensaje del usuario
     const userMessage = {
@@ -92,11 +45,41 @@ const ChatInterface = () => {
     setMessages(prev => [...prev, userMessage]);
     setIsThinking(true);
 
-    // Siempre tratar como búsqueda de Pokémon
-    setTimeout(() => {
-      handlePokemonSearch(messageText);
+    try {
+      // Preparar historial de conversación para el modelo
+      const conversationHistory = messages
+        .filter(msg => msg.text && (msg.sender === 'user' || msg.sender === 'bot'))
+        .slice(-10) // Mantener solo los últimos 10 mensajes para no sobrecargar
+        .map(msg => ({
+          role: msg.sender === 'user' ? 'user' : 'assistant',
+          content: msg.text
+        }));
+
+      // Obtener respuesta del modelo
+      const botResponseText = await getChatCompletion(messageText, conversationHistory);
+      
+      const botMessage = {
+        id: Date.now() + 1,
+        text: botResponseText,
+        sender: "bot",
+        timestamp: new Date().toLocaleTimeString()
+      };
+      
+      setMessages(prev => [...prev, botMessage]);
+    } catch (error) {
+      console.error('Error al obtener respuesta del modelo:', error);
+      
+      const errorMessage = {
+        id: Date.now() + 1,
+        text: getErrorMessage(error),
+        sender: "bot",
+        timestamp: new Date().toLocaleTimeString()
+      };
+      
+      setMessages(prev => [...prev, errorMessage]);
+    } finally {
       setIsThinking(false);
-    }, 1000 + Math.random() * 1000); // Entre 1 y 2 segundos
+    }
   };
 
   return (
