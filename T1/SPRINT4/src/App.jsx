@@ -24,10 +24,10 @@ function App() {
           <div className="panel-section">
             <h3>🎯 ¿Qué puedo hacer?</h3>
             <ul>
-              <li>🔍 Buscar información de Pokémon</li>
-              <li>📊 Mostrar estadísticas y tipos</li>
-              <li>🖼️ Mostrar imágenes oficiales</li>
-              <li>📚 Compartir datos de la Pokédex</li>
+              <li>💬 Mantener conversaciones naturales</li>
+              <li>📚 Responder preguntas</li>
+              <li>🧠 Recordar el contexto de la conversación</li>
+              <li>🎨 Ayudarte con cualquier tema</li>
             </ul>
           </div>
 
@@ -35,20 +35,20 @@ function App() {
             <h3>🌟 Características</h3>
             <div className="feature-grid">
               <div className="feature-item">
-                <span className="feature-icon">🔍</span>
-                <span>Búsqueda por nombre</span>
+                <span className="feature-icon">🤖</span>
+                <span>Modelo local (LM Studio)</span>
               </div>
               <div className="feature-item">
-                <span className="feature-icon">🔢</span>
-                <span>Búsqueda por número</span>
-              </div>
-              <div className="feature-item">
-                <span className="feature-icon">📊</span>
-                <span>Estadísticas completas</span>
+                <span className="feature-icon">💭</span>
+                <span>Contexto de conversación</span>
               </div>
               <div className="feature-item">
                 <span className="feature-icon">⚡</span>
                 <span>Respuesta rápida</span>
+              </div>
+              <div className="feature-item">
+                <span className="feature-icon">🔒</span>
+                <span>Privacidad local</span>
               </div>
             </div>
           </div>
@@ -56,10 +56,10 @@ function App() {
           <div className="panel-section">
             <h3>💡 Consejos de uso</h3>
             <div className="tips">
-              <p>• Escribe el nombre del Pokémon (ej: pikachu)</p>
-              <p>• O escribe su número (ej: 25)</p>
-              <p>• ¡Prueba con diferentes Pokémon!</p>
-              <p>• Puedes buscar cualquier Pokémon de la Pokédex</p>
+              <p>• Haz cualquier pregunta o comenta cualquier tema</p>
+              <p>• El chatbot recuerda el contexto de la conversación</p>
+              <p>• Asegúrate de tener LM Studio ejecutándose</p>
+              <p>• El servidor debe estar activo en el puerto 1234</p>
             </div>
           </div>
 
@@ -80,8 +80,8 @@ function App() {
 
         <section className="chat-section">
           <div className="section-title">
-            <h2>¡Busca información de Pokémon!</h2>
-            <p>Escribe el nombre o número del Pokémon que quieres conocer. ¡BubblyBot te ayudará a encontrar toda la información!</p>
+            <h2>¡Charla con BubblyBot!</h2>
+            <p>Escribe tu mensaje y mantén una conversación natural con BubblyBot. ¡Puedo ayudarte con cualquier tema!</p>
           </div>
           
           <ChatWindow />

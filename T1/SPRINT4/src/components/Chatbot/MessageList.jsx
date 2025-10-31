@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from 'react';
-import PokemonCard from './PokemonCard';
 
 const MessageList = ({ messages, isThinking }) => {
   const messagesEndRef = useRef(null);
@@ -25,7 +24,6 @@ const MessageList = ({ messages, isThinking }) => {
             </div>
             <div className="message-text">
               {message.text}
-              {message.pokemon && <PokemonCard pokemon={message.pokemon} />}
             </div>
           </div>
         </div>
