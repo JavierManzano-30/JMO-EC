@@ -79,11 +79,6 @@ function App() {
         </aside>
 
         <section className="chat-section">
-          <div className="section-title">
-            <h2>¡Charla con BubblyBot!</h2>
-            <p>Escribe tu mensaje y mantén una conversación natural con BubblyBot. ¡Puedo ayudarte con cualquier tema!</p>
-          </div>
-          
           <ChatWindow />
         </section>
       </main>
