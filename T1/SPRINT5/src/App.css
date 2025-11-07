@@ -1,0 +1,21 @@
+.app-logo {
+  width: 56px;
+  height: 56px;
+  animation: bubble-float 3s ease-in-out infinite;
+  filter: drop-shadow(0 4px 12px rgba(79, 195, 247, 0.35));
+}
+
+@keyframes bubble-float {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+  }
+  25% {
+    transform: translateY(-6px) scale(1.04);
+  }
+  50% {
+    transform: translateY(-10px) scale(1.02);
+  }
+  75% {
+    transform: translateY(-4px) scale(1.03);
+  }
+}
