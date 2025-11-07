@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 
 const demoPokemon = [
   { id: 25, name: 'Pikachu', type: 'Eléctrico' },
@@ -7,10 +7,18 @@ const demoPokemon = [
 ];
 
 const PokedexView = () => {
+  const headingRef = useRef(null);
+
+  useEffect(() => {
+    headingRef.current?.focus({ preventScroll: true });
+  }, []);
+
   return (
     <section className="view-section" aria-labelledby="pokedex-view-title">
       <header className="view-header">
-        <h2 id="pokedex-view-title">Pokédex</h2>
+        <h2 id="pokedex-view-title" tabIndex={-1} ref={headingRef}>
+          Pokédex
+        </h2>
         <p>Demostrador de la integración con la POKEAPI implementada en sprints anteriores.</p>
       </header>
 

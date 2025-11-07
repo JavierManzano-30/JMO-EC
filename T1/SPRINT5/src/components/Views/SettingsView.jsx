@@ -1,10 +1,18 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 
 const SettingsView = () => {
+  const headingRef = useRef(null);
+
+  useEffect(() => {
+    headingRef.current?.focus({ preventScroll: true });
+  }, []);
+
   return (
     <section className="view-section" aria-labelledby="settings-view-title">
       <header className="view-header">
-        <h2 id="settings-view-title">Ajustes</h2>
+        <h2 id="settings-view-title" tabIndex={-1} ref={headingRef}>
+          Ajustes
+        </h2>
         <p>Configura las preferencias del asistente y del modelo de lenguaje.</p>
       </header>
 
