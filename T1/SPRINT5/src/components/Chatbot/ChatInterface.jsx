@@ -24,6 +24,7 @@ const ChatInterface = () => {
   
   const [isThinking, setIsThinking] = useState(false);
   const messagesEndRef = useRef(null);
+  const inputRef = useRef(null);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -32,6 +33,16 @@ const ChatInterface = () => {
   useEffect(() => {
     scrollToBottom();
   }, [messages, isThinking]);
+
+  useEffect(() => {
+    if (!isThinking) {
+      inputRef.current?.focus({ preventScroll: true });
+    }
+  }, [isThinking]);
+
+  useEffect(() => {
+    inputRef.current?.focus({ preventScroll: true });
+  }, []);
 
   const handleSendMessage = async (messageText) => {
     // Agregar mensaje del usuario
@@ -86,7 +97,7 @@ const ChatInterface = () => {
     <div className="chat-interface">
       <MessageList messages={messages} isThinking={isThinking} />
       <div ref={messagesEndRef} />
-      <MessageInput onSendMessage={handleSendMessage} disabled={isThinking} />
+      <MessageInput onSendMessage={handleSendMessage} disabled={isThinking} ref={inputRef} />
     </div>
   );
 };

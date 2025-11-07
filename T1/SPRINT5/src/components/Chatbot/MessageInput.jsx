@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { forwardRef, useState } from 'react';
 
-const MessageInput = ({ onSendMessage, disabled }) => {
+const MessageInput = forwardRef(({ onSendMessage, disabled }, textareaRef) => {
   const [message, setMessage] = useState('');
 
   const handleSubmit = (e) => {
@@ -30,6 +30,7 @@ const MessageInput = ({ onSendMessage, disabled }) => {
             className="message-text-input"
             disabled={disabled}
             rows="1"
+          ref={textareaRef}
           />
           <button 
             type="submit" 
@@ -42,6 +43,8 @@ const MessageInput = ({ onSendMessage, disabled }) => {
       </form>
     </div>
   );
-};
+});
+
+MessageInput.displayName = 'MessageInput';
 
 export default MessageInput;
