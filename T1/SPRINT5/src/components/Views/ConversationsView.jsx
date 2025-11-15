@@ -1,11 +1,14 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import {
-  conversations,
+  getAllConversations,
   filterConversations,
   sortConversations,
+  subscribeToConversations,
 } from '../../services/conversations';
 import { mergeSearchParams, readSearchParams } from '../../services/urlState';
 import { getScrollPosition, setScrollPosition } from '../../services/scroll';
+import Loading from '../Feedback/Loading';
+import ErrorBlock from '../Feedback/ErrorBlock';
 
 const SORT_OPTIONS = [
   { value: 'recent', label: 'Más recientes' },
@@ -18,6 +21,9 @@ const DEFAULT_SORT = SORT_OPTIONS[0].value;
 const ConversationsView = ({ navigate }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [sortOrder, setSortOrder] = useState(DEFAULT_SORT);
+  const [conversations, setConversations] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
   const scrollContainerRef = useRef(null);
   const searchInputRef = useRef(null);
 
@@ -40,6 +46,36 @@ const ConversationsView = ({ navigate }) => {
     }
   }, []);
 
+  // Cargar conversaciones al montar
+  useEffect(() => {
+    const loadConversations = async () => {
+      setIsLoading(true);
+      setError(null);
+      try {
+        const allConversations = await getAllConversations();
+        setConversations(allConversations);
+      } catch (err) {
+        console.error('Error al cargar conversaciones:', err);
+        setError('No se pudieron cargar las conversaciones. Por favor, intenta recargar la página.');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadConversations();
+
+    // Suscribirse a cambios en las conversaciones
+    const unsubscribe = subscribeToConversations((updatedConversations) => {
+      setConversations(updatedConversations);
+    });
+
+    return () => {
+      if (unsubscribe) {
+        unsubscribe();
+      }
+    };
+  }, []);
+
   useEffect(() => {
     syncFromUrl();
     const handlePopstate = () => {
@@ -57,7 +93,7 @@ const ConversationsView = ({ navigate }) => {
   const filteredConversations = useMemo(() => {
     const filtered = filterConversations(conversations, searchTerm);
     return sortConversations(filtered, sortOrder);
-  }, [searchTerm, sortOrder]);
+  }, [conversations, searchTerm, sortOrder]);
 
   const handleSearchChange = (event) => {
     const value = event.target.value;
@@ -122,6 +158,39 @@ const ConversationsView = ({ navigate }) => {
     }
   }, [scrollKey]);
 
+  if (isLoading) {
+    return (
+      <section className="view-section" aria-labelledby="conversations-view-title">
+        <header className="view-header">
+          <h2 id="conversations-view-title">Conversaciones</h2>
+          <p>Consulta el historial de conversaciones guardadas para retomarlas más tarde.</p>
+        </header>
+        <div className="view-content">
+          <Loading message="Cargando conversaciones..." />
+        </div>
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section className="view-section" aria-labelledby="conversations-view-title">
+        <header className="view-header">
+          <h2 id="conversations-view-title">Conversaciones</h2>
+          <p>Consulta el historial de conversaciones guardadas para retomarlas más tarde.</p>
+        </header>
+        <div className="view-content">
+          <ErrorBlock 
+            title="Error al cargar conversaciones"
+            message={error}
+            onRetry={() => window.location.reload()}
+            retryLabel="Recargar página"
+          />
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section className="view-section" aria-labelledby="conversations-view-title">
       <header className="view-header">
@@ -176,9 +245,13 @@ const ConversationsView = ({ navigate }) => {
               </div>
             </li>
           ))}
-          {filteredConversations.length === 0 && (
+          {filteredConversations.length === 0 && !isLoading && (
             <li className="conversation-item conversation-item--empty">
-              <p>No hay conversaciones que coincidan con la búsqueda.</p>
+              <p>
+                {conversations.length === 0
+                  ? 'No hay conversaciones guardadas aún. Comienza una nueva conversación en el chat.'
+                  : 'No hay conversaciones que coincidan con la búsqueda.'}
+              </p>
             </li>
           )}
         </ul>

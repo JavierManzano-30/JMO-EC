@@ -2,7 +2,7 @@ import React from 'react';
 import ChatInterface from './ChatInterface';
 import '../chatbot.css';
 
-const ChatWindow = () => {
+const ChatWindow = ({ conversationId = null, onConversationCreated = null }) => {
   return (
     <div className="chat-window">
       <div className="chat-header">
@@ -15,7 +15,10 @@ const ChatWindow = () => {
         </div>
       </div>
       
-      <ChatInterface />
+      <ChatInterface 
+        conversationId={conversationId}
+        onConversationCreated={onConversationCreated}
+      />
     </div>
   );
 };

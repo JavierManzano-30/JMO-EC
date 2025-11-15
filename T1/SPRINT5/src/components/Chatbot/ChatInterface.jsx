@@ -5,26 +5,44 @@ import {
   getChatCompletion, 
   getErrorMessage 
 } from '../../services/lmstudio';
+import {
+  createConversation,
+  updateConversation,
+  addMessageToConversation,
+} from '../../services/conversations';
 
-const ChatInterface = () => {
-  const [messages, setMessages] = useState([
-    {
-      id: 1,
-      text: "¡Hola! Soy BubblyBot, tu asistente virtual. ¡Qué alegría verte por aquí! 💙",
-      sender: "bot",
-      timestamp: new Date().toLocaleTimeString()
-    },
-    {
-      id: 2,
-      text: "Estoy aquí para ayudarte con cualquier pregunta o conversación. ¿En qué puedo ayudarte hoy? 🔍",
-      sender: "bot",
-      timestamp: new Date().toLocaleTimeString()
-    }
-  ]);
+const initialMessages = [
+  {
+    id: 1,
+    text: "¡Hola! Soy BubblyBot, tu asistente virtual. ¿En qué puedo ayudarte hoy? 💙",
+    sender: "bot",
+    timestamp: new Date().toLocaleTimeString()
+  }
+];
+
+const ChatInterface = ({ conversationId: externalConversationId = null, onConversationCreated = null }) => {
+  const [messages, setMessages] = useState(initialMessages);
   
   const [isThinking, setIsThinking] = useState(false);
+  const [currentConversationId, setCurrentConversationId] = useState(externalConversationId);
+  const [isInitialized, setIsInitialized] = useState(false);
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
+
+  // Resetear mensajes cuando cambia la conversación externa
+  useEffect(() => {
+    if (externalConversationId && externalConversationId !== currentConversationId) {
+      // Nueva conversación externa: resetear todo
+      setMessages([...initialMessages]);
+      setCurrentConversationId(externalConversationId);
+      setIsInitialized(false);
+    } else if (externalConversationId === null && currentConversationId) {
+      // Si se resetea a null, limpiar para nueva conversación
+      setMessages([...initialMessages]);
+      setCurrentConversationId(null);
+      setIsInitialized(false);
+    }
+  }, [externalConversationId]);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -40,11 +58,41 @@ const ChatInterface = () => {
     }
   }, [isThinking]);
 
+  // NO crear conversación automáticamente - solo cuando el usuario envíe un mensaje
+  // Esto evita crear conversaciones vacías en la base de datos
+
   useEffect(() => {
     inputRef.current?.focus({ preventScroll: true });
   }, []);
 
   const handleSendMessage = async (messageText) => {
+    // Crear conversación si no existe (solo cuando el usuario envía el primer mensaje)
+    let conversationIdToUse = currentConversationId;
+    
+    if (!conversationIdToUse) {
+      try {
+        // Crear conversación con los mensajes iniciales (incluyendo el del bot)
+        const initialMessagesToSave = messages.map(msg => ({
+          id: msg.id,
+          text: msg.text,
+          sender: msg.sender,
+          timestamp: msg.timestamp,
+        }));
+        
+        const newConversation = await createConversation(initialMessagesToSave);
+        conversationIdToUse = newConversation.id;
+        setCurrentConversationId(conversationIdToUse);
+        setIsInitialized(true);
+        
+        if (onConversationCreated) {
+          onConversationCreated(newConversation.id);
+        }
+      } catch (error) {
+        console.error('Error al crear la conversación:', error);
+        // Continuar aunque falle la creación, para no bloquear el chat
+      }
+    }
+
     // Agregar mensaje del usuario
     const userMessage = {
       id: Date.now(),
@@ -53,12 +101,22 @@ const ChatInterface = () => {
       timestamp: new Date().toLocaleTimeString()
     };
     
-    setMessages(prev => [...prev, userMessage]);
+    const updatedMessages = [...messages, userMessage];
+    setMessages(updatedMessages);
     setIsThinking(true);
+
+    // Guardar mensaje del usuario en la conversación
+    if (conversationIdToUse) {
+      try {
+        await addMessageToConversation(conversationIdToUse, userMessage);
+      } catch (error) {
+        console.error('Error al guardar mensaje del usuario:', error);
+      }
+    }
 
     try {
       // Preparar historial de conversación para el modelo
-      const conversationHistory = messages
+      const conversationHistory = updatedMessages
         .filter(msg => msg.text && (msg.sender === 'user' || msg.sender === 'bot'))
         .slice(-10) // Mantener solo los últimos 10 mensajes para no sobrecargar
         .map(msg => ({
@@ -76,7 +134,17 @@ const ChatInterface = () => {
         timestamp: new Date().toLocaleTimeString()
       };
       
-      setMessages(prev => [...prev, botMessage]);
+      const finalMessages = [...updatedMessages, botMessage];
+      setMessages(finalMessages);
+
+      // Guardar mensaje del bot en la conversación
+      if (conversationIdToUse) {
+        try {
+          await addMessageToConversation(conversationIdToUse, botMessage);
+        } catch (error) {
+          console.error('Error al guardar mensaje del bot:', error);
+        }
+      }
     } catch (error) {
       console.error('Error al obtener respuesta del modelo:', error);
       
@@ -87,7 +155,17 @@ const ChatInterface = () => {
         timestamp: new Date().toLocaleTimeString()
       };
       
-      setMessages(prev => [...prev, errorMessage]);
+      const finalMessages = [...updatedMessages, errorMessage];
+      setMessages(finalMessages);
+
+      // Guardar mensaje de error en la conversación
+      if (conversationIdToUse) {
+        try {
+          await addMessageToConversation(conversationIdToUse, errorMessage);
+        } catch (error) {
+          console.error('Error al guardar mensaje de error:', error);
+        }
+      }
     } finally {
       setIsThinking(false);
     }
