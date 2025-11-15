@@ -25,6 +25,12 @@ const deriveRouteFromParams = (params, session) => {
 
   const viewParam = params.get('view');
   const candidate = viewParam && ROUTE_MAP[viewParam] ? viewParam : fallbacks();
+  
+  // Si hay un view param pero no existe en el mapa, es una ruta inválida
+  if (viewParam && !ROUTE_MAP[viewParam]) {
+    return 'notfound';
+  }
+  
   const route = ROUTE_MAP[candidate] ?? ROUTE_MAP[DEFAULT_ROUTE_ID];
 
   if (route.hideWhenAuthenticated && session?.isAuthenticated) {
@@ -162,7 +168,7 @@ function App() {
   }, [handleRouteChange]);
 
   const ActiveView = useMemo(() => {
-    return ROUTE_COMPONENTS[currentRoute] ?? ROUTE_COMPONENTS[DEFAULT_ROUTE_ID];
+    return ROUTE_COMPONENTS[currentRoute] ?? ROUTE_COMPONENTS.notfound;
   }, [currentRoute]);
 
   const activeRoute = useMemo(() => {

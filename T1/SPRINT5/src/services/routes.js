@@ -4,6 +4,7 @@ import {
   ConversationView,
   PokedexView,
   SettingsView,
+  NotFoundView,
 } from '../components/Views';
 import LoginView from '../components/Auth/LoginView';
 
@@ -62,6 +63,7 @@ export const ROUTE_COMPONENTS = Object.freeze({
   conversation: ConversationView,
   pokedex: PokedexView,
   settings: SettingsView,
+  notfound: NotFoundView,
 });
 
 export const DEFAULT_ROUTE_ID = 'chat';
