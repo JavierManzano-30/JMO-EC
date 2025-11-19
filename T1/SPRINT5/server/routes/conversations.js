@@ -286,6 +286,21 @@ router.post('/:conversationId/duplicate', async (req, res, next) => {
     const now = new Date();
     const duplicateTitle = `${existing.conversation.title} (copia)`;
 
+    const serializeMetadata = (metadata) => {
+      if (metadata === null || metadata === undefined) {
+        return null;
+      }
+      if (typeof metadata === 'string') {
+        return metadata;
+      }
+      try {
+        return JSON.stringify(metadata);
+      } catch (err) {
+        console.warn('No se pudo serializar metadata al duplicar conversación:', err);
+        return null;
+      }
+    };
+
     await withConnection(async (connection) => {
       await connection.beginTransaction();
       await connection.query(
@@ -312,7 +327,7 @@ router.post('/:conversationId/duplicate', async (req, res, next) => {
           message.sender_type,
           message.sender_user_id,
           message.content,
-          message.metadata,
+          serializeMetadata(message.metadata),
           message.is_error,
           message.created_at ?? now,
         ]);
