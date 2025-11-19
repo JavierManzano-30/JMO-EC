@@ -11,6 +11,7 @@ import {
 } from './services/routes';
 import { readSearchParams, writeSearchParams } from './services/urlState';
 import { clearSession, loadSession, saveSession } from './services/storage';
+import { clearActiveConversationId } from './services/activeConversation';
 
 const deriveRouteFromParams = (params, session) => {
   const fallbacks = () => {
@@ -147,10 +148,10 @@ function App() {
   );
 
   const handleLogin = useCallback(
-    ({ name }) => {
+    (user) => {
       const newSession = saveSession({
         isAuthenticated: true,
-        user: { name },
+        user,
         loggedAt: new Date().toISOString(),
       });
       setSession(newSession);
@@ -161,11 +162,14 @@ function App() {
   );
 
   const handleLogout = useCallback(() => {
+    if (session?.user?.id) {
+      clearActiveConversationId(session.user.id);
+    }
     clearSession();
     setSession(null);
     setAuthMessage('');
     handleRouteChange(PUBLIC_ROUTE_ID, { replace: true, force: true });
-  }, [handleRouteChange]);
+  }, [handleRouteChange, session]);
 
   const ActiveView = useMemo(() => {
     return ROUTE_COMPONENTS[currentRoute] ?? ROUTE_COMPONENTS.notfound;

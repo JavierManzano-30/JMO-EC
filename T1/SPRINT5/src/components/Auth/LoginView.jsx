@@ -1,36 +1,49 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import '../../styles/auth.css';
-
-const DEFAULT_USER_NAME = 'Persona curiosa';
+import { loginUser } from '../../services/auth';
 
 const LoginView = ({ onLogin, authMessage, session }) => {
-  const [name, setName] = useState(session?.user?.name || '');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const isAuthenticated = Boolean(session?.isAuthenticated);
   const inputRef = useRef(null);
+
+  useEffect(() => {
+    if (session?.user?.username) {
+      setUsername(session.user.username);
+    }
+  }, [session]);
 
   const helperText = useMemo(() => {
     if (isAuthenticated) {
       return 'Ya tienes una sesión activa en este dispositivo.';
     }
 
-    return 'Introduce un nombre o alias para iniciar una sesión local.';
+    return 'Introduce tu nombre de usuario tal y como aparece en la base de datos de HeidiSQL.';
   }, [isAuthenticated]);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (isAuthenticated) {
+    if (isAuthenticated || isSubmitting) {
       return;
     }
 
     setIsSubmitting(true);
+    setErrorMessage('');
 
-    const trimmedName = name.trim() || DEFAULT_USER_NAME;
-    window.setTimeout(() => {
-      onLogin?.({ name: trimmedName });
+    try {
+      const user = await loginUser({ username, password });
+      onLogin?.(user);
+      setPassword('');
+    } catch (error) {
+      console.error('Error al iniciar sesión:', error);
+      setErrorMessage(error.message || 'No se pudo iniciar sesión.');
+    } finally {
       setIsSubmitting(false);
-    }, 300);
+    }
   };
 
   useEffect(() => {
@@ -42,8 +55,8 @@ const LoginView = ({ onLogin, authMessage, session }) => {
   return (
     <section className="view-section auth-section" aria-labelledby="login-view-title">
       <header className="view-header">
-        <h2 id="login-view-title">Acceso local</h2>
-        <p>Inicia una sesión simulada para desbloquear las vistas protegidas de BubblyBot.</p>
+        <h2 id="login-view-title">Acceso a BubblyBot</h2>
+        <p>Introduce tu usuario registrado en la base de datos para continuar.</p>
       </header>
 
       <div className="view-content auth-content" role="region" aria-live="polite">
@@ -53,17 +66,35 @@ const LoginView = ({ onLogin, authMessage, session }) => {
           </div>
         )}
 
+        {errorMessage && (
+          <div className="auth-alert" role="alert">
+            {errorMessage}
+          </div>
+        )}
+
         <form className="auth-form" onSubmit={handleSubmit}>
           <label htmlFor="login-name" className="form-field">
-            Nombre o alias
+            Nombre de usuario
             <input
               id="login-name"
               type="text"
-              value={name}
-              onChange={(event) => setName(event.target.value)}
-              placeholder="Ej: Alex"
-              disabled={isAuthenticated}
+              value={username}
+              onChange={(event) => setUsername(event.target.value)}
+              placeholder="Ej: javier"
+              disabled={isAuthenticated || isSubmitting}
               ref={inputRef}
+            />
+          </label>
+
+          <label htmlFor="login-password" className="form-field">
+            Contraseña
+            <input
+              id="login-password"
+              type="password"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+              placeholder="Introduce tu contraseña"
+              disabled={isAuthenticated || isSubmitting}
             />
           </label>
 
@@ -74,7 +105,7 @@ const LoginView = ({ onLogin, authMessage, session }) => {
             className="primary-button"
             disabled={isSubmitting || isAuthenticated}
           >
-            {isAuthenticated ? 'Sesión activa' : isSubmitting ? 'Accediendo...' : 'Iniciar sesión'}
+            {isAuthenticated ? 'Sesión activa' : isSubmitting ? 'Verificando...' : 'Iniciar sesión'}
           </button>
         </form>
       </div>
@@ -83,4 +114,3 @@ const LoginView = ({ onLogin, authMessage, session }) => {
 };
 
 export default LoginView;
-

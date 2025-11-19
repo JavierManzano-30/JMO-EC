@@ -1,229 +1,248 @@
-# 💻 SPRINT 4 – Chatbot BubblyBot con React
+# 💻 SPRINT 5 – Navegación, rutas protegidas y persistencia real
 
-Este sprint recoge la evolución completa del chatbot **BubblyBot**, construido con React y Vite, desde la creación del proyecto hasta la integración con la POKEAPI. Cada actividad documenta objetivos, archivos relevantes, funcionalidades y evidencia visual del resultado.
-
----
-
-## 📊 Actividad 1: Creación del Proyecto del Chatbot
-
-**Descripción:**  
-Creación del proyecto base en React con Vite, incluyendo la estructura inicial del proyecto y la personalización visual del chatbot.
-
-**Objetivos:**
-- Configuración del entorno de desarrollo React
-- Estructura de carpetas organizada
-- Personalización inicial del proyecto
-- Verificación del funcionamiento del entorno
-
-**Archivos principales:** `package.json`, `vite.config.js`, `src/main.jsx`, `src/App.jsx`
-
-**Funcionalidades implementadas:**
-- Proyecto React creado con Vite
-- Estructura de carpetas preparada para escalabilidad
-- Personalización visual inicial
-- Servidor de desarrollo funcionando
-
-**Pruebas realizadas (Imagen):**
-
-![Actividad 1](src/assets/images/gifs/ejercicio1.png)
+Quinta iteración del proyecto **BubblyBot**. En este bloque la aplicación pasa de ser un prototipo estático a una SPA con rutas funcionales, deep-linking y persistencia real en MySQL. Cada actividad resume objetivos, archivos clave y la evidencia que queda por grabar en GIFs.
 
 ---
 
-## 🎨 Actividad 2: Personalización Visual del Chatbot
+## 🗺️ Actividad 1 · Mapa de rutas y contenedores funcionales
 
-**Descripción:**  
-Personalización completa de la identidad visual del chatbot, incluyendo nombre, logo, colores y elementos gráficos propios.
+**Descripción**  
+Definir el layout general (cabecera + navegación + vistas) y todas las pantallas exigidas por la práctica sin depender de un router externo.
 
-**Objetivos:**
-- Definición de identidad visual del chatbot
-- Sustitución de elementos genéricos por elementos propios
-- Organización de recursos gráficos
-- Integración de la identidad en la interfaz
+**Objetivos**
+- Declarar el mapa funcional de vistas en `src/services/routes.js`.
+- Renderizar cada vista desde `App.jsx` respetando el layout común.
+- Contar con contenedores básicos en `src/components/Views/`.
 
-**Archivos principales:** `src/App.jsx`, `src/App.css`, `src/assets/images/bubblybot-logo.svg`
+**Archivos principales** `src/App.jsx`, `src/components/Layout/AppLayout.jsx`, `src/components/Navigation/NavBar.jsx`, `src/components/Views/*.jsx`, `src/styles/layout.css`
 
-**Funcionalidades implementadas:**
-- Identidad visual "BubblyBot" definida
-- Logo personalizado creado
-- Colores y tema visual establecidos
-- Recursos gráficos organizados en `src/assets/`
-- Integración completa de la identidad visual
+**Funcionalidades implementadas**
+- Barra lateral con enlaces navegables mediante clic o teclado.
+- Cabecera persistente con identidad BubblyBot y estado de sesión.
+- Contenedores `Chat`, `Conversations`, `Conversation`, `Pokedex`, `Settings` y `Login`.
 
-**Pruebas realizadas (Imagen):**
-
-![Actividad 2](src/assets/images/gifs/ejercicio2.png)
+> 📹 GIF pendiente: recorrido completo por las vistas usando los botones de navegación.
 
 ---
 
-## 🏗️ Actividad 3: Estructura del Proyecto y Modularización
+## 🔁 Actividad 2 · Enrutado con parámetros, queries y estados
 
-**Descripción:**  
-Organización del proyecto en una estructura modular con carpetas separadas para componentes, estilos, servicios y recursos.
+**Descripción**  
+Sin usar React Router: la URL refleja qué vista está activa (`view`), qué filtros se aplican (`q`, `sort`) y qué conversación se consulta (`id`). Al recargar, la app reconstruye el estado desde esos parámetros.
 
-**Objetivos:**
-- Estructuración del proyecto por responsabilidades
-- Aislamiento de componentes del chatbot
-- Preparación de la carpeta `services/`
-- Centralización de estilos
-- Integración en la aplicación raíz
+**Objetivos**
+- Sincronizar `window.history` desde `App.jsx` (`deriveRouteFromParams`, `sanitizeUrlForRoute`).
+- `ConversationsView` maneja `?q=` y `?sort=` con `mergeSearchParams`.
+- `ConversationView` lee `?id=` y muestra la conversación correspondiente.
 
-**Archivos principales:** `src/components/Chatbot/`, `src/services/`, `src/styles/`, `src/components/chatbot.css`
+**Archivos principales** `src/App.jsx`, `src/components/Views/ConversationsView.jsx`, `src/components/Views/ConversationView.jsx`, `src/services/urlState.js`, `src/services/url-state.md`
 
-**Funcionalidades implementadas:**
-- Estructura modular implementada
-- Componentes del chatbot aislados
-- Carpeta `services/` preparada para APIs
-- Estilos centralizados
-- Integración completa en `App.jsx`
+**Funcionalidades implementadas**
+- Cambiar filtros modifica la URL con `replaceState`, evitando ensuciar el historial.
+- Abrir `?view=conversation&id=...` carga la conversación al instante.
+- Filtros y orden se restauran tras recargar o navegar con atrás/adelante.
 
-**Pruebas realizadas (Imagen):**
-
-![Actividad 3](src/assets/images/gifs/ejercicio3.png)
-![Actividad 3](src/assets/images/gifs/ejercicio3.1.png)
+> 📹 GIFs pendientes:  
+> 1. Filtrar → recargar → estado intacto.  
+> 2. Abrir directamente una conversación por URL.
 
 ---
 
-## 💬 Actividad 4: Componentes Mínimos del Chatbot
+## 🔒 Actividad 3 · Rutas protegidas, guards y sesiones locales
 
-**Descripción:**  
-Implementación de una interfaz de chat completa similar a ChatGPT/Claude, incluyendo historial de mensajes, área de entrada y respuestas del asistente.
+**Descripción**  
+Sólo la vista pública (Login) es accesible sin sesión. El resto queda bloqueado hasta que el usuario se autentica con un nombre/contraseña existente en MySQL.
 
-**Objetivos:**
-- Ventana principal del chat con identidad visual
-- Historial de mensajes cronológico
-- Área de entrada de mensajes
-- Respuestas simuladas del asistente
-- Indicador de "pensando..."
-- Identidad visual del asistente
+**Objetivos**
+- Documentar policy en `src/components/Navigation/Guards.md`.
+- Persistir sesión en `localStorage` (`src/services/storage.js`).
+- Mostrar estado y acciones en `SessionIndicator`.
+- Backend con `/api/auth/login` para validar usuario + hash de contraseña.
 
-**Archivos principales:** `src/components/Chatbot/ChatWindow.jsx`, `src/components/Chatbot/ChatInterface.jsx`, `src/components/Chatbot/MessageList.jsx`, `src/components/Chatbot/MessageInput.jsx`
+**Archivos principales** `src/App.jsx`, `src/components/Auth/LoginView.jsx`, `src/components/Auth/SessionIndicator.jsx`, `server/routes/auth.js`, `src/services/auth.js`
 
-**Funcionalidades implementadas:**
-- Ventana de chat con header identificativo
-- Historial de mensajes con diferenciación visual
-- Área de entrada con botón enviar circular
-- Respuestas automáticas variadas del asistente
-- Indicador "Pensando..." con animación
-- Scroll automático al final de la conversación
-- Identidad visual BubblyBot integrada
+**Funcionalidades implementadas**
+- Si un usuario sin sesión intenta abrir una vista protegida, se fuerza `view=login` con aviso.
+- Tras login correcto se redirige a `chat` y se muestran las rutas protegidas.
+- Logout limpia sesión y conversación activa.
 
-**Pruebas realizadas (GIF):**
-
-![Actividad 4](src/assets/images/gifs/ejercicio4.gif)
+> 📹 GIF pendiente: flujo completo sin sesión → bloqueo → login → navegación → logout.
 
 ---
 
-## 🔍 Actividad 5: Búsqueda de Pokémon con POKEAPI
+## 🧭 Actividad 4 · Historial, restauración de scroll y foco
 
-**Descripción:**  
-Integración completa con la API pública de Pokémon para búsqueda de información, incluyendo manejo de errores y visualización de datos.
+**Descripción**  
+La app respeta el historial nativo, devuelve el foco a elementos relevantes y recuerda la posición de scroll en listados largos.
 
-**Objetivos:**
-- Interpretación de consultas del usuario (nombres y números)
-- Consulta a la POKEAPI
-- Formato de respuesta del chatbot
-- Manejo de errores y Pokémon no encontrados
-- Integración natural en el flujo de chat
-- Uso coherente de la estructura del proyecto
+**Objetivos**
+- `App.jsx` maneja `popstate` para reconstruir la vista/params.
+- `ConversationsView` usa `src/services/scroll.js` y enfoca automáticamente el buscador.
+- Cada vista define puntos de foco (`useRef` + `focus({ preventScroll: true })`).
 
-**Archivos principales:** `src/services/pokeapi.js`, `src/components/Chatbot/PokemonCard.jsx`, `src/components/Chatbot/ChatInterface.jsx`
+**Archivos principales** `src/App.jsx`, `src/components/Views/ConversationsView.jsx`, `src/components/Views/ConversationView.jsx`, `src/components/Views/PokedexView.jsx`, `src/services/scroll.js`
 
-**Funcionalidades implementadas:**
-- Búsqueda por nombre o número de Pokémon
-- Integración con POKEAPI real
-- Tarjetas visuales de información de Pokémon
-- Manejo de errores amigable
-- Indicador "Pensando..." durante búsquedas
-- Scroll interno en el área de mensajes
-- Validación de entrada del usuario
+**Funcionalidades implementadas**
+- Botones atrás/adelante vuelven al estado exacto (incluyendo filtros).
+- El listado de conversaciones restaura el scroll al volver desde un detalle.
+- Chat, listados y Pokédex colocan el foco en un elemento significativo.
 
-**Pruebas realizadas (GIF):**
-
-![Búsqueda por nombre - Pikachu](src/assets/images/gifs/ejercicio5.1.gif)  
-![Búsqueda por número - Gengar (#094)](src/assets/images/gifs/ejercicio5.2.gif)  
-![Manejo de errores - Pokémon inexistente](src/assets/images/gifs/ejercicio5.3.gif)
+> 📹 GIF pendiente: bajar scroll → abrir detalle → volver → scroll restaurado.
 
 ---
 
-## 🗂️ Estructura del Proyecto
+## ⚠️ Actividad 5 · Errores, 404 y estados de carga homogéneos
 
+**Descripción**  
+Se estandarizan los estados de carga y error y se añade una vista 404 para rutas inexistentes.
+
+**Objetivos**
+- Componentes `Loading`, `ErrorBlock` y `NotFoundView` reutilizables.
+- Manejadores de error en POKEAPI y servicios de conversaciones.
+- Documentar estilos en `src/styles/layout.css` y `src/components/chatbot.css`.
+
+**Archivos principales** `src/components/Feedback/*.jsx`, `src/components/Views/NotFoundView.jsx`, `src/components/Views/PokedexView.jsx`, `src/components/Views/ConversationsView.jsx`, `src/styles/layout.css`
+
+**Funcionalidades implementadas**
+- Mensajes amigables cuando falla la API o no existe la conversación.
+- Vista 404 con enlace rápido para volver al inicio.
+- Estados “Cargando…” homogéneos en listados y Pokédex.
+
+> 📹 GIFs pendientes:  
+> 1. Entrar a una URL inexistente → 404 → volver a inicio.  
+> 2. Forzar fallo en POKEAPI y mostrar el bloque de error.
+
+---
+
+## 🧵 Actividad 6 · Deep-linking y acciones programáticas de conversación
+
+**Descripción**  
+El detalle de conversación soporta abrir una URL externa, duplicar, crear y borrar conversaciones actualizando tanto UI como base de datos.
+
+**Objetivos**
+- Servicio real (`src/services/conversations.js`) que consume la API Express/MySQL.
+- Vista de detalle con duplicar/borrar + estados vacíos.
+- `ChatView` y `ChatInterface` preservan la conversación activa entre pestañas.
+
+**Archivos principales** `src/components/Views/ConversationView.jsx`, `src/components/Views/ConversationsView.jsx`, `src/components/Chatbot/*.jsx`, `src/services/conversations.js`, `server/routes/conversations.js`, `src/services/activeConversation.js`
+
+**Funcionalidades implementadas**
+- Abrir `?view=conversation&id=...` desde otra pestaña carga todo el historial.
+- Botón “Nueva conversación” limpia el chat; duplicar crea un `... (copia)` y navega automáticamente.
+- Si el ID no existe, muestra CTA para volver al listado.
+
+> 📹 GIFs pendientes:  
+> 1. Copiar URL de una conversación → pegar en otra pestaña → historial cargado.  
+> 2. Borrar una conversación → volver al listado.
+
+---
+
+## 🗄️ Backend y base de datos (HeidiSQL/MySQL)
+
+- El esquema completo vive en `database/schema.sql`. Incluye `users`, `sessions`, `conversations`, `messages`, `conversation_shares` y dos vistas para reportes.
+- El backend Express (`server/index.js`) expone:
+  - `/api/auth/login` para validar credenciales (texto plano o hashes bcrypt).
+  - `/api/conversations` (GET/POST/DELETE) y `/messages`/`/duplicate` para gestionar el histórico.
+- Archivo `.env.example` describe las variables necesarias (`DB_HOST`, `DB_USER`, `DEFAULT_USER_ID`, etc.).
+- `server/README.md` documenta cómo levantarlo con `npm run server`.
+
+---
+
+## 🗂️ Estructura actual del proyecto
 ```
-SPRINT4/
+SPRINT5/
+├── database/
+│   ├── README.md                # Pasos para restaurar el schema en HeidiSQL
+│   └── schema.sql
+├── server/
+│   ├── index.js                 # Express + rutas API
+│   ├── db.js
+│   ├── routes/
+│   │   ├── auth.js
+│   │   └── conversations.js
+│   └── utils/
+│       └── conversationHelpers.js
 ├── src/
 │   ├── components/
+│   │   ├── Auth/
 │   │   ├── Chatbot/
-│   │   │   ├── ChatInterface.jsx
-│   │   │   ├── ChatWindow.jsx
-│   │   │   ├── MessageInput.jsx
-│   │   │   └── MessageList.jsx
-│   │   └── chatbot.css
+│   │   ├── Feedback/
+│   │   ├── Layout/
+│   │   ├── Navigation/
+│   │   └── Views/
 │   ├── services/
-│   │   └── lmstudio.js
+│   │   ├── activeConversation.js
+│   │   ├── auth.js
+│   │   ├── conversations.js
+│   │   ├── lmstudio.js
+│   │   ├── pokeapi.js
+│   │   ├── routes.js
+│   │   ├── scroll.js
+│   │   ├── storage.js
+│   │   └── url-state.md/js
 │   ├── styles/
+│   │   ├── auth.css
 │   │   └── layout.css
 │   ├── assets/
 │   │   ├── icons/
-│   │   │   └── bubblybot-icon.svg
-│   │   └── images/
-│   │       ├── bubblybot-logo.svg
-│   │       └── gifs/
-│   │           ├── ejercicio1.png
-│   │           ├── ejercicio2.png
-│   │           ├── ejercicio3.png
-│   │           ├── ejercicio3.1.png
-│   │           ├── ejercicio4.gif
-│   │           ├── ejercicio5.1.gif
-│   │           ├── ejercicio5.2.gif
-│   │           └── ejercicio5.3.gif
-│   ├── public/
-│   │   ├── favicon.svg
-│   │   └── vite.svg
+│   │   └── images/gifs/
 │   ├── App.jsx
-│   ├── App.css
 │   ├── main.jsx
 │   └── index.css
+├── .env.example
 ├── package.json
 ├── package-lock.json
 ├── vite.config.js
 ├── eslint.config.js
-├── index.html
-├── README.md
-└── INSTRUCCIONES_USO.md
+├── GUIA_PRUEBAS_ACTIVIDADES.md
+└── README.md
 ```
 
 ---
 
-## 🚀 Instalación y Uso
+## 🚀 Instalación y ejecución
 
-**Requisitos previos:** Node.js (≥16), npm o yarn, LM Studio configurado.
+**Requisitos**: Node.js ≥ 18, MySQL/MariaDB accesible desde HeidiSQL, LM Studio (para el servicio de chat) y un navegador moderno.
 
-```bash
-# Navegar al directorio del proyecto
-cd SPRINT4
+1. **Restaurar la base de datos**
+   ```bash
+   # Abrir HeidiSQL, ejecutar database/schema.sql y ajusta usuarios/contraseñas
+   ```
+2. **Configurar variables de entorno**
+   ```bash
+   cp .env.example .env
+   # Edita .env con host, usuario y contraseña reales de MySQL
+   ```
+3. **Instalar dependencias**
+   ```bash
+   npm install
+   ```
+4. **Levantar backend y frontend (en terminales separadas)**
+   ```bash
+   npm run server   # API Express -> http://localhost:4000
+   npm run dev      # Frontend Vite -> http://localhost:5173
+   ```
+5. **LM Studio**  
+   - Ejecuta un modelo compatible y deja el servidor en `127.0.0.1:1234`.  
+   - El cliente llama vía proxy a `/api/lmstudio/*` (configurado en `vite.config.js`).
 
-# Instalar dependencias
-npm install
-
-# Ejecutar el servidor de desarrollo
-npm run dev
-```
-
-**Acceso:** `http://localhost:5173` (o el puerto que indique Vite)  
-**Nota:** Ejecuta LM Studio en el puerto 1234 antes de usar el chatbot.
+> Para producción, construye con `npm run build` y sirve la carpeta `dist/`. El backend puede alojarse en la misma máquina o en un servicio Node/PM2 apuntando a la misma base de datos.
 
 ---
 
-## 📋 Tecnologías Utilizadas
-
-- **Frontend:** React 19 + Vite
-- **Estilos:** CSS3 con Flexbox y Grid
-- **API:** LM Studio (OpenAI-compatible) y POKEAPI
-- **Herramientas:** Node.js, npm, ESLint
-- **Desarrollo:** Servidor de desarrollo Vite
+## 🧪 Evidencias pendientes
+- GIFs de cada actividad (ver lista en `GUIA_PRUEBAS_ACTIVIDADES.md`). Guárdalos en `src/assets/images/gifs/` con los nombres que corresponden.
+- Capturas/explicaciones nuevas en este README una vez generes los GIFs definitivos.
 
 ---
 
-✍️ **Autor:** *Javier Manzano Oliveros*  
-📆 **Fecha:** *2025*  
-🏫 **Módulo:** *Entorno Cliente – 2º DAW*  
-🎯 **Proyecto:** *Chatbot BubblyBot con React*
+## ✅ Estado actual
+- ✓ Navegación funcional y sincronizada con URL.  
+- ✓ Guards + login real con tabla `users`.  
+- ✓ Persistencia de conversaciones en MySQL + deep-linking.  
+- ✓ Manejo de estados de carga, errores y 404.  
+- ⏳ Falta solamente registrar la evidencia visual (GIFs) y ajustar este README si se añaden nuevas capturas.
+
+---
+
+✍️ **Autor:** Javier Manzano Oliveros · 2º DAW – Entorno Cliente · 2025

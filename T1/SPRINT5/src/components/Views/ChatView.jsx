@@ -1,27 +1,59 @@
-import React, { useState, useCallback } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import ChatWindow from '../Chatbot/ChatWindow';
-import { createConversation } from '../../services/conversations';
+import {
+  getActiveConversationId,
+  setActiveConversationId,
+  clearActiveConversationId,
+} from '../../services/activeConversation';
 
-const ChatView = ({ navigate }) => {
-  const [conversationId, setConversationId] = useState(null);
+const ChatView = ({ session }) => {
+  const userId = session?.user?.id ?? null;
+  const initialConversationId = useMemo(() => {
+    if (!userId) {
+      return null;
+    }
+    return getActiveConversationId(userId);
+  }, [userId]);
+
+  const [conversationId, setConversationId] = useState(initialConversationId);
+
+  useEffect(() => {
+    if (!userId) {
+      setConversationId(null);
+      return;
+    }
+
+    setConversationId(getActiveConversationId(userId));
+  }, [userId]);
+
+  const persistConversation = useCallback(
+    (id) => {
+      if (!userId) {
+        return;
+      }
+
+      if (id) {
+        setActiveConversationId(userId, id);
+      } else {
+        clearActiveConversationId(userId);
+      }
+    },
+    [userId],
+  );
 
   const handleNewConversation = useCallback(async () => {
-    try {
-      // Resetear primero para que el chat se limpie
-      setConversationId(null);
-      // Pequeño delay para asegurar que el reset se procese
-      await new Promise(resolve => setTimeout(resolve, 100));
-      // Crear nueva conversación vacía
-      const newConversation = await createConversation([]);
-      setConversationId(newConversation.id);
-    } catch (error) {
-      console.error('Error al crear nueva conversación:', error);
-    }
-  }, []);
+    setConversationId(null);
+    persistConversation(null);
+    await new Promise((resolve) => setTimeout(resolve, 100));
+  }, [persistConversation]);
 
-  const handleConversationCreated = useCallback((id) => {
-    setConversationId(id);
-  }, []);
+  const handleConversationCreated = useCallback(
+    (id) => {
+      setConversationId(id);
+      persistConversation(id);
+    },
+    [persistConversation],
+  );
 
   return (
     <section className="view-section" aria-labelledby="chat-view-title">
@@ -43,7 +75,7 @@ const ChatView = ({ navigate }) => {
       </header>
 
       <div className="view-content">
-        <ChatWindow 
+        <ChatWindow
           conversationId={conversationId}
           onConversationCreated={handleConversationCreated}
         />
@@ -53,4 +85,3 @@ const ChatView = ({ navigate }) => {
 };
 
 export default ChatView;
-

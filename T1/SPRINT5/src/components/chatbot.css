@@ -223,6 +223,24 @@
   font-size: 0.9rem;
 }
 
+.chat-info,
+.chat-warning {
+  margin-bottom: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.chat-info {
+  background-color: #eef2ff;
+  color: #3730a3;
+}
+
+.chat-warning {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
 /* Área de entrada */
 .message-input {
   padding: 1rem;
