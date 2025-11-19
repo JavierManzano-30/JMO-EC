@@ -1,7 +1,11 @@
 import React from 'react';
 import './styles/layout.css';
 import './App.css';
+<<<<<<< Updated upstream:T1/SPRINT4/src/App.jsx
 import bubblybotLogo from './assets/images/bubblybot-logo.svg';
+=======
+import bubblybotLogo from './public/assets/images/bubblybot-logo.svg';
+>>>>>>> Stashed changes:T1/SPRINT4/pokemon-chatbot/src/App.jsx
 import ChatWindow from './components/Chatbot/ChatWindow';
 
 function App() {

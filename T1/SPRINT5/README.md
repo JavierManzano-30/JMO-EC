@@ -21,7 +21,8 @@ Definir el layout general (cabecera + navegación + vistas) y todas las pantalla
 - Cabecera persistente con identidad BubblyBot y estado de sesión.
 - Contenedores `Chat`, `Conversations`, `Conversation`, `Pokedex`, `Settings` y `Login`.
 
-> 📹 GIF pendiente: recorrido completo por las vistas usando los botones de navegación.
+**Pruebas realizadas (GIF):**  
+![Actividad 1](src/assets/images/gifs/ejercicio1.gif)
 
 ---
 
@@ -42,9 +43,8 @@ Sin usar React Router: la URL refleja qué vista está activa (`view`), qué fil
 - Abrir `?view=conversation&id=...` carga la conversación al instante.
 - Filtros y orden se restauran tras recargar o navegar con atrás/adelante.
 
-> 📹 GIFs pendientes:  
-> 1. Filtrar → recargar → estado intacto.  
-> 2. Abrir directamente una conversación por URL.
+**Pruebas realizadas (GIF):**  
+![Actividad 2](src/assets/images/gifs/ejercicio2.gif)
 
 ---
 
@@ -66,7 +66,8 @@ Sólo la vista pública (Login) es accesible sin sesión. El resto queda bloquea
 - Tras login correcto se redirige a `chat` y se muestran las rutas protegidas.
 - Logout limpia sesión y conversación activa.
 
-> 📹 GIF pendiente: flujo completo sin sesión → bloqueo → login → navegación → logout.
+**Pruebas realizadas (GIF):**  
+![Actividad 3](src/assets/images/gifs/ejercicio3.gif)
 
 ---
 
@@ -87,7 +88,8 @@ La app respeta el historial nativo, devuelve el foco a elementos relevantes y re
 - El listado de conversaciones restaura el scroll al volver desde un detalle.
 - Chat, listados y Pokédex colocan el foco en un elemento significativo.
 
-> 📹 GIF pendiente: bajar scroll → abrir detalle → volver → scroll restaurado.
+**Pruebas realizadas (GIF):**  
+![Actividad 4](src/assets/images/gifs/ejercicio4.gif)
 
 ---
 
@@ -108,9 +110,8 @@ Se estandarizan los estados de carga y error y se añade una vista 404 para ruta
 - Vista 404 con enlace rápido para volver al inicio.
 - Estados “Cargando…” homogéneos en listados y Pokédex.
 
-> 📹 GIFs pendientes:  
-> 1. Entrar a una URL inexistente → 404 → volver a inicio.  
-> 2. Forzar fallo en POKEAPI y mostrar el bloque de error.
+**Pruebas realizadas (GIF):**  
+![Actividad 5](src/assets/images/gifs/ejercicio5.gif)
 
 ---
 
@@ -131,9 +132,8 @@ El detalle de conversación soporta abrir una URL externa, duplicar, crear y bor
 - Botón “Nueva conversación” limpia el chat; duplicar crea un `... (copia)` y navega automáticamente.
 - Si el ID no existe, muestra CTA para volver al listado.
 
-> 📹 GIFs pendientes:  
-> 1. Copiar URL de una conversación → pegar en otra pestaña → historial cargado.  
-> 2. Borrar una conversación → volver al listado.
+**Pruebas realizadas (GIF):**  
+![Actividad 6](src/assets/images/gifs/ejercicio6.gif)
 
 ---
 
@@ -230,9 +230,9 @@ SPRINT5/
 
 ---
 
-## 🧪 Evidencias pendientes
-- GIFs de cada actividad (ver lista en `GUIA_PRUEBAS_ACTIVIDADES.md`). Guárdalos en `src/assets/images/gifs/` con los nombres que corresponden.
-- Capturas/explicaciones nuevas en este README una vez generes los GIFs definitivos.
+## 🧪 Evidencias
+- Los GIFs para cada actividad están disponibles en `src/assets/images/gifs/`.
+- `GUIA_PRUEBAS_ACTIVIDADES.md` detalla los pasos verificados en cada grabación.
 
 ---
 
@@ -241,7 +241,7 @@ SPRINT5/
 - ✓ Guards + login real con tabla `users`.  
 - ✓ Persistencia de conversaciones en MySQL + deep-linking.  
 - ✓ Manejo de estados de carga, errores y 404.  
-- ⏳ Falta solamente registrar la evidencia visual (GIFs) y ajustar este README si se añaden nuevas capturas.
+- ✓ Evidencias grabadas y referenciadas en el README.
 
 ---
 

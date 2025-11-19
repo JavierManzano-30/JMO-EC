@@ -150,7 +150,7 @@ const ConversationsView = ({ navigate }) => {
     }
   }, [scrollKey]);
 
-  if (isLoading) {
+  if (isLoading && conversations.length === 0) {
     return (
       <section className="view-section" aria-labelledby="conversations-view-title">
         <header className="view-header">
