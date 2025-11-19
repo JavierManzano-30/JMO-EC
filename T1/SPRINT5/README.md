@@ -189,7 +189,7 @@ SPRINT5/
 │   ├── App.jsx
 │   ├── main.jsx
 │   └── index.css
-├── .env.example
+├── .env
 ├── package.json
 ├── package-lock.json
 ├── vite.config.js
