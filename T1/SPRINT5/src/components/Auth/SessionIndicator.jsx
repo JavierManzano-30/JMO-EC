@@ -3,7 +3,8 @@ import '../../styles/auth.css';
 
 const SessionIndicator = ({ session, onLogout, onRequireLogin }) => {
   const isAuthenticated = Boolean(session?.isAuthenticated);
-  const displayName = session?.user?.name || 'Invitado';
+  const displayName =
+    session?.user?.displayName || session?.user?.username || session?.user?.name || 'Invitado';
 
   return (
     <div className="session-indicator" role="status">

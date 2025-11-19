@@ -7,8 +7,8 @@ import {
 } from '../../services/lmstudio';
 import {
   createConversation,
-  updateConversation,
   addMessageToConversation,
+  getConversationById,
 } from '../../services/conversations';
 
 const initialMessages = [
@@ -24,24 +24,67 @@ const ChatInterface = ({ conversationId: externalConversationId = null, onConver
   const [messages, setMessages] = useState(initialMessages);
   
   const [isThinking, setIsThinking] = useState(false);
+  const [isLoadingHistory, setIsLoadingHistory] = useState(false);
+  const [historyError, setHistoryError] = useState('');
   const [currentConversationId, setCurrentConversationId] = useState(externalConversationId);
-  const [isInitialized, setIsInitialized] = useState(false);
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
 
-  // Resetear mensajes cuando cambia la conversación externa
+  const adaptHistoryMessages = (history = []) =>
+    history.map((msg) => ({
+      id: msg.id,
+      text: msg.text,
+      sender: msg.sender === 'user' ? 'user' : 'bot',
+      timestamp:
+        msg.timestamp ||
+        (msg.createdAt ? new Date(msg.createdAt).toLocaleTimeString() : new Date().toLocaleTimeString()),
+    }));
+
+  // Cargar historial cuando cambia el ID externo
   useEffect(() => {
-    if (externalConversationId && externalConversationId !== currentConversationId) {
-      // Nueva conversación externa: resetear todo
-      setMessages([...initialMessages]);
-      setCurrentConversationId(externalConversationId);
-      setIsInitialized(false);
-    } else if (externalConversationId === null && currentConversationId) {
-      // Si se resetea a null, limpiar para nueva conversación
-      setMessages([...initialMessages]);
-      setCurrentConversationId(null);
-      setIsInitialized(false);
-    }
+    let ignore = false;
+
+    const loadHistory = async () => {
+      if (!externalConversationId) {
+        setMessages([...initialMessages]);
+        setCurrentConversationId(null);
+        setHistoryError('');
+        return;
+      }
+
+      setIsLoadingHistory(true);
+      setHistoryError('');
+
+      try {
+        const conversation = await getConversationById(externalConversationId);
+        if (ignore) {
+          return;
+        }
+
+        if (conversation && conversation.messages && conversation.messages.length > 0) {
+          setMessages(adaptHistoryMessages(conversation.messages));
+        } else {
+          setMessages([...initialMessages]);
+        }
+        setCurrentConversationId(externalConversationId);
+      } catch (error) {
+        if (!ignore) {
+          console.error('Error al cargar conversación previa en el chat:', error);
+          setHistoryError('No se pudo cargar la conversación previa. Puedes continuar escribiendo.');
+          setMessages([...initialMessages]);
+          setCurrentConversationId(null);
+        }
+      } finally {
+        if (!ignore) {
+          setIsLoadingHistory(false);
+        }
+      }
+    };
+
+    loadHistory();
+    return () => {
+      ignore = true;
+    };
   }, [externalConversationId]);
 
   const scrollToBottom = () => {
@@ -82,8 +125,6 @@ const ChatInterface = ({ conversationId: externalConversationId = null, onConver
         const newConversation = await createConversation(initialMessagesToSave);
         conversationIdToUse = newConversation.id;
         setCurrentConversationId(conversationIdToUse);
-        setIsInitialized(true);
-        
         if (onConversationCreated) {
           onConversationCreated(newConversation.id);
         }
@@ -173,6 +214,16 @@ const ChatInterface = ({ conversationId: externalConversationId = null, onConver
 
   return (
     <div className="chat-interface">
+      {isLoadingHistory && (
+        <div className="chat-info" role="status">
+          Cargando conversación guardada...
+        </div>
+      )}
+      {historyError && (
+        <div className="chat-warning" role="alert">
+          {historyError}
+        </div>
+      )}
       <MessageList messages={messages} isThinking={isThinking} />
       <div ref={messagesEndRef} />
       <MessageInput onSendMessage={handleSendMessage} disabled={isThinking} ref={inputRef} />

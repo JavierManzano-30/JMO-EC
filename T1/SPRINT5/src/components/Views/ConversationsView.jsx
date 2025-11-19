@@ -1,10 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import {
-  getAllConversations,
-  filterConversations,
-  sortConversations,
-  subscribeToConversations,
-} from '../../services/conversations';
+import { getAllConversations } from '../../services/conversations';
 import { mergeSearchParams, readSearchParams } from '../../services/urlState';
 import { getScrollPosition, setScrollPosition } from '../../services/scroll';
 import Loading from '../Feedback/Loading';
@@ -46,36 +41,6 @@ const ConversationsView = ({ navigate }) => {
     }
   }, []);
 
-  // Cargar conversaciones al montar
-  useEffect(() => {
-    const loadConversations = async () => {
-      setIsLoading(true);
-      setError(null);
-      try {
-        const allConversations = await getAllConversations();
-        setConversations(allConversations);
-      } catch (err) {
-        console.error('Error al cargar conversaciones:', err);
-        setError('No se pudieron cargar las conversaciones. Por favor, intenta recargar la página.');
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    loadConversations();
-
-    // Suscribirse a cambios en las conversaciones
-    const unsubscribe = subscribeToConversations((updatedConversations) => {
-      setConversations(updatedConversations);
-    });
-
-    return () => {
-      if (unsubscribe) {
-        unsubscribe();
-      }
-    };
-  }, []);
-
   useEffect(() => {
     syncFromUrl();
     const handlePopstate = () => {
@@ -90,10 +55,37 @@ const ConversationsView = ({ navigate }) => {
     searchInputRef.current?.focus({ preventScroll: true });
   }, []);
 
-  const filteredConversations = useMemo(() => {
-    const filtered = filterConversations(conversations, searchTerm);
-    return sortConversations(filtered, sortOrder);
-  }, [conversations, searchTerm, sortOrder]);
+  const fetchConversations = useCallback(() => {
+    const controller = new AbortController();
+    setIsLoading(true);
+    setError(null);
+
+    getAllConversations({
+      q: searchTerm.trim(),
+      sort: sortOrder,
+      signal: controller.signal,
+    })
+      .then((results) => {
+        setConversations(results);
+      })
+      .catch((err) => {
+        if (err.name === 'AbortError') {
+          return;
+        }
+        console.error('Error al cargar conversaciones:', err);
+        setError(err.message || 'No se pudieron cargar las conversaciones. Intenta de nuevo.');
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+
+    return () => controller.abort();
+  }, [searchTerm, sortOrder]);
+
+  useEffect(() => {
+    const cleanup = fetchConversations();
+    return cleanup;
+  }, [fetchConversations]);
 
   const handleSearchChange = (event) => {
     const value = event.target.value;
@@ -149,7 +141,7 @@ const ConversationsView = ({ navigate }) => {
     } else {
       window.requestAnimationFrame(restorePosition);
     }
-  }, [scrollKey, filteredConversations.length]);
+  }, [scrollKey, conversations.length]);
 
   useEffect(() => () => {
     const container = scrollContainerRef.current;
@@ -229,7 +221,7 @@ const ConversationsView = ({ navigate }) => {
         </form>
 
         <ul className="conversation-list">
-          {filteredConversations.map((conversation) => (
+          {conversations.map((conversation) => (
             <li key={conversation.id} className="conversation-item">
               <h3>{conversation.title}</h3>
               <p>{conversation.summary}</p>
@@ -245,12 +237,12 @@ const ConversationsView = ({ navigate }) => {
               </div>
             </li>
           ))}
-          {filteredConversations.length === 0 && !isLoading && (
+          {conversations.length === 0 && !isLoading && (
             <li className="conversation-item conversation-item--empty">
               <p>
-                {conversations.length === 0
-                  ? 'No hay conversaciones guardadas aún. Comienza una nueva conversación en el chat.'
-                  : 'No hay conversaciones que coincidan con la búsqueda.'}
+                {searchTerm.trim()
+                  ? 'No hay conversaciones que coincidan con la búsqueda.'
+                  : 'No hay conversaciones guardadas aún. Comienza una nueva conversación en el chat.'}
               </p>
             </li>
           )}
