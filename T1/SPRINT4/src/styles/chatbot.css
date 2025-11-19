@@ -1,0 +1,521 @@
+/* Estilos específicos del chatbot */
+
+.chat-window {
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  max-height: 100%;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  margin: 0;
+  flex: 1;
+  min-height: 0;
+  padding: 0;
+}
+
+.chat-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: white;
+  border-radius: 20px 20px 0 0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.chatbot-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #4fc3f7 0%, #29b6f6 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(79, 195, 247, 0.3);
+  animation: bubble-float 3s ease-in-out infinite;
+}
+
+.bubble-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ffffff 0%, #f0f8ff 100%);
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.chatbot-info {
+  flex-grow: 1;
+}
+
+.chatbot-info h3 {
+  margin: 0 0 0.25rem 0;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.chatbot-info .status-indicator {
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+.chat-interface {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.message-list {
+  flex: 1;
+  padding: 1rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: #eef2f7;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-height: 0;
+  max-height: 100%;
+}
+
+.message {
+  display: flex;
+  animation: messageSlide 0.3s ease-out;
+}
+
+.message.user {
+  justify-content: flex-end;
+}
+
+.message.bot {
+  justify-content: flex-start;
+}
+
+.message-content {
+  max-width: 70%;
+  padding: 1rem;
+  border-radius: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.message.user .message-content {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-bottom-right-radius: 5px;
+}
+
+.message.bot .message-content {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  color: #2c3e50;
+  border-bottom-left-radius: 5px;
+  border: 1px solid #e9ecef;
+}
+
+.message-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+.sender-name {
+  font-weight: bold;
+}
+
+.timestamp {
+  font-style: italic;
+}
+
+.message-text {
+  line-height: 1.5;
+}
+
+/* Indicador de pensando */
+.thinking-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-style: italic;
+  color: #666;
+}
+
+.thinking-dots {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.thinking-dots span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #667eea;
+  animation: dot-pulse 1.5s infinite;
+}
+
+.thinking-dots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.thinking-dots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes dot-pulse {
+  0%, 80%, 100% {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+  40% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+<<<<<<<< Updated upstream:T1/SPRINT5/src/components/chatbot.css
+.thinking-text {
+  font-style: italic;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.chat-info,
+.chat-warning {
+  margin-bottom: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.chat-info {
+  background-color: #eef2ff;
+  color: #3730a3;
+}
+
+.chat-warning {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+========
+>>>>>>>> Stashed changes:T1/SPRINT4/src/styles/chatbot.css
+/* Área de entrada */
+.message-input {
+  padding: 1rem;
+  background-color: #ffffff;
+  border-top: 1px solid #e0e0e0;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+  flex-shrink: 0;
+  height: 80px; /* Altura fija para asegurar que siempre sea visible */
+}
+
+.input-form {
+  width: 100%;
+}
+
+.input-container {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-end;
+  width: 100%;
+}
+
+.message-text-input {
+  flex-grow: 1;
+  padding: 1rem 1.25rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 25px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s ease;
+  resize: none;
+  min-height: 50px;
+  max-height: 120px;
+  font-family: inherit;
+  width: calc(100% - 70px);
+}
+
+.message-text-input:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.message-text-input::placeholder {
+  color: #999;
+  font-style: italic;
+}
+
+.send-button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.send-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.send-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.send-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.send-icon {
+  font-size: 1.2rem;
+}
+
+/* Scrollbar personalizada */
+.message-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.message-list::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.message-list::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+.message-list::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+<<<<<<<< Updated upstream:T1/SPRINT5/src/components/chatbot.css
+========
+/* Estilos para la tarjeta de Pokémon */
+.pokemon-card {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  border-radius: 15px;
+  padding: 1.5rem;
+  margin-top: 1rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e9ecef;
+}
+
+.pokemon-header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.pokemon-image {
+  flex-shrink: 0;
+}
+
+.pokemon-sprite {
+  width: 120px;
+  height: 120px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  padding: 1rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.pokemon-info {
+  flex-grow: 1;
+}
+
+.pokemon-name {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #2c3e50;
+  margin: 0 0 0.5rem 0;
+  text-transform: capitalize;
+}
+
+.pokemon-number {
+  font-size: 1rem;
+  color: #6c757d;
+  margin: 0 0 1rem 0;
+  font-weight: 500;
+}
+
+.pokemon-types {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.type-badge {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Colores específicos para cada tipo de Pokémon */
+.type-normal { background: linear-gradient(135deg, #A8A878 0%, #9C9C63 100%); }
+.type-fire { background: linear-gradient(135deg, #F08030 0%, #DD6610 100%); }
+.type-water { background: linear-gradient(135deg, #6890F0 0%, #4A6FDD 100%); }
+.type-electric { background: linear-gradient(135deg, #F8D030 0%, #E6C020 100%); }
+.type-grass { background: linear-gradient(135deg, #78C850 0%, #5BA830 100%); }
+.type-ice { background: linear-gradient(135deg, #98D8D8 0%, #7BC5C5 100%); }
+.type-fighting { background: linear-gradient(135deg, #C03028 0%, #A02018 100%); }
+.type-poison { background: linear-gradient(135deg, #A040A0 0%, #802080 100%); }
+.type-ground { background: linear-gradient(135deg, #E0C068 0%, #C8A050 100%); }
+.type-flying { background: linear-gradient(135deg, #A890F0 0%, #8A70DD 100%); }
+.type-psychic { background: linear-gradient(135deg, #F85888 0%, #E04068 100%); }
+.type-bug { background: linear-gradient(135deg, #A8B820 0%, #8A9A10 100%); }
+.type-rock { background: linear-gradient(135deg, #B8A038 0%, #988020 100%); }
+.type-ghost { background: linear-gradient(135deg, #705898 0%, #504078 100%); }
+.type-dragon { background: linear-gradient(135deg, #7038F8 0%, #5020D8 100%); }
+.type-dark { background: linear-gradient(135deg, #705848 0%, #503828 100%); }
+.type-steel { background: linear-gradient(135deg, #B8B8D0 0%, #9898B0 100%); }
+.type-fairy { background: linear-gradient(135deg, #EE99AC 0%, #D5798C 100%); }
+
+.pokemon-details {
+  margin-bottom: 1.5rem;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.detail-row:last-child {
+  border-bottom: none;
+}
+
+.detail-label {
+  font-weight: 600;
+  color: #495057;
+}
+
+.detail-value {
+  font-weight: 500;
+  color: #2c3e50;
+}
+
+.pokemon-stats {
+  margin-top: 1.5rem;
+}
+
+.pokemon-stats h4 {
+  margin: 0 0 1rem 0;
+  color: #2c3e50;
+  font-size: 1.2rem;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+}
+
+.stat-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 10px;
+  border: 1px solid #dee2e6;
+}
+
+.stat-name {
+  font-weight: 600;
+  color: #495057;
+  font-size: 0.9rem;
+}
+
+.stat-value {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+>>>>>>>> Stashed changes:T1/SPRINT4/src/styles/chatbot.css
+/* Responsive para móviles */
+@media (max-width: 768px) {
+  .message {
+    max-width: 85%;
+  }
+  
+  .message-content {
+    padding: 0.75rem;
+  }
+  
+  .message-text-input {
+    font-size: 16px; /* Evita zoom en iOS */
+  }
+<<<<<<<< Updated upstream:T1/SPRINT5/src/components/chatbot.css
+========
+  
+  .pokemon-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.75rem;
+  }
+  
+  .pokemon-sprite {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Animaciones */
+@keyframes messageSlide {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bubble-float {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+  }
+  25% {
+    transform: translateY(-8px) scale(1.05);
+  }
+  50% {
+    transform: translateY(-12px) scale(1.02);
+  }
+  75% {
+    transform: translateY(-6px) scale(1.03);
+  }
+>>>>>>>> Stashed changes:T1/SPRINT4/src/styles/chatbot.css
+}
