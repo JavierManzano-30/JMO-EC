@@ -57,27 +57,13 @@ const ChatView = ({ session }) => {
 
   return (
     <section className="view-section" aria-labelledby="chat-view-title">
-      <header className="view-header">
-        <div className="view-header__content">
-          <div>
-            <h2 id="chat-view-title">Inicio / Chat</h2>
-            <p>Habla con BubblyBot en la vista principal del asistente.</p>
-          </div>
-          <button
-            type="button"
-            className="primary-button"
-            onClick={handleNewConversation}
-            title="Iniciar una nueva conversación"
-          >
-            Nueva conversación
-          </button>
-        </div>
-      </header>
-
       <div className="view-content">
         <ChatWindow
           conversationId={conversationId}
           onConversationCreated={handleConversationCreated}
+          title="Inicio / Chat"
+          subtitle="Habla con BubblyBot en la vista principal del asistente."
+          onNewConversation={handleNewConversation}
         />
       </div>
     </section>
