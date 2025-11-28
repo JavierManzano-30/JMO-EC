@@ -1,0 +1,25 @@
+version: "3.9"
+
+services:
+  backend:
+    build:
+      context: ../backend
+      dockerfile: ../docker/backend.Dockerfile
+    ports:
+      - "3001:3001"
+    volumes:
+      - ../backend/output:/app/output
+      - ../backend/storage:/app/storage
+    environment:
+      - PORT=3001
+
+  frontend:
+    build:
+      context: ../frontend
+      dockerfile: ../docker/frontend.Dockerfile
+    ports:
+      - "8978:8978"
+    environment:
+      - VITE_API_URL=http://localhost:3001
+    depends_on:
+      - backend
