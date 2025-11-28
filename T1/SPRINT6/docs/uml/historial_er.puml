@@ -1,0 +1,15 @@
+@startuml
+title Modelo Entidad-Relación – Historial de Ejecuciones
+
+entity "Execution" {
+  * id : string
+  * projectName : string
+  * createdAt : datetime
+  * totalFiles : int
+  * totalClasses : int
+  * totalMethods : int
+  * mdPath : string
+  * pdfPath : string
+}
+
+@enduml

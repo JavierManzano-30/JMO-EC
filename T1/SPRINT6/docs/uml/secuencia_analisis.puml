@@ -1,0 +1,36 @@
+@startuml
+title Secuencia: Análisis de Proyecto Java
+
+actor Usuario
+participant Frontend
+participant Backend
+participant "Analizador Java" as Analyzer
+participant "Generador UML/Markdown/PDF" as Generator
+participant "IA Local" as AI
+participant "Historial" as History
+
+Usuario -> Frontend: Sube proyecto ZIP
+Frontend -> Backend: POST /api/analyze + archivo
+
+Backend -> Analyzer: Analizar código .java
+Analyzer --> Backend: Estructura + estadísticas
+
+Backend -> Generator: Crear UML (.puml)
+Generator --> Backend: UML generado
+
+Backend -> Generator: Crear Markdown (.md)
+Generator --> Backend: Markdown base
+
+Backend -> AI: Enriquecer texto
+AI --> Backend: Contenido enriquecido
+
+Backend -> Generator: Convertir a PDF
+Generator --> Backend: PDF final
+
+Backend -> History: Guardar ejecución
+History --> Backend: OK
+
+Backend --> Frontend: Resultado + ID
+Frontend --> Usuario: Mostrar documentación generada
+
+@enduml

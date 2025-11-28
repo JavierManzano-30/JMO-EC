@@ -1,0 +1,17 @@
+@startuml
+title Máquina de Estados - Frontend React
+
+[*] --> Idle
+
+Idle --> ArchivoSeleccionado : onChange archivo
+ArchivoSeleccionado --> Analizando : onSubmit
+Analizando --> Exito : análisis completado
+Analizando --> Error : error en petición o análisis
+
+Exito --> ArchivoSeleccionado : seleccionar nuevo archivo
+Error --> ArchivoSeleccionado : reintentar
+
+Exito --> Idle : reiniciar
+Error --> Idle : reiniciar
+
+@enduml

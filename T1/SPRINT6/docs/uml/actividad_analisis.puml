@@ -1,0 +1,28 @@
+@startuml
+title Actividad - Proceso de Análisis del Proyecto
+
+start
+
+:Usuario sube ZIP desde el frontend;
+:Enviar ZIP al backend mediante /api/analyze;
+
+:Descomprimir proyecto Java;
+
+:Analizar archivos .java;
+:Extraer clases, métodos y paquetes;
+
+:Generar diagramas UML (PlantUML);
+
+:Generar documentación Markdown;
+
+:Enviar descripción a IA local (LMStudio);
+:Recibir texto enriquecido y añadirlo al MD;
+
+:Convertir Markdown final a PDF (Pandoc);
+
+:Guardar ejecución en historial;
+
+:Responder al frontend con ID + estadísticas;
+
+stop
+@enduml

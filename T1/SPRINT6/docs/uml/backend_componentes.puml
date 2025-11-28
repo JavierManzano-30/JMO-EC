@@ -1,0 +1,44 @@
+@startuml
+title Componentes Backend – Sprint 6
+
+package "Backend Node.js" {
+  
+  component "API REST" as API
+
+  package "Rutas" {
+    component "/api/analyze"
+    component "/api/history"
+    component "/api/docs/:id"
+  }
+
+  package "Analyzers" {
+    component "javaAnalyzer.js"
+  }
+
+  package "Generators" {
+    component "plantumlGenerator.js"
+    component "markdownGenerator.js"
+    component "pdfGenerator.js"
+  }
+
+  package "Services" {
+    component "aiService.js"
+  }
+
+  package "Storage" {
+    component "historyStore.js"
+  }
+}
+
+API --> "/api/analyze"
+API --> "/api/history"
+API --> "/api/docs/:id"
+
+"/api/analyze" --> "javaAnalyzer.js"
+"/api/analyze" --> "plantumlGenerator.js"
+"/api/analyze" --> "markdownGenerator.js"
+"/api/analyze" --> "pdfGenerator.js"
+"/api/analyze" --> "aiService.js"
+"/api/analyze" --> "historyStore.js"
+
+@enduml

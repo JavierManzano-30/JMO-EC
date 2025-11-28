@@ -1,0 +1,36 @@
+@startuml
+title Arquitectura General – Sprint 6
+
+node "Usuario" as User
+
+node "Frontend\nReact + TailwindCSS" as FE {
+  component "Subida de ZIP" as Upload
+  component "Resultado Markdown/PDF" as Result
+  component "Historial de ejecuciones" as HistoryFE
+}
+
+node "Backend\nNode.js" as BE {
+  component "API REST" as API
+  component "/api/analyze" as Analyze
+  component "/api/history" as History
+  component "/api/docs/:id" as Docs
+}
+
+node "Analizadores Java" as Analyzer
+node "Generadores UML/Markdown/PDF" as Generators
+node "IA Local (LMStudio)" as AI
+node "Historial y Almacenamiento" as Storage
+
+User --> FE
+FE --> API
+
+API --> Analyze
+API --> History
+API --> Docs
+
+Analyze --> Analyzer
+Analyze --> Generators
+Analyze --> AI
+Analyze --> Storage
+
+@enduml
