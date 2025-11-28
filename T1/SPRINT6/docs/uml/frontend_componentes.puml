@@ -1,0 +1,34 @@
+@startuml
+title Componentes Frontend – Sprint 6
+
+package "Frontend React" {
+
+  component "App.jsx" as App
+
+  package "Componentes" {
+    component "ProjectSelector.jsx"
+    component "StatusBanner.jsx"
+    component "ResultView.jsx"
+    component "HistoryView.jsx"
+    component "Layout.jsx"
+  }
+
+  package "Hooks" {
+    component "useState"
+    component "useEffect"
+  }
+}
+
+App --> ProjectSelector.jsx
+App --> StatusBanner.jsx
+App --> ResultView.jsx
+App --> HistoryView.jsx
+App --> Layout.jsx
+
+ProjectSelector.jsx --> useState
+StatusBanner.jsx --> useState
+ResultView.jsx --> useState
+HistoryView.jsx --> useEffect
+App --> useEffect
+
+@enduml

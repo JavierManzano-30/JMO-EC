@@ -1,0 +1,34 @@
+@startuml
+title Diagrama de Despliegue - Infraestructura Docker
+
+node "Máquina Host" {
+
+  node "Docker Engine" {
+
+    node "Contenedor Backend" {
+      artifact "Node.js"
+      artifact "Java Runtime"
+      artifact "PlantUML"
+      artifact "Pandoc"
+      artifact "Backend API"
+    }
+
+    node "Contenedor Frontend" {
+      artifact "React + Vite"
+      artifact "TailwindCSS"
+      artifact "Servidor 8978"
+    }
+
+    node "Contenedor IA Local (LMStudio)" {
+      artifact "Modelo Local LLM"
+      artifact "API LMStudio"
+    }
+
+  }
+
+}
+
+"Contenedor Frontend" --> "Contenedor Backend" : HTTP (puerto 3000)
+"Contenedor Backend" --> "Contenedor IA Local (LMStudio)" : HTTP / IA Requests
+
+@enduml

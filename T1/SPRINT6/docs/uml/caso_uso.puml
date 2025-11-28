@@ -1,0 +1,29 @@
+@startuml
+title Caso de Uso - Generador de Documentación Java
+
+actor Usuario
+
+rectangle "Sistema" {
+
+  usecase "Subir proyecto Java (.zip)" as U1
+  usecase "Iniciar análisis" as U2
+  usecase "Generar UML" as U3
+  usecase "Generar Markdown" as U4
+  usecase "Enriquecer documentación con IA" as U5
+  usecase "Convertir a PDF" as U6
+  usecase "Descargar PDF o MD" as U7
+  usecase "Consultar historial" as U8
+
+}
+
+Usuario --> U1
+Usuario --> U2
+Usuario --> U7
+Usuario --> U8
+
+U2 --> U3
+U3 --> U4
+U4 --> U5
+U5 --> U6
+
+@enduml

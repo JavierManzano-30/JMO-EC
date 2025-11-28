@@ -1,0 +1,43 @@
+@startuml
+title Paquetes Backend - Organización Interna
+
+package "backend" {
+
+  package "routes" {
+    class AnalyzeRoute
+    class HistoryRoute
+    class DocsRoute
+  }
+
+  package "analyzers" {
+    class JavaAnalyzer
+  }
+
+  package "generators" {
+    class PlantUMLGenerator
+    class MarkdownGenerator
+    class PDFGenerator
+  }
+
+  package "services" {
+    class IAService
+  }
+
+  package "storage" {
+    class HistoryStore
+  }
+
+  package "config" {
+    class Config
+  }
+
+}
+
+AnalyzeRoute --> JavaAnalyzer
+AnalyzeRoute --> PlantUMLGenerator
+AnalyzeRoute --> MarkdownGenerator
+AnalyzeRoute --> PDFGenerator
+AnalyzeRoute --> IAService
+AnalyzeRoute --> HistoryStore
+
+@enduml
