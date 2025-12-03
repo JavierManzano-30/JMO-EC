@@ -1,0 +1,38 @@
+@startuml
+title Flujo General del Sistema (Diagrama de Actividad)
+
+start
+
+:Usuario selecciona proyecto (.zip);
+:Frontend valida el archivo;
+if (Archivo válido?) then (Sí)
+    :Enviar ZIP al backend\nPOST /api/analyze;
+else (No)
+    :Mostrar mensaje de error;
+    stop
+endif
+
+partition Backend {
+    :Descomprimir proyecto;
+    :Analizar archivos .java;\n(paquetes, clases, métodos)
+    :Generar estadísticas;
+    :Generar diagramas UML (.puml);
+    :Crear Markdown base (.md);
+    :Enviar resumen a IA local;
+    :Recibir texto enriquecido;
+    :Insertar contenido IA en el Markdown;
+    :Convertir Markdown a PDF;
+    :Guardar archivos y metadatos\nen historial;
+}
+
+:Devolver ID + estadísticas + rutas;
+:Mostrar resultados en el frontend;
+:Permitir descarga de PDF y Markdown;
+
+if (Usuario consulta historial?) then (Sí)
+    :Frontend solicita historial\nGET /api/history;
+    :Mostrar lista de ejecuciones;
+endif
+
+stop
+@enduml
