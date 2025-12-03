@@ -1,13 +1,4 @@
-Entendido.
-Aquí tienes **ÚNICAMENTE** el `README.md` del **backend**, limpio, sin nada más, y **listo para copiar y pegar**.
 
----
-
-# ✅ **README.md — Backend**
-
-*(Copia y pega tal cual en `SPRINT6/backend/README.md`)*
-
-````markdown
 # Backend — Generador Automático de Documentación para Proyectos Java
 
 Este directorio contiene el diseño técnico previsto del **backend** del sistema de generación automática de documentación para proyectos Java, correspondiente al Sprint 6 del módulo de Entorno Cliente.
