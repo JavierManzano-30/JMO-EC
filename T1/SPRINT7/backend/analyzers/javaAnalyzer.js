@@ -55,7 +55,7 @@ export async function analyzeProject(projectPath, runId = "analysis") {
     if (ext === ".java") {
       const content = await fs.promises.readFile(projectPath, "utf-8");
       const parsed = parseJavaFile(content);
-      const summary = { files: 1, packages: 1, classes: 1 };
+  const summary = { files: 1, packages: 1, classes: 1, totalMethods: methods.length };
       return {
         projectPath,
         classes: [{ file: projectPath, ...parsed }],
@@ -89,6 +89,7 @@ export async function analyzeProject(projectPath, runId = "analysis") {
     files: javaFiles.length,
     packages: new Set(classes.map((c) => c.package)).size,
     classes: classes.length,
+    totalMethods: classes.reduce((acc, c) => acc + c.methods.length, 0),
   };
 
   return {

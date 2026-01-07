@@ -1,1 +1,276 @@
-[]
+[
+  {
+    "id": "999b35f2-84b7-4e17-8ac3-c04008052f60",
+    "projectPath": "/app/uploads/34b7f415-866a-4713-b93f-c43d8719b708.zip",
+    "projectName": "2_trimestre.zip",
+    "analysisSummary": {
+      "files": 126,
+      "packages": 5,
+      "classes": 126,
+      "totalMethods": 431
+    },
+    "markdownPath": "/app/output/999b35f2-84b7-4e17-8ac3-c04008052f60/documentation.md",
+    "pdfPath": "/app/output/999b35f2-84b7-4e17-8ac3-c04008052f60/documentation.pdf",
+    "umlFiles": [
+      "/app/output/999b35f2-84b7-4e17-8ac3-c04008052f60/diagram.puml"
+    ],
+    "createdAt": "2026-01-07T20:08:40.882Z",
+    "status": "success"
+  },
+  {
+    "id": "593a8f2f-0245-4c64-b7a5-43c4a8e0727c",
+    "projectPath": "/app/uploads/731a8cca-d6e7-4e70-be86-849915762fed.zip",
+    "projectName": "2_trimestre.zip",
+    "analysisSummary": {
+      "files": 126,
+      "packages": 5,
+      "classes": 126,
+      "totalMethods": 431
+    },
+    "markdownPath": "/app/output/593a8f2f-0245-4c64-b7a5-43c4a8e0727c/documentation.md",
+    "pdfPath": "/app/output/593a8f2f-0245-4c64-b7a5-43c4a8e0727c/documentation.pdf",
+    "umlFiles": [
+      "/app/output/593a8f2f-0245-4c64-b7a5-43c4a8e0727c/diagram.puml"
+    ],
+    "createdAt": "2026-01-07T19:57:53.375Z",
+    "status": "success"
+  },
+  {
+    "id": "f30dd131-7e34-4792-a369-0c40e40e7501",
+    "projectPath": "/app/uploads/6d048b8d-4e81-4239-8934-fe740d02376f.zip",
+    "projectName": "2_trimestre.zip",
+    "analysisSummary": {
+      "files": 126,
+      "packages": 5,
+      "classes": 126,
+      "totalMethods": 431
+    },
+    "markdownPath": "/app/output/f30dd131-7e34-4792-a369-0c40e40e7501/documentation.md",
+    "pdfPath": "/app/output/f30dd131-7e34-4792-a369-0c40e40e7501/documentation.pdf",
+    "umlFiles": [
+      "/app/output/f30dd131-7e34-4792-a369-0c40e40e7501/diagram.puml"
+    ],
+    "createdAt": "2026-01-07T19:38:25.026Z",
+    "status": "success"
+  },
+  {
+    "id": "0d3754dc-ed6d-4fb6-8728-7966936c248d",
+    "projectPath": "/app/uploads/fc1b6b23-4c50-4eaf-a4c0-797f08cfdf69.zip",
+    "projectName": "2_trimestre.zip",
+    "analysisSummary": {
+      "files": 126,
+      "packages": 5,
+      "classes": 126,
+      "totalMethods": 431
+    },
+    "markdownPath": "/app/output/0d3754dc-ed6d-4fb6-8728-7966936c248d/documentation.md",
+    "pdfPath": "/app/output/0d3754dc-ed6d-4fb6-8728-7966936c248d/documentation.pdf",
+    "umlFiles": [
+      "/app/output/0d3754dc-ed6d-4fb6-8728-7966936c248d/diagram.puml"
+    ],
+    "createdAt": "2026-01-07T19:25:35.237Z",
+    "status": "success"
+  },
+  {
+    "id": "069c49ff-f3b4-4dd9-9365-dc1a1abc4186",
+    "projectPath": "/app/uploads/35ee26d3-c5ef-4136-99d9-306ddcc7514c.zip",
+    "projectName": "2_trimestre.zip",
+    "analysisSummary": {
+      "files": 126,
+      "packages": 5,
+      "classes": 126,
+      "totalMethods": 431
+    },
+    "markdownPath": "/app/output/069c49ff-f3b4-4dd9-9365-dc1a1abc4186/documentation.md",
+    "pdfPath": "/app/output/069c49ff-f3b4-4dd9-9365-dc1a1abc4186/documentation.pdf",
+    "umlFiles": [
+      "/app/output/069c49ff-f3b4-4dd9-9365-dc1a1abc4186/diagram.puml"
+    ],
+    "createdAt": "2026-01-07T19:24:30.336Z",
+    "status": "success"
+  },
+  {
+    "id": "5f2fbffe-b8f6-4abb-8cb5-40e465e0efd4",
+    "projectPath": "/app/uploads/00df4665-ba85-467b-b17b-74211082bf22.zip",
+    "projectName": "2_trimestre.zip",
+    "analysisSummary": {
+      "files": 126,
+      "packages": 5,
+      "classes": 126,
+      "totalMethods": 431
+    },
+    "markdownPath": "/app/output/5f2fbffe-b8f6-4abb-8cb5-40e465e0efd4/documentation.md",
+    "pdfPath": "/app/output/5f2fbffe-b8f6-4abb-8cb5-40e465e0efd4/documentation.pdf",
+    "umlFiles": [
+      "/app/output/5f2fbffe-b8f6-4abb-8cb5-40e465e0efd4/diagram.puml"
+    ],
+    "createdAt": "2026-01-07T19:19:59.592Z",
+    "status": "success"
+  },
+  {
+    "id": "67fde561-3d31-4c32-a348-58ad49f24fa3",
+    "projectPath": "C:\\Users\\javie\\Documents\\GitHub\\JMO-EC\\T1\\SPRINT7\\backend\\uploads\\0db727f6-173f-440f-99d3-8e4b02cc2a98.java",
+    "analysisSummary": {
+      "files": 1,
+      "packages": 1,
+      "classes": 1
+    },
+    "markdownPath": "C:\\Users\\javie\\Documents\\GitHub\\JMO-EC\\T1\\SPRINT7\\backend\\output\\67fde561-3d31-4c32-a348-58ad49f24fa3\\documentation.md",
+    "pdfPath": "C:\\Users\\javie\\Documents\\GitHub\\JMO-EC\\T1\\SPRINT7\\backend\\output\\67fde561-3d31-4c32-a348-58ad49f24fa3\\documentation.pdf",
+    "umlFiles": [
+      "C:\\Users\\javie\\Documents\\GitHub\\JMO-EC\\T1\\SPRINT7\\backend\\output\\67fde561-3d31-4c32-a348-58ad49f24fa3\\diagram.puml"
+    ],
+    "createdAt": "2026-01-07T14:38:01.097Z",
+    "status": "success"
+  },
+  {
+    "id": "d938ebc9-2e33-4d81-8746-79b50b3616bf",
+    "projectPath": "C:\\Users\\javie\\Documents\\GitHub\\JMO-EC\\T1\\SPRINT7\\backend\\uploads\\57c4a469-958e-421b-9e5a-afd69db25ea3.java",
+    "analysisSummary": {
+      "files": 1,
+      "packages": 1,
+      "classes": 1
+    },
+    "markdownPath": "C:\\Users\\javie\\Documents\\GitHub\\JMO-EC\\T1\\SPRINT7\\backend\\output\\d938ebc9-2e33-4d81-8746-79b50b3616bf\\documentation.md",
+    "pdfPath": "C:\\Users\\javie\\Documents\\GitHub\\JMO-EC\\T1\\SPRINT7\\backend\\output\\d938ebc9-2e33-4d81-8746-79b50b3616bf\\documentation.pdf",
+    "umlFiles": [
+      "C:\\Users\\javie\\Documents\\GitHub\\JMO-EC\\T1\\SPRINT7\\backend\\output\\d938ebc9-2e33-4d81-8746-79b50b3616bf\\diagram.puml"
+    ],
+    "createdAt": "2026-01-07T14:31:57.302Z",
+    "status": "success"
+  },
+  {
+    "id": "65d3faf6-5619-4215-9dc0-ec0016e1372f",
+    "projectPath": "C:\\Users\\javie\\Documents\\GitHub\\JMO-EC\\T1\\SPRINT7\\backend\\uploads\\3f03e3a3-e28d-4a94-b77d-50177f41153c.java",
+    "analysisSummary": {
+      "files": 1,
+      "packages": 1,
+      "classes": 1
+    },
+    "markdownPath": "C:\\Users\\javie\\Documents\\GitHub\\JMO-EC\\T1\\SPRINT7\\backend\\output\\65d3faf6-5619-4215-9dc0-ec0016e1372f\\documentation.md",
+    "pdfPath": "C:\\Users\\javie\\Documents\\GitHub\\JMO-EC\\T1\\SPRINT7\\backend\\output\\65d3faf6-5619-4215-9dc0-ec0016e1372f\\documentation.pdf",
+    "umlFiles": [
+      "C:\\Users\\javie\\Documents\\GitHub\\JMO-EC\\T1\\SPRINT7\\backend\\output\\65d3faf6-5619-4215-9dc0-ec0016e1372f\\diagram.puml"
+    ],
+    "createdAt": "2026-01-07T14:29:37.132Z",
+    "status": "success"
+  },
+  {
+    "id": "6b8dddf2-d92a-4eba-b3b0-eb5653932cb5",
+    "projectPath": "C:\\Users\\javie\\Documents\\GitHub\\JMO-EC\\T1\\SPRINT7\\backend\\uploads\\15e4d1d9-b3e4-4273-a4c9-e1939648c5ca.java",
+    "analysisSummary": {
+      "files": 1,
+      "packages": 1,
+      "classes": 1
+    },
+    "markdownPath": "C:\\Users\\javie\\Documents\\GitHub\\JMO-EC\\T1\\SPRINT7\\backend\\output\\6b8dddf2-d92a-4eba-b3b0-eb5653932cb5\\documentation.md",
+    "pdfPath": "C:\\Users\\javie\\Documents\\GitHub\\JMO-EC\\T1\\SPRINT7\\backend\\output\\6b8dddf2-d92a-4eba-b3b0-eb5653932cb5\\documentation.pdf",
+    "umlFiles": [
+      "C:\\Users\\javie\\Documents\\GitHub\\JMO-EC\\T1\\SPRINT7\\backend\\output\\6b8dddf2-d92a-4eba-b3b0-eb5653932cb5\\diagram.puml"
+    ],
+    "createdAt": "2026-01-07T14:18:50.934Z",
+    "status": "success"
+  },
+  {
+    "id": "aa92197b-0762-433e-99b1-9167d294dd45",
+    "projectPath": "C:\\Users\\javie\\Documents\\GitHub\\JMO-EC\\T1\\SPRINT7\\backend\\uploads\\6b2318c4-389f-45ad-bf3e-137752ce0fb0.java",
+    "analysisSummary": {
+      "files": 1,
+      "packages": 1,
+      "classes": 1
+    },
+    "markdownPath": "C:\\Users\\javie\\Documents\\GitHub\\JMO-EC\\T1\\SPRINT7\\backend\\output\\aa92197b-0762-433e-99b1-9167d294dd45\\documentation.md",
+    "pdfPath": "C:\\Users\\javie\\Documents\\GitHub\\JMO-EC\\T1\\SPRINT7\\backend\\output\\aa92197b-0762-433e-99b1-9167d294dd45\\documentation.pdf",
+    "umlFiles": [
+      "C:\\Users\\javie\\Documents\\GitHub\\JMO-EC\\T1\\SPRINT7\\backend\\output\\aa92197b-0762-433e-99b1-9167d294dd45\\diagram.puml"
+    ],
+    "createdAt": "2026-01-07T14:05:39.366Z",
+    "status": "success"
+  },
+  {
+    "id": "ec0d6293-4c1b-4414-957c-3764c7bc37f5",
+    "projectPath": "C:\\Users\\javie\\Documents\\GitHub\\JMO-EC\\T1\\SPRINT7\\backend\\uploads\\8ec51bbe-720e-4ceb-8744-b98b30d3aae8.java",
+    "analysisSummary": {
+      "files": 1,
+      "packages": 1,
+      "classes": 1
+    },
+    "markdownPath": "C:\\Users\\javie\\Documents\\GitHub\\JMO-EC\\T1\\SPRINT7\\backend\\output\\ec0d6293-4c1b-4414-957c-3764c7bc37f5\\documentation.md",
+    "pdfPath": "C:\\Users\\javie\\Documents\\GitHub\\JMO-EC\\T1\\SPRINT7\\backend\\output\\ec0d6293-4c1b-4414-957c-3764c7bc37f5\\documentation.pdf",
+    "umlFiles": [
+      "C:\\Users\\javie\\Documents\\GitHub\\JMO-EC\\T1\\SPRINT7\\backend\\output\\ec0d6293-4c1b-4414-957c-3764c7bc37f5\\diagram.puml"
+    ],
+    "createdAt": "2026-01-07T13:57:41.120Z",
+    "status": "success"
+  },
+  {
+    "id": "ae0d1844-9440-4282-88bf-740de9a71c83",
+    "projectPath": "C:\\Users\\javie\\Documents\\GitHub\\JMO-EC\\T1\\SPRINT7\\backend\\uploads\\c2fd4bf802b5687cb1b04a16b3b607ec",
+    "error": "Formato no soportado. Use carpeta, .zip o .java",
+    "status": "error",
+    "createdAt": "2026-01-07T13:48:52.692Z"
+  },
+  {
+    "id": "e48c1f74-756f-4997-af17-00d9d4cc3472",
+    "projectPath": "C:\\Users\\javie\\Documents\\GitHub\\JMO-EC\\T1\\SPRINT7\\backend\\uploads\\9c19af519778ff43006e21521d82a479",
+    "error": "Formato no soportado. Use carpeta, .zip o .java",
+    "status": "error",
+    "createdAt": "2026-01-07T13:48:01.281Z"
+  },
+  {
+    "id": "4de1568e-0644-4d67-84b1-772775de958d",
+    "projectPath": "C:\\Users\\javie\\Documents\\GitHub\\JMO-EC\\T1\\SPRINT7\\backend\\uploads\\4ad300cea2bbbaab9614fc3b1e22b60a",
+    "error": "Formato no soportado. Use carpeta, .zip o .java",
+    "status": "error",
+    "createdAt": "2026-01-07T13:44:58.788Z"
+  },
+  {
+    "id": "12eac882-5338-4957-ac52-634d973c0861",
+    "projectPath": "C:\\Users\\javie\\Documents\\GitHub\\JMO-EC\\T1\\SPRINT7\\backend\\uploads\\b0d6d401988fb8a66356a3d410494aa1",
+    "error": "Formato no soportado. Use carpeta, .zip o .java",
+    "status": "error",
+    "createdAt": "2026-01-07T13:43:02.547Z"
+  },
+  {
+    "id": "ec77f231-ad5b-4d9e-8231-e389c0361759",
+    "projectPath": "C:\\Users\\javie\\Documents\\GitHub\\JMO-EC\\T1\\SPRINT7\\backend\\uploads\\dd24f5c06a6815b4e5f3fe3868b4ec4f",
+    "error": "Formato no soportado. Use carpeta, .zip o .java",
+    "status": "error",
+    "createdAt": "2026-01-07T13:42:51.593Z"
+  },
+  {
+    "id": "a9dc09ab-74d4-4e24-b5c6-172c9951e99e",
+    "projectPath": "C:\\Users\\javie\\Documents\\GitHub\\JMO-EC\\T1\\SPRINT7\\backend\\uploads\\826392aaf58ef284f93a3a7f597979b6",
+    "error": "Formato no soportado. Use carpeta, .zip o .java",
+    "status": "error",
+    "createdAt": "2026-01-07T13:35:28.945Z"
+  },
+  {
+    "id": "8285f155-a740-4416-b6d0-fd9086a232fb",
+    "projectPath": "C:\\Users\\javie\\Documents\\GitHub\\JMO-EC\\T1\\SPRINT7\\backend\\uploads\\ce9ac95adcd1aed42cb3ae2644c1deac",
+    "error": "Formato no soportado. Use carpeta, .zip o .java",
+    "status": "error",
+    "createdAt": "2026-01-07T13:31:26.654Z"
+  },
+  {
+    "id": "695a6631-a795-470f-97cd-5055ee8adf69",
+    "projectPath": "C:\\Users\\javie\\Documents\\GitHub\\JMO-EC\\T1\\SPRINT7\\backend\\uploads\\f15f724ec838cdd518f84898d017bfde",
+    "error": "Formato no soportado. Use carpeta, .zip o .java",
+    "status": "error",
+    "createdAt": "2026-01-07T13:27:06.978Z"
+  },
+  {
+    "id": "c363e32f-5a81-4bde-8b46-3e61e4395c17",
+    "projectPath": "C:\\Users\\javie\\Documents\\GitHub\\JMO-EC\\T1\\SPRINT7\\backend\\uploads\\1a963f190bc74c759677658a042bf0d6",
+    "error": "Formato no soportado. Use carpeta, .zip o .java",
+    "status": "error",
+    "createdAt": "2026-01-07T13:26:16.692Z"
+  },
+  {
+    "id": "15e56b6e-941e-4ad3-806e-91a6f2cd6557",
+    "projectPath": "https://github.com/JavierManzano-30/DWES-JMO",
+    "error": "ENOENT: no such file or directory, stat 'C:\\Users\\javie\\Documents\\GitHub\\JMO-EC\\T1\\SPRINT7\\backend\\https:\\github.com\\JavierManzano-30\\DWES-JMO'",
+    "status": "error",
+    "createdAt": "2026-01-07T13:14:10.197Z"
+  }
+]

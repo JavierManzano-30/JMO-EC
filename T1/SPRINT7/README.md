@@ -34,6 +34,19 @@ docker compose up --build
 ```
 La imagen de backend instala PlantUML, Graphviz y Pandoc.
 
+## Como probar en Docker (paso a paso)
+1. Abre LMStudio y deja el servidor activo en `http://127.0.0.1:1234`.
+2. En `SPRINT7/docker`, levanta los servicios:
+   ```bash
+   docker compose up --build -d
+   ```
+3. Abre `http://localhost:8978`.
+4. Sube un `.java` o `.zip` con codigo Java y pulsa "Generar documentacion".
+5. Verifica:
+   - Markdown renderizado en la vista de resultados.
+   - Descargas de Markdown/PDF.
+   - Historial actualizado.
+
 ## Setup.ps1
 ```powershell
 .\scripts\Setup.ps1
@@ -43,4 +56,10 @@ La imagen de backend instala PlantUML, Graphviz y Pandoc.
 ## Notas
 - El analizador soporta carpetas, `.java` sueltos o `.zip` (se descomprime en `uploads/unzipped`).
 - La conversion a PDF usa Pandoc si esta disponible; si no, genera un placeholder para validar el flujo.
-- Para IA local, define `AI_URL` (endpoint estilo OpenAI) y opcionalmente `AI_MODEL`.
+- Para IA local, define `AI_URL` (endpoint estilo OpenAI) y opcionalmente `AI_MODEL`. El backend carga `.env` automaticamente.
+- Los resultados se copian a `SPRINT7/descargas/markdown` y `SPRINT7/descargas/pdf` con el ID de ejecucion.
+
+## Mejoras implementadas
+- Estadisticas adicionales del analisis (total de metodos) en el resumen.
+- Recomendaciones generadas por IA cuando `AI_URL` esta configurado.
+- Descarga directa de Markdown/PDF desde la vista de resultados.

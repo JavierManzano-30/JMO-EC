@@ -1,3 +1,4 @@
+import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import multer from "multer";
@@ -14,7 +15,15 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
-const upload = multer({ dest: path.join(__dirname, "uploads") });
+const upload = multer({
+  storage: multer.diskStorage({
+    destination: path.join(__dirname, "uploads"),
+    filename: (_req, file, cb) => {
+      const ext = path.extname(file.originalname || "").toLowerCase();
+      cb(null, `${uuidv4()}${ext}`);
+    },
+  }),
+});
 
 const ensureDirectories = () => {
   const dirs = [
@@ -60,12 +69,19 @@ app.get("/api/docs/:id", (req, res) => {
       .json({ message: `Archivo ${format.toUpperCase()} no disponible` });
   }
 
-  res.sendFile(filePath);
+  const filename =
+    format === "pdf" ? "documentacion.pdf" : "documentacion.md";
+  res.setHeader(
+    "Content-Type",
+    format === "pdf" ? "application/pdf" : "text/markdown; charset=utf-8"
+  );
+  res.download(filePath, filename);
 });
 
 app.post("/api/analyze", upload.single("project"), async (req, res) => {
   const runId = uuidv4();
   const projectPath = req.file?.path || req.body.projectPath;
+  const projectName = req.file?.originalname || path.basename(projectPath || "");
 
   if (!projectPath) {
     return res.status(400).json({ message: "Debe enviar un proyecto o ruta" });
@@ -74,10 +90,11 @@ app.post("/api/analyze", upload.single("project"), async (req, res) => {
   try {
     const analysis = await analyzeProject(projectPath, runId);
     const umlFiles = await generateUml(runId, analysis);
-    const docs = await generateDocs(runId, analysis, umlFiles);
+    const docs = await generateDocs(runId, analysis, umlFiles, projectName);
     const stored = historyStore.addRun({
       id: runId,
       projectPath,
+      projectName,
       analysisSummary: analysis.summary,
       markdownPath: docs.markdownPath,
       pdfPath: docs.pdfPath,

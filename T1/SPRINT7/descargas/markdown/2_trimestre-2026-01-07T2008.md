@@ -1,0 +1,275 @@
+# Documentación generada automáticamente
+
+## Resumen
+- Archivos Java: 126
+- Paquetes: 5
+- Clases: 126
+
+## Clases analizadas
+- **Arbitro** (default)
+  - Métodos: detenerPelea, Presentarse
+- **Boxeador** (default)
+  - Métodos: calcularCategoria, recibirGolpe, estaDerrotado, esquivarGolpe, mejorarEstadisticas, mostrarEstado, Presentarse, getPeso, setPeso, getVelocidad, setVelocidad, getPotencia, setPotencia, getResistencia, setResistencia, getCategoria, setNombre
+- **Categoria** (default)
+  - Métodos: sin métodos detectados
+- **Entrenador** (default)
+  - Métodos: motivarBoxeador, Presentarse
+- **Evento** (default)
+  - Métodos: iniciarEvento
+- **ICombate** (default)
+  - Métodos: sin métodos detectados
+- **Main** (default)
+  - Métodos: sin métodos detectados
+- **Participante** (default)
+  - Métodos: getNombre, setNombre
+- **Pelea** (default)
+  - Métodos: iniciarCombate, continuarCombate, registrarGolpe, determinarGanador, finalizarCombate
+- **Arbitro** (default)
+  - Métodos: detenerCombate, toString, Presentarse
+- **Boxeador** (default)
+  - Métodos: getNacionalidad, setNacionalidad, getPotencia, setPotencia, getResistencia, setResistencia, getVelocidad, setVelocidad, getPeso, setPeso, getCategoria, setCategoria, calcularCategoria, recibirGolpe, estaDerrotado, esquivarGolpe, mejorarEstadisticas, mostrarEstado, toString, Presentarse
+- **Entrenador** (default)
+  - Métodos: getBoxeador, setBoxeador, toString, Presentarse, motivar
+- **Evento** (default)
+  - Métodos: Evento, Evento, iniciarEvento
+- **ICombate** (default)
+  - Métodos: sin métodos detectados
+- **Main** (default)
+  - Métodos: sin métodos detectados
+- **Participante** (default)
+  - Métodos: getNombre, setNombre, getEdad, setEdad, toString
+- **Pelea** (default)
+  - Métodos: IniciaCombate, continuarCombate, registrarGolpe, determinarGanador, finalizarCombate, toString
+- **Droide** (default)
+  - Métodos: viajarAPlaneta, repararNave
+- **ILuchador** (default)
+  - Métodos: sin métodos detectados
+- **ITransporte** (default)
+  - Métodos: sin métodos detectados
+- **Jedi** (default)
+  - Métodos: getNivelFuerza, setNivelFuerza, setHabilidadesEspeciales, getNaves, setNaves, getDroide, setDroide, getPlanetaOrigen, setPlanetaOrigen, recibirDanio, calcularDanioDefensivo, calcularHabilidadEspecial, luchar
+- **Main** (default)
+  - Métodos: sin métodos detectados
+- **Nave** (default)
+  - Métodos: sin métodos detectados
+- **Planeta** (default)
+  - Métodos: sin métodos detectados
+- **SerVivo** (default)
+  - Métodos: getNombre, setNombre, getDefensa, setDefensa, getSalud, setSalud
+- **Sith** (default)
+  - Métodos: recibirDanio, luchar, calcularDanioAgresivo, recibirDanio
+- **Juego** (default)
+  - Métodos: getPremio, setPremio, getMiniJuegos, setMiniJuegos
+- **Jugador** (default)
+  - Métodos: getNombre, getNumero, getDeuda, getJuegosGanados, getVivo, getRondaEliminado, setNombre, setNumero, setDeuda, setJuegosGanados, setVivo, setRondaEliminada, jugar, asesinar, toString
+- **Main** (default)
+  - Métodos: sin métodos detectados
+- **MiniJuego** (default)
+  - Métodos: nombre, reglas, tiempo, esGrupal, numeroJugadores, setNombre, setReglas, setTiempo, setEsGrupal, setNumeroJugadores, toString
+- **Agenda** (default)
+  - Métodos: sin métodos detectados
+- **Contacto** (default)
+  - Métodos: getNombre, getTelefono, setNombre, setTelefono, toString
+- **ContactoEmpresa** (default)
+  - Métodos: sin métodos detectados
+- **ContactoPersona** (default)
+  - Métodos: getNombre, getApellido, getTelefono, getEmail, setNombre, setApellido, setTelefono, setEmail, toString
+- **Main** (default)
+  - Métodos: sin métodos detectados
+- **Arma** (default)
+  - Métodos: getName, setName, getDanio, setDanio, getAlcance, setAlcance, isEquipada, setequipada
+- **Constructores** (default)
+  - Métodos: sin métodos detectados
+- **Arma** (default)
+  - Métodos: sin métodos detectados
+- **Consumible** (default)
+  - Métodos: sin métodos detectados
+- **Distancia** (default)
+  - Métodos: getNombre, setNombre, getDanyo, setDanyo, getRango, setRango, getMunicion, setMunicion, getCapacidad, setCapacidad
+- **Main** (default)
+  - Métodos: sin métodos detectados
+- **Melee** (default)
+  - Métodos: getNombre, setNombre, getDanyo, setDanyo, getTamanio, setTamanio, getDesgaste, setDesgaste
+- **Baraja** (default)
+  - Métodos: Ordenar, Barajar, CogerPrimeraCarta, Cortar, MezclaAmericana
+- **Carta** (default)
+  - Métodos: getPalo, setPalo, getValor, setValor, toString
+- **Main** (default)
+  - Métodos: sin métodos detectados
+- **Jugador** (default)
+  - Métodos: sin métodos detectados
+- **Coche** (default)
+  - Métodos: getMatricula, setMatricula, getMarca, setMarca, getModelo, setModelo, getDeposito, setDeposito, LlenarDeposito, HacerKm, CalcularConsumo, toString
+- **Destino** (default)
+  - Métodos: sin métodos detectados
+- **Garaje** (default)
+  - Métodos: sin métodos detectados
+- **Main** (default)
+  - Métodos: sin métodos detectados
+- **Banco** (default)
+  - Métodos: sin métodos detectados
+- **Cuenta** (default)
+  - Métodos: crearDigitosAleatorios, generarNumeroCuenta, getNumero, getUser, getSaldo, getMovimientos, ingresarDinero, retirarDinero, transferirDinero, toString
+- **Leer** (default)
+  - Métodos: sin métodos detectados
+- **Main** (default)
+  - Métodos: sin métodos detectados
+- **Movimiento** (default)
+  - Métodos: getCuenta, getValor, getFecha, getAccion, toString
+- **User** (default)
+  - Métodos: getDni, getSecretCode, getName, checkLogin, toString
+- **Electrodomestico** (default)
+  - Métodos: getTipo, setTipo, getMarca, setMarca, getPotencia, setPotencia, toString, getConsumo, getCosteConsumo
+- **Lavadora** (default)
+  - Métodos: getPrecio, setPrecio, isAguaCaliente, setAguaCaliente, toString, getConsumo, getCosteConsumo
+- **Main** (default)
+  - Métodos: sin métodos detectados
+- **Main** (default)
+  - Métodos: sin métodos detectados
+- **Persona** (default)
+  - Métodos: getNombre, getApellidos, setNombre, setApellidos, toString
+- **RevisionAlarma** (default)
+  - Métodos: getAlarmasARevisar, setAlarmasARevisar, toString, costeMaterial, costeManoObra, costeTotal, detalleServicio
+- **Servicio** (default)
+  - Métodos: getTrabajador, setTrabajador, getFechaInicio, setFechaInicio, getCliente, setCliente, toString
+- **TrabajoPintura** (default)
+  - Métodos: getSuperficie, setSuperficie, getPrecioPintura, setPrecioPintura, toString, costeMaterial, costeManoObra, costeTotal, detalleServicio
+- **Circulo** (default)
+  - Métodos: CalcularArea, CalcularPerimetro, toString, getRadio, setRadio
+- **Figura** (default)
+  - Métodos: getNombre, setNombre, toString, ImprimirDetalle
+- **Main** (default)
+  - Métodos: sin métodos detectados
+- **Rectangulo** (default)
+  - Métodos: CalcularArea, CalcularPerimetro, toString, getBase, setBase, getAltura, setAltura
+- **MaquinaExpendedora** (default)
+  - Métodos: getDisponible, setDisponible, getProductos, setProductos, getPagoConTarjeta, setPagoConTarjeta, getSaldoMaquina, setSaldoMaquina, insertarDinero, reponerProducto, comprarProducto, toString
+- **Producto** (default)
+  - Métodos: getNombre, setNombre, getPrecio, setPrecio, getCalorias, setCalorias, getCaducado, setCaducado, aplicarDescuento, esMasBaratoQueOtro, toString
+- **Objeto** (default)
+  - Métodos: sin métodos detectados
+- **Main** (default)
+  - Métodos: sin métodos detectados
+- **Persona** (default)
+  - Métodos: PonerseCamiseta, quitarseCamiseta, toString
+- **Camiseta** (PersonaCamiseta)
+  - Métodos: getMarca, getTalla, getColor, toString
+- **Cocina** (entorno)
+  - Métodos: sin métodos detectados
+- **Mesa** (entorno)
+  - Métodos: sin métodos detectados
+- **Restaurante** (entorno)
+  - Métodos: sin métodos detectados
+- **Camarero** (persona)
+  - Métodos: sin métodos detectados
+- **Cliente** (persona)
+  - Métodos: sin métodos detectados
+- **Cocinero** (persona)
+  - Métodos: sin métodos detectados
+- **Persona** (persona)
+  - Métodos: sin métodos detectados
+- **Bebida** (producto)
+  - Métodos: sin métodos detectados
+- **Comida** (producto)
+  - Métodos: sin métodos detectados
+- **Postre** (producto)
+  - Métodos: sin métodos detectados
+- **Producto** (producto)
+  - Métodos: toString
+- **Cereal** (default)
+  - Métodos: getTipoCereal, setTipoCereal, getCaducidad, setCaducidad, getCalorias, toString
+- **Detergente** (default)
+  - Métodos: getVolumen, setVolumen, getTipoEnvase, setTipoEnvase, getDescuento, setDescuento, getPrecioDescuento, toString
+- **Main** (default)
+  - Métodos: sin métodos detectados
+- **Producto** (default)
+  - Métodos: getMarca, setMarca, getPrecio, setPrecio, getId, setId, toString
+- **Vino** (default)
+  - Métodos: getTipoVino, setTipoVino, getGraduacion, setGraduacion, getAnyoCosecha, setAnyoCosecha, esDeAltaGama, esVinoDulce, toString
+- **Dimension** (default)
+  - Métodos: getAlto, setAlto, getAncho, setAncho, getProfundidad, setProfundidad, toString
+- **Main** (default)
+  - Métodos: sin métodos detectados
+- **Superheroe** (default)
+  - Métodos: getNombre, setNombre, getDescripcion, setDescripcion, getCapa, setCapa, toString
+- **Autobus** (default)
+  - Métodos: getNumeroParadas, setNumeroParadas, getTarifa, setTarifa, arrancar, parar
+- **IVehiculo** (default)
+  - Métodos: sin métodos detectados
+- **Main** (default)
+  - Métodos: sin métodos detectados
+- **TransportePublico** (default)
+  - Métodos: getCapacidad, setCapacidad, getRuta, setRuta, getVelocidadMaxima, setVelocidadMaxima, mostrarInformacion
+- **Tranvia** (default)
+  - Métodos: isElectrico, setElectrico, getLinea, setLinea, arrancar, parar, mostrarInformacion
+- **Coche** (default)
+  - Métodos: getPuertas, setPuertas, getRuedas, setRuedas, CuantasRuedas, CuantasPuertas
+- **Main** (default)
+  - Métodos: sin métodos detectados
+- **Moto** (default)
+  - Métodos: getRuedas, setRuedas, CuantasRuedas, CuantasPuertas
+- **Vehiculo** (default)
+  - Métodos: getMarca, setMarca, getModelo, setModelo, getAnio, setAnio, getPrecio, setPrecio
+- **Carta** (default)
+  - Métodos: getNombre, setNombre, getAtaque, setAtaque, getDefensa, setDefensa, getPosicion, setPosicion, isOculto, setOculto, toString, atacar
+- **Juego** (default)
+  - Métodos: sin métodos detectados
+- **Jugador** (default)
+  - Métodos: getNombre, setNombre, getMano, setMano, getBaraja, setBaraja, toString, RobarCarta, JugarCarta, Atacar
+- **Main** (default)
+  - Métodos: sin métodos detectados
+- **Tablero** (default)
+  - Métodos: sin métodos detectados
+- **Camiseta** (default)
+  - Métodos: sin métodos detectados
+- **Categoria** (default)
+  - Métodos: sin métodos detectados
+- **Comestible** (default)
+  - Métodos: sin métodos detectados
+- **Comida** (default)
+  - Métodos: getFechaCaducidad, setFechaCaducidad, toString
+- **Main** (default)
+  - Métodos: sin métodos detectados
+- **Mochila** (default)
+  - Métodos: getMarca, setMarca, getColor, setColor, getCapacidad, setCapacidad, getObjetos, setObjetos, toString
+- **Objeto** (default)
+  - Métodos: getNombre, setNombre, toString
+- **Ocio** (default)
+  - Métodos: sin métodos detectados
+- **Pantalon** (default)
+  - Métodos: sin métodos detectados
+- **Ropa** (default)
+  - Métodos: getTalla, setTalla, toString
+- **Zapatos** (default)
+  - Métodos: sin métodos detectados
+- **Errores** (default)
+  - Métodos: esMayor19, nombreValido, telefonoValido
+- **Main** (default)
+  - Métodos: sin métodos detectados
+- **RegistrarPersona** (default)
+  - Métodos: getNombre, setNombre, getEdad, setEdad, getTelefono, setTelefono, toString
+- **Contar** (default)
+  - Métodos: sin métodos detectados
+- **Lectura** (default)
+  - Métodos: sin métodos detectados
+- **PedirLectura** (default)
+  - Métodos: sin métodos detectados
+- **hastaPonerFin** (default)
+  - Métodos: sin métodos detectados
+- **caesar** (default)
+  - Métodos: sin métodos detectados
+
+## Diagramas PlantUML
+- /app/output/999b35f2-84b7-4e17-8ac3-c04008052f60/diagram.puml
+
+## Notas generadas por IA
+**Resumen Técnico del Proyecto Java**
+
+El proyecto cuenta con una estructura básica pero amplia, compuesta por **126 clases**, distribuidas en **5 paquetes** y un total de **126 archivos**. Esta cantidad de clases indica un sistema con un alto nivel de detalle funcional, lo que sugiere que el código está bien descompuesto en módulos o componentes específicos.
+
+La relación entre número de clases y paquetes (5 paquetes para 126 clases) implica una distribución moderadamente equilibrada. Esto puede indicar un diseño orientado a la modularidad, aunque podría requerir refinamiento si algunas clases son demasiado grandes o están agrupadas en paquetes poco claros.
+
+**Análisis de calidad y mantenibilidad:**
+- **Bajo riesgo de duplicación**: La cantidad de archivos es alta, pero sin información adicional sobre código repetido, se asume que el diseño sigue principios como SRP (Single Responsibility) o DRY.
+- **Posible falta de abstracción**: Si las 126 clases no están bien organizadas en capas (por ejemplo: presentación, lógica, acceso a datos), podría dificultar la mantenibilidad y pruebas unitarias.
+- **Escalabilidad limitada**: Un número elevado de clases puede indicar un código que se ha id

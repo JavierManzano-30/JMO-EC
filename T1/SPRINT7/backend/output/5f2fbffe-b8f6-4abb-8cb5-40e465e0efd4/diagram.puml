@@ -1,0 +1,748 @@
+@startuml
+title Diagrama de clases generado automáticamente
+class Arbitro {
+    + detenerPelea()
+    + Presentarse()
+}
+class Boxeador {
+    + calcularCategoria()
+    + recibirGolpe()
+    + estaDerrotado()
+    + esquivarGolpe()
+    + mejorarEstadisticas()
+    + mostrarEstado()
+    + Presentarse()
+    + getPeso()
+    + setPeso()
+    + getVelocidad()
+    + setVelocidad()
+    + getPotencia()
+    + setPotencia()
+    + getResistencia()
+    + setResistencia()
+    + getCategoria()
+    + setNombre()
+}
+class Categoria {
+
+}
+class Entrenador {
+    + motivarBoxeador()
+    + Presentarse()
+}
+class Evento {
+    + iniciarEvento()
+}
+class ICombate {
+
+}
+class Main {
+
+}
+class Participante {
+    + getNombre()
+    + setNombre()
+}
+class Pelea {
+    + iniciarCombate()
+    + continuarCombate()
+    + registrarGolpe()
+    + determinarGanador()
+    + finalizarCombate()
+}
+class Arbitro {
+    + detenerCombate()
+    + toString()
+    + Presentarse()
+}
+class Boxeador {
+    + getNacionalidad()
+    + setNacionalidad()
+    + getPotencia()
+    + setPotencia()
+    + getResistencia()
+    + setResistencia()
+    + getVelocidad()
+    + setVelocidad()
+    + getPeso()
+    + setPeso()
+    + getCategoria()
+    + setCategoria()
+    + calcularCategoria()
+    + recibirGolpe()
+    + estaDerrotado()
+    + esquivarGolpe()
+    + mejorarEstadisticas()
+    + mostrarEstado()
+    + toString()
+    + Presentarse()
+}
+class Entrenador {
+    + getBoxeador()
+    + setBoxeador()
+    + toString()
+    + Presentarse()
+    + motivar()
+}
+class Evento {
+    + Evento()
+    + Evento()
+    + iniciarEvento()
+}
+class ICombate {
+
+}
+class Main {
+
+}
+class Participante {
+    + getNombre()
+    + setNombre()
+    + getEdad()
+    + setEdad()
+    + toString()
+}
+class Pelea {
+    + IniciaCombate()
+    + continuarCombate()
+    + registrarGolpe()
+    + determinarGanador()
+    + finalizarCombate()
+    + toString()
+}
+class Droide {
+    + viajarAPlaneta()
+    + repararNave()
+}
+class ILuchador {
+
+}
+class ITransporte {
+
+}
+class Jedi {
+    + getNivelFuerza()
+    + setNivelFuerza()
+    + setHabilidadesEspeciales()
+    + getNaves()
+    + setNaves()
+    + getDroide()
+    + setDroide()
+    + getPlanetaOrigen()
+    + setPlanetaOrigen()
+    + recibirDanio()
+    + calcularDanioDefensivo()
+    + calcularHabilidadEspecial()
+    + luchar()
+}
+class Main {
+
+}
+class Nave {
+
+}
+class Planeta {
+
+}
+class SerVivo {
+    + getNombre()
+    + setNombre()
+    + getDefensa()
+    + setDefensa()
+    + getSalud()
+    + setSalud()
+}
+class Sith {
+    + recibirDanio()
+    + luchar()
+    + calcularDanioAgresivo()
+    + recibirDanio()
+}
+class Juego {
+    + getPremio()
+    + setPremio()
+    + getMiniJuegos()
+    + setMiniJuegos()
+}
+class Jugador {
+    + getNombre()
+    + getNumero()
+    + getDeuda()
+    + getJuegosGanados()
+    + getVivo()
+    + getRondaEliminado()
+    + setNombre()
+    + setNumero()
+    + setDeuda()
+    + setJuegosGanados()
+    + setVivo()
+    + setRondaEliminada()
+    + jugar()
+    + asesinar()
+    + toString()
+}
+class Main {
+
+}
+class MiniJuego {
+    + nombre()
+    + reglas()
+    + tiempo()
+    + esGrupal()
+    + numeroJugadores()
+    + setNombre()
+    + setReglas()
+    + setTiempo()
+    + setEsGrupal()
+    + setNumeroJugadores()
+    + toString()
+}
+class Agenda {
+
+}
+class Contacto {
+    + getNombre()
+    + getTelefono()
+    + setNombre()
+    + setTelefono()
+    + toString()
+}
+class ContactoEmpresa {
+
+}
+class ContactoPersona {
+    + getNombre()
+    + getApellido()
+    + getTelefono()
+    + getEmail()
+    + setNombre()
+    + setApellido()
+    + setTelefono()
+    + setEmail()
+    + toString()
+}
+class Main {
+
+}
+class Arma {
+    + getName()
+    + setName()
+    + getDanio()
+    + setDanio()
+    + getAlcance()
+    + setAlcance()
+    + isEquipada()
+    + setequipada()
+}
+class Constructores {
+
+}
+class Arma {
+
+}
+class Consumible {
+
+}
+class Distancia {
+    + getNombre()
+    + setNombre()
+    + getDanyo()
+    + setDanyo()
+    + getRango()
+    + setRango()
+    + getMunicion()
+    + setMunicion()
+    + getCapacidad()
+    + setCapacidad()
+}
+class Main {
+
+}
+class Melee {
+    + getNombre()
+    + setNombre()
+    + getDanyo()
+    + setDanyo()
+    + getTamanio()
+    + setTamanio()
+    + getDesgaste()
+    + setDesgaste()
+}
+class Baraja {
+    + Ordenar()
+    + Barajar()
+    + CogerPrimeraCarta()
+    + Cortar()
+    + MezclaAmericana()
+}
+class Carta {
+    + getPalo()
+    + setPalo()
+    + getValor()
+    + setValor()
+    + toString()
+}
+class Main {
+
+}
+class Jugador {
+
+}
+class Coche {
+    + getMatricula()
+    + setMatricula()
+    + getMarca()
+    + setMarca()
+    + getModelo()
+    + setModelo()
+    + getDeposito()
+    + setDeposito()
+    + LlenarDeposito()
+    + HacerKm()
+    + CalcularConsumo()
+    + toString()
+}
+class Destino {
+
+}
+class Garaje {
+
+}
+class Main {
+
+}
+class Banco {
+
+}
+class Cuenta {
+    + crearDigitosAleatorios()
+    + generarNumeroCuenta()
+    + getNumero()
+    + getUser()
+    + getSaldo()
+    + getMovimientos()
+    + ingresarDinero()
+    + retirarDinero()
+    + transferirDinero()
+    + toString()
+}
+class Leer {
+
+}
+class Main {
+
+}
+class Movimiento {
+    + getCuenta()
+    + getValor()
+    + getFecha()
+    + getAccion()
+    + toString()
+}
+class User {
+    + getDni()
+    + getSecretCode()
+    + getName()
+    + checkLogin()
+    + toString()
+}
+class Electrodomestico {
+    + getTipo()
+    + setTipo()
+    + getMarca()
+    + setMarca()
+    + getPotencia()
+    + setPotencia()
+    + toString()
+    + getConsumo()
+    + getCosteConsumo()
+}
+class Lavadora {
+    + getPrecio()
+    + setPrecio()
+    + isAguaCaliente()
+    + setAguaCaliente()
+    + toString()
+    + getConsumo()
+    + getCosteConsumo()
+}
+class Main {
+
+}
+class Main {
+
+}
+class Persona {
+    + getNombre()
+    + getApellidos()
+    + setNombre()
+    + setApellidos()
+    + toString()
+}
+class RevisionAlarma {
+    + getAlarmasARevisar()
+    + setAlarmasARevisar()
+    + toString()
+    + costeMaterial()
+    + costeManoObra()
+    + costeTotal()
+    + detalleServicio()
+}
+class Servicio {
+    + getTrabajador()
+    + setTrabajador()
+    + getFechaInicio()
+    + setFechaInicio()
+    + getCliente()
+    + setCliente()
+    + toString()
+}
+class TrabajoPintura {
+    + getSuperficie()
+    + setSuperficie()
+    + getPrecioPintura()
+    + setPrecioPintura()
+    + toString()
+    + costeMaterial()
+    + costeManoObra()
+    + costeTotal()
+    + detalleServicio()
+}
+class Circulo {
+    + CalcularArea()
+    + CalcularPerimetro()
+    + toString()
+    + getRadio()
+    + setRadio()
+}
+class Figura {
+    + getNombre()
+    + setNombre()
+    + toString()
+    + ImprimirDetalle()
+}
+class Main {
+
+}
+class Rectangulo {
+    + CalcularArea()
+    + CalcularPerimetro()
+    + toString()
+    + getBase()
+    + setBase()
+    + getAltura()
+    + setAltura()
+}
+class MaquinaExpendedora {
+    + getDisponible()
+    + setDisponible()
+    + getProductos()
+    + setProductos()
+    + getPagoConTarjeta()
+    + setPagoConTarjeta()
+    + getSaldoMaquina()
+    + setSaldoMaquina()
+    + insertarDinero()
+    + reponerProducto()
+    + comprarProducto()
+    + toString()
+}
+class Producto {
+    + getNombre()
+    + setNombre()
+    + getPrecio()
+    + setPrecio()
+    + getCalorias()
+    + setCalorias()
+    + getCaducado()
+    + setCaducado()
+    + aplicarDescuento()
+    + esMasBaratoQueOtro()
+    + toString()
+}
+class Objeto {
+
+}
+class Main {
+
+}
+class Persona {
+    + PonerseCamiseta()
+    + quitarseCamiseta()
+    + toString()
+}
+class Camiseta {
+    + getMarca()
+    + getTalla()
+    + getColor()
+    + toString()
+}
+class Cocina {
+
+}
+class Mesa {
+
+}
+class Restaurante {
+
+}
+class Camarero {
+
+}
+class Cliente {
+
+}
+class Cocinero {
+
+}
+class Persona {
+
+}
+class Bebida {
+
+}
+class Comida {
+
+}
+class Postre {
+
+}
+class Producto {
+    + toString()
+}
+class Cereal {
+    + getTipoCereal()
+    + setTipoCereal()
+    + getCaducidad()
+    + setCaducidad()
+    + getCalorias()
+    + toString()
+}
+class Detergente {
+    + getVolumen()
+    + setVolumen()
+    + getTipoEnvase()
+    + setTipoEnvase()
+    + getDescuento()
+    + setDescuento()
+    + getPrecioDescuento()
+    + toString()
+}
+class Main {
+
+}
+class Producto {
+    + getMarca()
+    + setMarca()
+    + getPrecio()
+    + setPrecio()
+    + getId()
+    + setId()
+    + toString()
+}
+class Vino {
+    + getTipoVino()
+    + setTipoVino()
+    + getGraduacion()
+    + setGraduacion()
+    + getAnyoCosecha()
+    + setAnyoCosecha()
+    + esDeAltaGama()
+    + esVinoDulce()
+    + toString()
+}
+class Dimension {
+    + getAlto()
+    + setAlto()
+    + getAncho()
+    + setAncho()
+    + getProfundidad()
+    + setProfundidad()
+    + toString()
+}
+class Main {
+
+}
+class Superheroe {
+    + getNombre()
+    + setNombre()
+    + getDescripcion()
+    + setDescripcion()
+    + getCapa()
+    + setCapa()
+    + toString()
+}
+class Autobus {
+    + getNumeroParadas()
+    + setNumeroParadas()
+    + getTarifa()
+    + setTarifa()
+    + arrancar()
+    + parar()
+}
+class IVehiculo {
+
+}
+class Main {
+
+}
+class TransportePublico {
+    + getCapacidad()
+    + setCapacidad()
+    + getRuta()
+    + setRuta()
+    + getVelocidadMaxima()
+    + setVelocidadMaxima()
+    + mostrarInformacion()
+}
+class Tranvia {
+    + isElectrico()
+    + setElectrico()
+    + getLinea()
+    + setLinea()
+    + arrancar()
+    + parar()
+    + mostrarInformacion()
+}
+class Coche {
+    + getPuertas()
+    + setPuertas()
+    + getRuedas()
+    + setRuedas()
+    + CuantasRuedas()
+    + CuantasPuertas()
+}
+class Main {
+
+}
+class Moto {
+    + getRuedas()
+    + setRuedas()
+    + CuantasRuedas()
+    + CuantasPuertas()
+}
+class Vehiculo {
+    + getMarca()
+    + setMarca()
+    + getModelo()
+    + setModelo()
+    + getAnio()
+    + setAnio()
+    + getPrecio()
+    + setPrecio()
+}
+class Carta {
+    + getNombre()
+    + setNombre()
+    + getAtaque()
+    + setAtaque()
+    + getDefensa()
+    + setDefensa()
+    + getPosicion()
+    + setPosicion()
+    + isOculto()
+    + setOculto()
+    + toString()
+    + atacar()
+}
+class Juego {
+
+}
+class Jugador {
+    + getNombre()
+    + setNombre()
+    + getMano()
+    + setMano()
+    + getBaraja()
+    + setBaraja()
+    + toString()
+    + RobarCarta()
+    + JugarCarta()
+    + Atacar()
+}
+class Main {
+
+}
+class Tablero {
+
+}
+class Camiseta {
+
+}
+class Categoria {
+
+}
+class Comestible {
+
+}
+class Comida {
+    + getFechaCaducidad()
+    + setFechaCaducidad()
+    + toString()
+}
+class Main {
+
+}
+class Mochila {
+    + getMarca()
+    + setMarca()
+    + getColor()
+    + setColor()
+    + getCapacidad()
+    + setCapacidad()
+    + getObjetos()
+    + setObjetos()
+    + toString()
+}
+class Objeto {
+    + getNombre()
+    + setNombre()
+    + toString()
+}
+class Ocio {
+
+}
+class Pantalon {
+
+}
+class Ropa {
+    + getTalla()
+    + setTalla()
+    + toString()
+}
+class Zapatos {
+
+}
+class Errores {
+    + esMayor19()
+    + nombreValido()
+    + telefonoValido()
+}
+class Main {
+
+}
+class RegistrarPersona {
+    + getNombre()
+    + setNombre()
+    + getEdad()
+    + setEdad()
+    + getTelefono()
+    + setTelefono()
+    + toString()
+}
+class Contar {
+
+}
+class Lectura {
+
+}
+class PedirLectura {
+
+}
+class hastaPonerFin {
+
+}
+class caesar {
+
+}
+@enduml

@@ -25,7 +25,7 @@ function ProjectSelector({
           <span className="text-sm text-slate-300">Subir ZIP o carpeta</span>
           <input
             type="file"
-            accept=".zip,.jar,.java"
+            accept=".zip,.java"
             onChange={(e) => onFileChange(e.target.files?.[0] || null)}
             className="mt-2 block w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm"
           />

@@ -1,0 +1,9 @@
+@startuml
+title Diagrama de clases generado automáticamente
+class Juego {
+    + getPremio()
+    + setPremio()
+    + getMiniJuegos()
+    + setMiniJuegos()
+}
+@enduml

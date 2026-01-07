@@ -4,13 +4,17 @@ import { execFile } from "child_process";
 
 function runPandoc(markdownPath, pdfPath) {
   return new Promise((resolve, reject) => {
-    execFile("pandoc", [markdownPath, "-o", pdfPath], (error) => {
+    execFile(
+      "pandoc",
+      [markdownPath, "-o", pdfPath, "--pdf-engine=pdflatex"],
+      (error) => {
       if (error) {
         reject(error);
         return;
       }
       resolve();
-    });
+      }
+    );
   });
 }
 
