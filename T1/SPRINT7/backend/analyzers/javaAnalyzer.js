@@ -6,7 +6,11 @@ import { getUploadsUnzippedDir } from "../utils/paths.js";
 const JAVA_REGEX = {
   package: /^\s*package\s+([\w.]+);/m,
   class: /(?:public|protected|private)?\s*(class|interface|enum)\s+(\w+)/,
+  extends: /\bextends\s+(\w+)/,
+  implements: /\bimplements\s+([\w\s,]+)/,
   method: /(?:public|protected|private)\s+[<>\w\[\]]+\s+(\w+)\s*\([^)]*\)\s*\{/g,
+  field: /(?:public|protected|private)?\s*(?:static\s+)?(?:final\s+)?([\w<>]+)\s+(\w+)\s*(?:=|;)/g,
+  methodSignature: /(?:public|protected|private)\s+[<>\w\[\]]+\s+\w+\s*\(([^)]*)\)/g,
 };
 
 async function collectJavaFiles(basePath) {
@@ -30,13 +34,46 @@ function parseJavaFile(content) {
   const pkg = JAVA_REGEX.package.exec(content)?.[1] || "default";
   const classMatch = JAVA_REGEX.class.exec(content);
   const className = classMatch?.[2] || "UnknownClass";
+  const extendsMatch = JAVA_REGEX.extends.exec(content);
+  const implementsMatch = JAVA_REGEX.implements.exec(content);
+  const implementsList = implementsMatch
+    ? implementsMatch[1].split(",").map((item) => item.trim()).filter(Boolean)
+    : [];
   const methods = [];
   let methodMatch;
   while ((methodMatch = JAVA_REGEX.method.exec(content)) !== null) {
     methods.push(methodMatch[1]);
   }
+  const fields = [];
+  let fieldMatch;
+  while ((fieldMatch = JAVA_REGEX.field.exec(content)) !== null) {
+    fields.push({ type: fieldMatch[1], name: fieldMatch[2] });
+  }
+  const methodTypes = [];
+  let sigMatch;
+  while ((sigMatch = JAVA_REGEX.methodSignature.exec(content)) !== null) {
+    const params = sigMatch[1]
+      .split(",")
+      .map((chunk) => {
+        const tokens = chunk.trim().split(/\s+/).filter(Boolean);
+        if (tokens.length >= 2) {
+          return tokens[tokens.length - 2];
+        }
+        return tokens[0];
+      })
+      .filter(Boolean);
+    methodTypes.push(...params);
+  }
 
-  return { package: pkg, className, methods };
+  return {
+    package: pkg,
+    className,
+    extendsClass: extendsMatch?.[1] || null,
+    implementsInterfaces: implementsList,
+    fields,
+    methodTypes,
+    methods,
+  };
 }
 
 export async function analyzeProject(projectPath, runId = "analysis") {

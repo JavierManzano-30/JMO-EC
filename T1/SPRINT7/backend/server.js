@@ -78,6 +78,31 @@ app.get("/api/docs/:id", (req, res) => {
   res.download(filePath, filename);
 });
 
+app.get("/api/uml/:id", (req, res) => {
+  const { id } = req.params;
+  const format = req.query.format === "png" ? "png" : "puml";
+  const record = historyStore.getRun(id);
+
+  if (!record) {
+    return res.status(404).json({ message: "Ejecucion no encontrada" });
+  }
+
+  const filePath =
+    format === "png" ? record.umlImagePath : record.umlFiles?.[0];
+  if (!filePath || !fs.existsSync(filePath)) {
+    return res
+      .status(404)
+      .json({ message: `UML ${format.toUpperCase()} no disponible` });
+  }
+
+  const filename = format === "png" ? "uml.png" : "uml.puml";
+  res.setHeader(
+    "Content-Type",
+    format === "png" ? "image/png" : "text/plain; charset=utf-8"
+  );
+  res.download(filePath, filename);
+});
+
 app.post("/api/analyze", upload.single("project"), async (req, res) => {
   const runId = uuidv4();
   const projectPath = req.file?.path || req.body.projectPath;
@@ -89,7 +114,7 @@ app.post("/api/analyze", upload.single("project"), async (req, res) => {
 
   try {
     const analysis = await analyzeProject(projectPath, runId);
-    const umlFiles = await generateUml(runId, analysis);
+    const { umlFiles, umlImagePath } = await generateUml(runId, analysis);
     const docs = await generateDocs(runId, analysis, umlFiles, projectName);
     const stored = historyStore.addRun({
       id: runId,
@@ -99,6 +124,7 @@ app.post("/api/analyze", upload.single("project"), async (req, res) => {
       markdownPath: docs.markdownPath,
       pdfPath: docs.pdfPath,
       umlFiles,
+      umlImagePath,
       createdAt: new Date().toISOString(),
       status: "success",
     });
@@ -107,6 +133,7 @@ app.post("/api/analyze", upload.single("project"), async (req, res) => {
       runId,
       analysis,
       umlFiles,
+      umlImagePath,
       markdownPath: stored.markdownPath,
       pdfPath: stored.pdfPath,
     });

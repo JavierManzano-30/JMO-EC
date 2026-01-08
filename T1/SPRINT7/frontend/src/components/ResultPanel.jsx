@@ -145,6 +145,22 @@ function ResultPanel({ result, apiUrl }) {
               Descargar PDF
             </a>
           )}
+          {result.umlImagePath && (
+            <a
+              href={`${apiUrl}/api/uml/${result.runId}?format=png`}
+              className="text-sm text-primary hover:underline"
+            >
+              Descargar UML (PNG)
+            </a>
+          )}
+          {result.umlFiles?.length > 0 && (
+            <a
+              href={`${apiUrl}/api/uml/${result.runId}?format=puml`}
+              className="text-sm text-primary hover:underline"
+            >
+              Descargar UML (PUML)
+            </a>
+          )}
         </div>
       </div>
 

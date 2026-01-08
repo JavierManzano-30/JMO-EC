@@ -29,6 +29,22 @@ function HistoryItem({ item, apiUrl }) {
           >
             PDF
           </a>
+          {item.umlImagePath && (
+            <a
+              className="text-primary hover:underline"
+              href={`${apiUrl}/api/uml/${item.id}?format=png`}
+            >
+              UML
+            </a>
+          )}
+          {item.umlFiles?.length > 0 && (
+            <a
+              className="text-primary hover:underline"
+              href={`${apiUrl}/api/uml/${item.id}?format=puml`}
+            >
+              PUML
+            </a>
+          )}
         </div>
       )}
       {item.error && <p className="text-xs text-amber-300 mt-1">{item.error}</p>}

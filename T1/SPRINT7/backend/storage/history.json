@@ -1,5 +1,61 @@
 [
   {
+    "id": "0bd10277-9ba2-40b2-8578-4f5e64609b2b",
+    "projectPath": "/app/uploads/2c0ba4f8-4310-4a24-a2cf-7d6e5b4e897d.zip",
+    "projectName": "2_trimestre.zip",
+    "analysisSummary": {
+      "files": 126,
+      "packages": 5,
+      "classes": 126,
+      "totalMethods": 431
+    },
+    "markdownPath": "/app/output/0bd10277-9ba2-40b2-8578-4f5e64609b2b/documentation.md",
+    "pdfPath": "/app/output/0bd10277-9ba2-40b2-8578-4f5e64609b2b/documentation.pdf",
+    "umlFiles": [
+      "/app/output/0bd10277-9ba2-40b2-8578-4f5e64609b2b/diagram.puml"
+    ],
+    "umlImagePath": "/app/output/0bd10277-9ba2-40b2-8578-4f5e64609b2b/diagram.png",
+    "createdAt": "2026-01-08T11:32:40.432Z",
+    "status": "success"
+  },
+  {
+    "id": "3e011cec-f205-4c31-8522-00ea6a19819d",
+    "projectPath": "/app/uploads/366f3c06-46c4-4467-a902-8e7b76228bec.zip",
+    "projectName": "2_trimestre.zip",
+    "analysisSummary": {
+      "files": 126,
+      "packages": 5,
+      "classes": 126,
+      "totalMethods": 431
+    },
+    "markdownPath": "/app/output/3e011cec-f205-4c31-8522-00ea6a19819d/documentation.md",
+    "pdfPath": "/app/output/3e011cec-f205-4c31-8522-00ea6a19819d/documentation.pdf",
+    "umlFiles": [
+      "/app/output/3e011cec-f205-4c31-8522-00ea6a19819d/diagram.puml"
+    ],
+    "umlImagePath": "/app/output/3e011cec-f205-4c31-8522-00ea6a19819d/diagram.png",
+    "createdAt": "2026-01-08T11:19:00.511Z",
+    "status": "success"
+  },
+  {
+    "id": "962844c3-1dc6-42b4-b0a5-98eb3ce381b3",
+    "projectPath": "/app/uploads/99b2403c-640f-46e0-a048-e4d69848e5e5.zip",
+    "projectName": "2_trimestre.zip",
+    "analysisSummary": {
+      "files": 126,
+      "packages": 5,
+      "classes": 126,
+      "totalMethods": 431
+    },
+    "markdownPath": "/app/output/962844c3-1dc6-42b4-b0a5-98eb3ce381b3/documentation.md",
+    "pdfPath": "/app/output/962844c3-1dc6-42b4-b0a5-98eb3ce381b3/documentation.pdf",
+    "umlFiles": [
+      "/app/output/962844c3-1dc6-42b4-b0a5-98eb3ce381b3/diagram.puml"
+    ],
+    "createdAt": "2026-01-08T11:16:07.065Z",
+    "status": "success"
+  },
+  {
     "id": "999b35f2-84b7-4e17-8ac3-c04008052f60",
     "projectPath": "/app/uploads/34b7f415-866a-4713-b93f-c43d8719b708.zip",
     "projectName": "2_trimestre.zip",

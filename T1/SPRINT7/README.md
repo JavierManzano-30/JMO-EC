@@ -58,6 +58,8 @@ La imagen de backend instala PlantUML, Graphviz y Pandoc.
 - La conversion a PDF usa Pandoc si esta disponible; si no, genera un placeholder para validar el flujo.
 - Para IA local, define `AI_URL` (endpoint estilo OpenAI) y opcionalmente `AI_MODEL`. El backend carga `.env` automaticamente.
 - Los resultados se copian a `SPRINT7/descargas/markdown` y `SPRINT7/descargas/pdf` con el ID de ejecucion.
+- El UML se genera en `.puml` y tambien se exporta a PNG para descargar desde el frontend.
+- El diagrama UML incluye relaciones basicas (herencia, interfaces, asociaciones y dependencias) cuando se detectan en el codigo Java.
 
 ## Mejoras implementadas
 - Estadisticas adicionales del analisis (total de metodos) en el resumen.
